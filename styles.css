@@ -1,0 +1,285 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f0f0;
+  color: #222;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 60px; /* Rezerva pro footer */
+}
+
+header {
+  background: #2c3e50;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+
+nav {
+  padding: 0,5em;
+  text-align: center;
+  background: #ecf0f1;
+}
+
+nav .button {
+  margin: 0.5em;
+  padding: 0.5em 1em;
+  background: #3498db;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.search-form {
+  text-align: center;
+  padding: 1em;
+}
+
+.search-form input,
+.search-form select,
+.search-form button {
+  padding: 0.5em;
+  margin: 0.2em;
+}
+
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1em;
+  padding: 1em;
+}
+
+.movie-card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  overflow: hidden;
+  text-align: center;
+  transition: transform 0.2s; 
+}
+
+.movie-poster {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.movie-title {
+  padding: 0.5em;
+  font-weight: bold;
+}
+
+/* Detail page (info.php) */
+.movie-card img {
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.movie-info {
+  padding: 1em;
+}
+
+.button {
+  display: inline-block;
+  background-color: #3498db;
+  color: white;
+  padding: 0.6em 1.2em;
+  text-decoration: none;
+  border-radius: 6px;
+  margin-top: 1em;
+}
+
+.button:hover {
+  background-color: #2980b9;
+}
+
+.container {
+  padding: 2em;
+  max-width: 1000px;
+  margin: auto;
+  padding: 60px 0 0 0; /* Rezerva pro header */
+  padding-bottom: 60px; /* Rezerva pro footer */
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 0.75em;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+  background-color: #34495e;
+  color: white;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.btn {
+  padding: 0.4em 0.8em;
+  margin: 0.2em;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  background-color: #3498db;
+  font-size: 0.9em;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+.btn-view  {
+  background-color: #972ecc;
+}
+
+.btn-view:hover {
+  background-color: #7a21a7;
+}
+
+.btn-view-dsbld  {
+  background-color: #972ecc;
+}
+
+.btn-view-dsbld:hover {
+  background-color: #797979;
+}
+
+.btn-warning {
+  background-color: #f39c12;
+}
+
+.btn-warning:hover {
+  background-color: #e67e22;
+}
+
+.btn-danger {
+  background-color: #e74c3c;
+}
+
+.btn-danger:hover {
+  background-color: #c0392b;
+}
+
+.btn-approve {
+  background-color: #2ecc71;
+}
+
+.btn-approve:hover {
+  background-color: #27ae60;
+}
+
+
+.add-form input[type="text"],
+.add-form input[type="number"],
+.add-form textarea,
+.add-form input[type="file"] {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+    padding: 0.5em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+form button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 0.6em 1.2em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #27ae60;
+}
+
+footer {
+  background: #2c3e50;
+  color: white;
+  padding: 1em;
+  text-align: center;
+position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+
+/* === DARK MODE === */
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode header,
+body.dark-mode footer {
+  background: #1f1f1f;
+  color: #e0e0e0;
+}
+
+body.dark-mode nav {
+  background: #2c2c2c;
+}
+
+body.dark-mode .movie-card {
+  background: #1e1e1e;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .admin-table th {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode .admin-table tr:nth-child(even) {
+  background-color: #1a1a1a;
+}
+
+body.dark-mode .admin-table td {
+  border-bottom: 1px solid #444;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode button {
+  background-color: #2b2b2b;
+  color: #e0e0e0;
+  border: 1px solid #555;
+}
+
+body.dark-mode .btn,
+body.dark-mode .button {
+  color: white;
+}
+
+body.dark-mode a {
+  color: #90caf9;
+}
+
+body.dark-mode .theme-toggle {
+  background-color: #333;
+  color: #fff;
+}

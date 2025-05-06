@@ -1,0 +1,76 @@
+<?php
+session_start();
+require 'db.php';
+
+$chyba = '';
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Bezpečné vyhledání uživatele
+    $stmt = $conn->prepare("SELECT * FROM uzivatele WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $vysledek = $stmt->get_result();
+
+    if ($vysledek->num_rows === 1) {
+        $uzivatel = $vysledek->fetch_assoc();
+
+        // Ověření hesla pomocí password_verify
+        if (password_verify($password, $uzivatel['password'])) {
+            $_SESSION['username'] = $uzivatel['username'];
+            $_SESSION['role'] = $uzivatel['role'];
+            header("Location: index.php");
+            exit();
+        } else {
+            $chyba = "Špatné heslo.";
+        }
+    } else {
+        $chyba = "Uživatel nenalezen.";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>Přihlášení</title>
+    <script src="theme-toggle.js"></script>
+      <script>
+         if (localStorage.getItem('dark-mode') === 'true') {
+          document.documentElement.classList.add('dark-mode');
+         }
+      </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+         <h1>Přihlášení</h1>
+      </header>
+      <nav>
+         <a class="button" href="index.php">← Zpět na filmy</a>
+         <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
+      </nav>
+<div class="container">
+  
+    <?php if ($chyba): ?>
+        <div class="error"><?= htmlspecialchars($chyba) ?></div>
+    <?php endif; ?>
+
+    <form method="post">
+        <label>Uživatelské jméno:</label>
+        <input type="text" name="username" required>
+
+        <label>Heslo:</label>
+        <input type="password" name="password" required>
+
+        <button type="submit">Přihlásit se</button>
+    </form>
+    <p>Nemáte účet? <a href="register.php">Zaregistrujte se</a></p>
+</div>
+</body>
+    <footer>
+       <a href="https://github.com/0ndraM">©0ndra_m_  2020-<?php echo date("Y");?></a> 
+    </footer>
+</html>
