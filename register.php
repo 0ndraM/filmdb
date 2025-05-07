@@ -71,19 +71,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <div class="success"><?= $zprava ?></div>
     <?php endif; ?>
 
-    <form method="post">
-        <label>Uživatelské jméno:</label>
-        <input type="text" name="username" required>
+    <div class="credentials-container">
+        <form method="post" class="credentials-form">
+            <label class="form-label">Uživatelské jméno:</label>
+            <input type="text" name="username" class="form-input" required>
 
-        <label>Heslo:</label>
-        <input type="password" name="password" required>
+            <label class="form-label">Heslo:</label>
+            <input type="password" name="password" class="form-input" required>
 
-        <label>Potvrzení hesla:</label>
-        <input type="password" name="confirm" required>
+            <label class="form-label">Potvrzení hesla:</label>
+            <input type="password" name="confirm" class="form-input" required>
 
-        <button type="submit">Registrovat se</button>
-    </form>
-    <p>Máte již účet? <a href="login.php">Přihlaste se</a></p>
+            <button type="submit" class="form-button">Registrovat se</button>
+        </form>
+        <p>Máte již účet? <a href="login.php">Přihlaste se</a></p>
+    </div>
 
 </div>
 </body>

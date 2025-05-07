@@ -31,18 +31,22 @@
          <h1>Seznam filmů</h1>
       </header>
       <nav>
-         <?php if (isset($_SESSION['role'])): ?>
-         <a class="button" href="add.php">➕ Přidat film</a>
-         <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
-         <a class="button" href="settings.php">⚙️ Nastavení</a>
-         <a class="button" href="logout.php">🚪 Odhlásit se</a>
-         <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'owner'): ?>
-         <a class="button" href="admin.php">🛠️ Admin sekce</a>
-         <?php endif; ?>
-         <?php else: ?>
-         <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
-         <a class="button" href="login.php">🔑 Přihlásit se</a>
-         <?php endif; ?>
+      <?php if (isset($_SESSION['role'])): ?>
+    <a class="button" href="add.php">➕ Přidat film</a>
+    <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
+
+    <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'owner'): ?>
+        <a class="button" href="admin.php">🛠️ Admin sekce</a>
+    <?php else: ?>
+        <a class="button" href="settings.php">⚙️ Nastavení</a>
+    <?php endif; ?>
+
+    <a class="button" href="logout.php">🚪 Odhlásit se</a>
+<?php else: ?>
+    <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
+    <a class="button" href="login.php">🔑 Přihlásit se</a>
+<?php endif; ?>
+
       </nav>
       <form method="get" class="search-form">
          <input type="text" name="search" placeholder="Hledat..." value="<?= htmlspecialchars($search) ?>">

@@ -52,20 +52,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <a class="button" href="index.php">← Zpět na filmy</a>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
-<div class="container">
-  
+<div class="credentials-container">
     <?php if ($chyba): ?>
-        <div class="error"><?= htmlspecialchars($chyba) ?></div>
+        <div class="form-error"><?= htmlspecialchars($chyba) ?></div>
     <?php endif; ?>
 
-    <form method="post">
-        <label>Uživatelské jméno:</label>
-        <input type="text" name="username" required>
+    <form method="post" class="credentials-form">
+        <label class="form-label">Uživatelské jméno:</label>
+        <input type="text" name="username" class="form-input" required>
 
-        <label>Heslo:</label>
-        <input type="password" name="password" required>
+        <label class="form-label">Heslo:</label>
+        <input type="password" name="password" class="form-input" required>
 
-        <button type="submit">Přihlásit se</button>
+        <button type="submit" class="form-button">Přihlásit se</button>
     </form>
     <p>Nemáte účet? <a href="register.php">Zaregistrujte se</a></p>
 </div>
