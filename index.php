@@ -34,9 +34,10 @@
          <?php if (isset($_SESSION['role'])): ?>
          <a class="button" href="add.php">➕ Přidat film</a>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
+         <a class="button" href="settings.php">⚙️ Nastavení</a>
          <a class="button" href="logout.php">🚪 Odhlásit se</a>
          <?php if ($_SESSION['role'] == 'admin' || $_SESSION['role'] == 'owner'): ?>
-         <a class="button" href="admin.php">⚙️ Admin sekce</a>
+         <a class="button" href="admin.php">🛠️ Admin sekce</a>
          <?php endif; ?>
          <?php else: ?>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>

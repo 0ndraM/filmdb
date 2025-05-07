@@ -1,60 +1,71 @@
 <?php
-   session_start();
-   require 'db.php';
-   
-   if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
-       header('Location: login.php');
-       exit();
+session_start();
+require 'db.php';
+
+if (!isset($_SESSION['username'])) {
+    header('Location: login.php');
+    exit();
+}
+
+if (!isset($_GET['id'])) {
+    header('Location: admin.php');
+    exit();
+}
+
+$id = intval($_GET['id']);
+$stmt = $conn->prepare("SELECT * FROM filmy WHERE id = ?");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$film = $stmt->get_result()->fetch_assoc();
+
+if (!$film) {
+    echo "Film nenalezen.";
+    exit();
+}
+
+// Přístupová kontrola
+$aktualniUzivatel = $_SESSION['username'];
+$jeAutor = $film['autor'] === $aktualniUzivatel;
+$jeAdmin = in_array($_SESSION['role'], ['admin', 'owner']);
+
+if (!$jeAutor && !$jeAdmin) {
+    echo "Nemáte oprávnění upravovat tento film.";
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
+    $nazev = $_POST['nazev'];
+    $rok = $_POST['rok'];
+    $zanr = $_POST['zanr'];
+    $reziser = $_POST['reziser'];
+    $hodnoceni = $_POST['hodnoceni'];
+    $popis = $_POST['popis'];
+
+    // Uložit změny bez změny autora
+    $stmt = $conn->prepare("UPDATE filmy SET nazev=?, rok=?, zanr=?, reziser=?, hodnoceni=?, popis=?, vytvoreno=NOW() WHERE id=?");
+    $stmt->bind_param("sissdsi", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $id);
+    $stmt->execute();
+
+    // Nahrání nového plakátu (volitelné)
+    if (!empty($_FILES['plakat']['name']) && mime_content_type($_FILES['plakat']['tmp_name']) === 'image/jpeg') {
+        $target_dir = "plakaty/";
+        $target_file = $target_dir . $id . ".jpg";
+        move_uploaded_file($_FILES['plakat']['tmp_name'], $target_file);
     }
-    
-   
-   if (!isset($_GET['id'])) {
-       header('Location: admin.php');
-       exit();
-   }
-   
-   $id = intval($_GET['id']);
-   $stmt = $conn->prepare("SELECT * FROM filmy WHERE id = ?");
-   $stmt->bind_param("i", $id);
-   $stmt->execute();
-   $film = $stmt->get_result()->fetch_assoc();
-   
-   if (!$film) {
-       echo "Film nenalezen.";
-       exit();
-   }
-   
-   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-       $id = $_POST['id'];
-       $nazev = $_POST['nazev'];
-       $rok = $_POST['rok'];
-       $zanr = $_POST['zanr'];
-       $reziser = $_POST['reziser'];
-       $hodnoceni = $_POST['hodnoceni'];
-       $popis = $_POST['popis'];
-       $autor = $_SESSION['username'];
-   
-       $stmt = $conn->prepare("UPDATE filmy SET nazev=?, rok=?, zanr=?, reziser=?, hodnoceni=?, popis=?, autor=?, vytvoreno=NOW() WHERE id=?");
-       $stmt->bind_param("sissdssi", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $autor, $id);
-       $stmt->execute();
-   
-       // Plakát – opětovné nahrání (volitelné)
-       if (!empty($_FILES['plakat']['name']) && mime_content_type($_FILES['plakat']['tmp_name']) === 'image/jpeg') {
-           $target_dir = "plakaty/";
-           $target_file = $target_dir . $id . ".jpg";
-           move_uploaded_file($_FILES['plakat']['tmp_name'], $target_file);
-       }
-      
-       // Uložení změny do logu
-          $stmt_log = $conn->prepare("INSERT INTO filmy_log (film_id, nazev, rok, zanr, reziser, hodnoceni, popis, autor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-          $stmt_log->bind_param("isissdss", $id, $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $autor);
-          $stmt_log->execute();
-          $stmt_log->close();
-   
-       header('Location: admin.php');
-       exit();
-   }
-   ?>
+
+    // Uložení do logu (zachování aktuálního autora z tabulky, ale uložení "kdo to změnil")
+    $upravujici = $_SESSION['username'];
+    $stmt_log = $conn->prepare("INSERT INTO filmy_log (film_id, nazev, rok, zanr, reziser, hodnoceni, popis, autor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt_log->bind_param("isissdss", $id, $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $upravujici);
+    $stmt_log->execute();
+    $stmt_log->close();
+
+    header('Location: admin.php');
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="cs">
    <head>

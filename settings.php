@@ -2,8 +2,8 @@
 session_start();
 require 'db.php';
 
-if (!isset($_SESSION['username'])) {
-    header('Location: login.php');
+if (!isset($_SESSION['role'])) {
+    header('Location: index.php');
     exit();
 }
 
@@ -93,7 +93,7 @@ $films_result = $conn->query("SELECT * FROM filmy WHERE autor = '$username' ORDE
                         <td><?= htmlspecialchars($film['rok']) ?></td>
                         <td><?= $film['schvaleno'] ? 'Ano' : 'Ne' ?></td>
                         <td>
-                            <a class="btn" href="info.php?id=<?= $film['id'] ?>">👁️ Zobrazit</a>
+                            <a class="btn btn-view" href="info.php?id=<?= $film['id'] ?>">👁️ Zobrazit</a>
                             <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️ Upravit</a>
                         </td>
                     </tr>
