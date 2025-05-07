@@ -101,6 +101,20 @@ INSERT INTO `uzivatele` (`id`, `username`, `password`, `role`) VALUES
 -- Indexy pro exportované tabulky
 --
 
+CREATE TABLE filmy_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    film_id INT NOT NULL,
+    nazev VARCHAR(255),
+    rok INT,
+    zanr VARCHAR(100),
+    reziser VARCHAR(255),
+    hodnoceni DECIMAL(3,1),
+    popis TEXT,
+    autor VARCHAR(50),
+    zmeneno TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (film_id) REFERENCES filmy(id)
+);
+
 --
 -- Indexy pro tabulku `filmy`
 --

@@ -33,6 +33,7 @@
       </header>
       <nav>
          <a class="button" href="index.php">← Zpět na filmy</a>
+         <a class="button" href="logs.php"> Logy</a>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">
@@ -121,36 +122,6 @@
                </tbody>
             </table>
          </div>
-         <?php
-            $logy = $conn->query("SELECT * FROM logy ORDER BY cas DESC LIMIT 50");
-            
-            if (!$logy) {
-                echo "<p style='color:red;'>Chyba při načítání logu: " . $conn->error . "</p>";
-            } else {
-            ?>
-         <h2>📜 Log změn rolí</h2>
-         <table class="admin-table">
-            <thead>
-               <tr>
-                  <th>Autor</th>
-                  <th>Akce</th>
-                  <th>Čas</th>
-               </tr>
-            </thead>
-            <tbody>
-               <?php while ($log = $logy->fetch_assoc()): ?>
-               <tr>
-                  <td><?= htmlspecialchars($log['autor']) ?></td>
-                  <td><?= htmlspecialchars($log['akce']) ?></td>
-                  <td><?= htmlspecialchars($log['cas']) ?></td>
-               </tr>
-               <?php endwhile; ?>
-            </tbody>
-         </table>
-         <?php } ?>
-         <form method="post" action="export_log.php" style="margin-bottom: 20px;">
-            <button type="submit" class="button">⬇️ Exportovat log do CSV</button>
-         </form>
       </div>
    </body>
    <footer>
