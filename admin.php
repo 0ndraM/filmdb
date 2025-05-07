@@ -6,19 +6,19 @@
       header('Location: settings.php');
       exit();
    }
-
-// Získání aktuálních údajů o uživatelském účtu
-$username = $_SESSION['username'];
-$user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
-
-if ($user_result->num_rows > 0) {
+   
+   // Získání aktuálních údajů o uživatelském účtu
+   $username = $_SESSION['username'];
+   $user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
+   
+   if ($user_result->num_rows > 0) {
     $user = $user_result->fetch_assoc();
-} else {
+   } else {
     die("Uživatel nenalezen.");
-}
-
-// Změna jména a hesla
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+   }
+   
+   // Změna jména a hesla
+   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Změna jména
     if (isset($_POST['new_username'])) {
         $new_username = $_POST['new_username'];
@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['username'] = $new_username; // Aktualizace session proměnné
         $username = $new_username;
     }
-
+   
     // Změna hesla
     if (isset($_POST['new_password'])) {
         $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Přesměrování na stránku pro zobrazení změn
     header('Location: admin.php');
     exit();
-}
+   }
    
    // Filmy
    $filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, rok DESC");
@@ -67,28 +67,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">
-      <h2>🖊️ Změnit jméno a heslo</h2>
-    <form method="POST" action="admin.php" class="admin-form">
-        <label>Nové jméno:</label>
-        <input type="text" name="new_username" value="<?= htmlspecialchars($username) ?>" required>
 
-        <label>Nové heslo:</label>
-        <input type="password" name="new_password" placeholder="Nové heslo" required>
-
-        <button type="submit">Uložit změny</button>
-    </form>
          <h2>🎬 Správa filmů</h2>
          <div class="table-wrapper">
-         <table class="admin-table">
-    <thead>
-        <tr>
-            <th>Název</th>
-            <th>Autor</th>
-            <th>Přidáno</th>
-            <th>Akce</th>
-        </tr>
-    </thead>
-
+            <table class="admin-table">
+               <thead>
+                  <tr>
+                     <th>Název</th>
+                     <th>Autor</th>
+                     <th>Přidáno</th>
+                     <th>Akce</th>
+                  </tr>
+               </thead>
                <tbody>
                   <?php while ($film = $filmy->fetch_assoc()): ?>
                   <tr>
@@ -158,6 +148,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                </tbody>
             </table>
          </div>
+         <h2>🖊️ Změnit jméno a heslo</h2>
+         <form method="POST" action="admin.php" class="credentials-form">
+            <label class="form-label">Nové uživatelské jméno:</label>
+            <input type="text" name="new_username" class="form-input" value="<?= htmlspecialchars($user['username']) ?>" required>
+            <label class="form-label">Nové heslo:</label>
+            <input type="password" name="new_password" class="form-input">
+            <button type="submit" class="form-button">Uložit změny</button>
+         </form>
       </div>
    </body>
    <footer>
