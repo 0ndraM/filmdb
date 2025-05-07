@@ -105,4 +105,4 @@ owner / heslo
 ---
 
 > 📣 Autor: [0ndra_m_](https://github.com/0ndraM)  
-> Tento projekt vznikl pro výukové účely a není určen pro produkční nasazení.
+
