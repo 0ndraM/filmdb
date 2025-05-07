@@ -55,11 +55,7 @@
                      <td><?= htmlspecialchars($film['autor']) ?></td>
                      <td><?= htmlspecialchars($film['vytvoreno']) ?></td>
                      <td>
-                        <?php if (!$film['schvaleno']): ?>
-                        <a class="btn btn-view-dsbld" >👁️ Zobrazit</a>
-                        <?php else: ?>
                         <a class="btn btn-view"  href="info.php?id=<?= $film['id'] ?>">👁️ Zobrazit</a>
-                        <?php endif; ?>
                         <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️ Upravit</a>
                         <?php if (!$film['schvaleno']): ?>
                         <a class="btn btn-approve" href="schvalit.php?id=<?= $film['id'] ?>">✅ Schválit</a>

@@ -1,23 +1,39 @@
 <?php
+session_start();
 require 'db.php';
 
-if (!isset($_GET['id'])) {
-    header('Location: index.php');
-    exit();
-}
-
 $id = intval($_GET['id']);
-$stmt = $conn->prepare("SELECT * FROM filmy WHERE id = ? AND schvaleno = 1");
+$film = null;
+
+// Pokud film existuje
+$stmt = $conn->prepare("SELECT * FROM filmy WHERE id = ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $result = $stmt->get_result();
-$film = $result->fetch_assoc();
 
-if (!$film) {
-    echo "Film nenalezen nebo neschválen.";
+if ($result->num_rows > 0) {
+    $film = $result->fetch_assoc();
+}
+
+// Pokud film existuje
+if ($film) {
+    // Pokud je film schválený, není potřeba přihlášení
+    if ($film['schvaleno'] == 1) {
+        // Film je schválený, takže se může zobrazit bez přihlášení
+    } else {
+        // Pokud film není schválený, musíme zkontrolovat přihlášení a roli
+        if (!isset($_SESSION['username']) || !in_array($_SESSION['role'], ['admin', 'owner']) && $film['autor'] != $_SESSION['username']) {
+            // Pokud není uživatel přihlášený nebo není admin/owner a není autorem, přesměrujeme na login
+            header('Location: login.php');
+            exit();
+        }
+    }
+} else {
+    echo "Film nenalezen.";
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
