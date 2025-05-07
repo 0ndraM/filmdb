@@ -44,6 +44,34 @@ Logovací tabulka ukládající každou změnu filmu.
 | autor       | VARCHAR(50)   | Uživatel, který provedl změnu     |
 | zmeneno     | TIMESTAMP     | Čas změny                         |
 
+## 🗂️ Struktura souborů
+
+```
+📁 projekt/
+├── db.php                # Připojení k databázi
+├── login.php             # Přihlášení
+├── logout.php            # Odhlášení
+├── register.php          # Registrace
+├── index.php             # Úvodní stránka / výpis filmů
+├── add.php               # Přidání filmu
+├── smazat.php            # Smazání filmu (admin nebo owner)
+├── edit.php              # Úprava filmu (s kontrolou práv)
+├── info.php              # Detail filmu (s kontrolou přístupnosti)
+├── admin.php             # Admin sekce pro správu a schvalování
+├── settings.php          # Změna jména a hesla
+├── plakaty/              # Složka pro nahrané plakáty
+├── styles.css            # Stylování
+├── export_log.php        # Export logů správy uživatelů
+├── export_filmy_log.php  # Export logů úpravy filmů
+├── schvalit.php          # Schválení filmu
+├── odschválit.php        # Odschvální filmu
+├── promenit_roli.php     # Úprava rolí 
+├── smazat_uzivatele.php  # Smazání uživatele
+├── theme-toggle.js       # Přepínání motivu
+├── plakáty               # Složka plakátů filmů
+├── filmy_db.sql          # SQL skripty
+└── README.md             # Tento soubor
+```
 
 ## 🔐 Role a přístupová práva
 
@@ -60,6 +88,13 @@ Logovací tabulka ukládající každou změnu filmu.
 - Webserver (např. Apache)
 - Povolený `file_uploads` v `php.ini`
 
+## 🧪 Testovací účty
+
+```
+user / heslo
+admin / heslo
+owner / heslo
+```
 
 ## 📌 Poznámky
 
