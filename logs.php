@@ -60,6 +60,10 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
             </div>
         <?php endif; ?>
 
+        <form method="post" action="export_log.php" style="margin-top: 20px;">
+            <button type="submit" class="button">⬇️ Exportovat log rolí do CSV</button>
+        </form>
+
         <h2>🎬 Log změn filmů</h2>
         <?php if (!$logy_filmy): ?>
             <p style='color:red;'>Chyba při načítání logu filmů: <?= $conn->error ?></p>
@@ -94,8 +98,8 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
             </div>
         <?php endif; ?>
 
-        <form method="post" action="export_log.php" style="margin-top: 20px;">
-            <button type="submit" class="button">⬇️ Exportovat log rolí do CSV</button>
+        <form method="post" action="export_filmy_log.php" style="margin-top: 20px;">
+            <button type="submit" class="button">⬇️ Exportovat log úpravy filmů do CSV</button>
         </form>
     </div>
 </body>
