@@ -7,7 +7,6 @@
       exit();
    }
    
-   
    // Filmy
    $filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, rok DESC");
    
