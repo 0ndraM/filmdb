@@ -38,21 +38,22 @@
       <div class="container">
          <h2>🎬 Správa filmů</h2>
          <div class="table-wrapper">
-            <table class="admin-table">
-               <thead>
-                  <tr>
-                     <th>Název</th>
-                     <th>Rok</th>
-                     <th>Schváleno</th>
-                     <th>Akce</th>
-                  </tr>
-               </thead>
+         <table class="admin-table">
+    <thead>
+        <tr>
+            <th>Název</th>
+            <th>Autor</th>
+            <th>Přidáno</th>
+            <th>Akce</th>
+        </tr>
+    </thead>
+
                <tbody>
                   <?php while ($film = $filmy->fetch_assoc()): ?>
                   <tr>
                      <td><?= htmlspecialchars($film['nazev']) ?></td>
-                     <td><?= htmlspecialchars($film['rok']) ?></td>
-                     <td><?= $film['schvaleno'] ? 'Ano' : 'Ne' ?></td>
+                     <td><?= htmlspecialchars($film['autor']) ?></td>
+                     <td><?= htmlspecialchars($film['vytvoreno']) ?></td>
                      <td>
                         <?php if (!$film['schvaleno']): ?>
                         <a class="btn btn-view-dsbld" >👁️ Zobrazit</a>

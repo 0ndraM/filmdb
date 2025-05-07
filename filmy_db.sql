@@ -36,7 +36,11 @@ CREATE TABLE `filmy` (
   `hodnoceni` decimal(3,1) DEFAULT NULL,
   `popis` text DEFAULT NULL,
   `schvaleno` tinyint(1) DEFAULT 0
+  `vytvoreno` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `autor` VARCHAR(50) NOT NULL DEFAULT 'neznámý';
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
 
 --
 -- Vypisuji data pro tabulku `filmy`

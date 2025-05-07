@@ -25,22 +25,25 @@ if (!$film) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'];
     $nazev = $_POST['nazev'];
     $rok = $_POST['rok'];
     $zanr = $_POST['zanr'];
     $reziser = $_POST['reziser'];
     $hodnoceni = $_POST['hodnoceni'];
     $popis = $_POST['popis'];
+    $autor = $_SESSION['username'];
 
+    $stmt = $conn->prepare("UPDATE filmy SET nazev=?, rok=?, zanr=?, reziser=?, hodnoceni=?, popis=?, autor=?, vytvoreno=NOW() WHERE id=?");
+    $stmt->bind_param("sissdssi", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $autor, $id);
+    $stmt->execute();
+
+    // Plakát – opětovné nahrání (volitelné)
     if (!empty($_FILES['plakat']['name']) && mime_content_type($_FILES['plakat']['tmp_name']) === 'image/jpeg') {
         $target_dir = "plakaty/";
         $target_file = $target_dir . $id . ".jpg";
         move_uploaded_file($_FILES['plakat']['tmp_name'], $target_file);
     }
-
-    $stmt = $conn->prepare("UPDATE filmy SET nazev=?, rok=?, zanr=?, reziser=?, hodnoceni=?, popis=? WHERE id=?");
-    $stmt->bind_param("sissdsi", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $id);
-    $stmt->execute();
 
     header('Location: admin.php');
     exit();
@@ -92,6 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <label>Nahrát nový plakát:</label>
         <input type="file" name="plakat" accept=".jpg,.jpeg">
+        <input type="hidden" name="id" value="<?= $film['id'] ?>">
 
         <button type="submit">💾 Uložit změny</button>
     </form>
