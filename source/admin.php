@@ -94,7 +94,7 @@
                      <td><?= htmlspecialchars($film['vytvoreno']) ?></td>
                      <td>
                         <a class="btn btn-view"  href="info.php?id=<?= $film['id'] ?>">👁️Zobrazit</a>
-                        <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️ Upravit</a>
+                        <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️Upravit</a>
                         <?php if (!$film['schvaleno']): ?>
                         <a class="btn btn-approve" href="schvalit.php?id=<?= $film['id'] ?>">✅Schválit</a>
                         <?php else: ?>
