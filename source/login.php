@@ -34,7 +34,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Přihlášení do databáze filmů. Umožňuje uživatelům přístup k jejich účtům a správu filmů.">
+    <meta name="keywords" content="přihlášení, databáze filmů, uživatelský účet, správa filmů">
+    <meta name="author" content="0ndra_m_">
+    <link rel="icon" type="image/svg" href="logo.svg">
     <title>Přihlášení</title>
     <script src="theme-toggle.js"></script>
       <script>

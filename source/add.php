@@ -38,13 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <meta name="description" content="Přidání nového filmu do databáze. Filmy přidáváte ke schválení administrátorovi. Po schválení se film zobrazí v seznamu.">
+    <meta name="keywords" content="filmy, přidat film, databáze filmů, přidání filmu, schválení filmu">
+    <meta name="author" content="0ndra_m_">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <title>Přidat film</title>
     <script src="theme-toggle.js"></script>
-      <script>
+    <script>
          if (localStorage.getItem('dark-mode') === 'true') {
           document.documentElement.classList.add('dark-mode');
          }
-      </script>
+    </script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -67,19 +72,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="number" name="rok" placeholder="Rok" required>
 
         <label>Žánr:</label>
-        <input type="text" name="zanr" placeholder="Žánr" required>
+        <input type="text" name="zanr" placeholder="Žánr" >
 
         <label>Režisér:</label>
-        <input type="text" name="reziser" placeholder="Režisér" required>
+        <input type="text" name="reziser" placeholder="Režisér" >
 
         <label>Hodnocení:</label>
-        <input type="number" step="0.1" name="hodnoceni" placeholder="Hodnocení" required>
+        <input type="number" step="0.1" name="hodnoceni" placeholder="Hodnocení" >
 
         <label>Popis:</label>
-        <textarea name="popis" placeholder="Popis" required></textarea>
+        <textarea name="popis" placeholder="Popis" ></textarea>
 
         <label>Plakát (.jpg):</label>
-        <input type="file" name="plakat" accept=".jpg,.jpeg" required>
+        <input type="file" name="plakat" accept=".jpg,.jpeg" >
 
         <button type="submit">📤 Odeslat ke schválení</button>
     </form>

@@ -1,10 +1,10 @@
+/* === GLOBAL === */
 body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #f0f0f0;
   color: #222;
   margin: 0;
-  padding: 0;
-  padding-bottom: 60px; /* Rezerva pro footer */
+  padding: 0 0 60px 0; /* Rezerva pro footer */
 }
 
 header {
@@ -14,9 +14,8 @@ header {
   text-align: center;
 }
 
-
 nav {
-  padding: 0,5em;
+  padding: 0.5em;
   text-align: center;
   background: #ecf0f1;
 }
@@ -28,6 +27,11 @@ nav .button {
   color: white;
   text-decoration: none;
   border-radius: 8px;
+  transition: background 0.3s;
+}
+
+nav .button:hover {
+  background-color: #2980b9;
 }
 
 .search-form {
@@ -40,11 +44,14 @@ nav .button {
 .search-form button {
   padding: 0.5em;
   margin: 0.2em;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
+/* === MOVIE GRID === */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 1em;
   padding: 1em;
 }
@@ -55,7 +62,11 @@ nav .button {
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   overflow: hidden;
   text-align: center;
-  transition: transform 0.2s; 
+  transition: transform 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
 }
 
 .movie-poster {
@@ -69,7 +80,7 @@ nav .button {
   font-weight: bold;
 }
 
-/* Detail page (info.php) */
+/* === DETAIL PAGE === */
 .movie-card img {
   max-width: 300px;
   border-radius: 10px;
@@ -79,32 +90,38 @@ nav .button {
   padding: 1em;
 }
 
-.button {
+/* === GENERAL BUTTONS === */
+.button,
+.btn {
   display: inline-block;
   background-color: #3498db;
   color: white;
   padding: 0.6em 1.2em;
   text-decoration: none;
   border-radius: 6px;
-  margin-top: 1em;
+  margin: 0.5em 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  font-size: 1em;
 }
 
-.button:hover {
+.button:hover,
+.btn:hover {
   background-color: #2980b9;
 }
 
+/* === CONTAINER === */
 .container {
-  padding: 2em;
+  padding: 60px 1em 60px;
   max-width: 1000px;
   margin: auto;
-  padding: 60px 0 0 0; /* Rezerva pro header */
-  padding-bottom: 60px; /* Rezerva pro footer */
 }
 
+/* === ADMIN TABLE === */
 .admin-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1em;
+  margin-top: 0,2em;
 }
 
 .admin-table th,
@@ -124,22 +141,15 @@ nav .button {
 }
 
 .btn {
-  padding: 0.4em 0.8em;
+  padding: 0.4em 0.4em;
   margin: 0.2em;
   border: none;
-  border-radius: 5px;
-  text-decoration: none;
-  color: white;
-  background-color: #3498db;
   font-size: 0.9em;
-  transition: background 0.3s;
+  display: inline-block;
 }
 
-.btn:hover {
-  background-color: #2980b9;
-}
-
-.btn-view  {
+/* === BUTTON VARIANTS === */
+.btn-view {
   background-color: #972ecc;
 }
 
@@ -171,44 +181,45 @@ nav .button {
   background-color: #27ae60;
 }
 
-
+/* === FORM ELEMENTS === */
 .add-form input[type="text"],
 .add-form input[type="number"],
 .add-form textarea,
 .add-form input[type="file"] {
-    display: block;
-    width: 100%;
-    max-width: 500px;
-    padding: 0.5em;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 form textarea {
-    height: 120px;
-    resize: vertical;
+  height: 120px;
+  resize: vertical;
 }
 
 form button {
-    background-color: #2ecc71;
-    color: white;
-    border: none;
-    padding: 0.6em 1.2em;
-    border-radius: 5px;
-    cursor: pointer;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 form button:hover {
-    background-color: #27ae60;
+  background-color: #27ae60;
 }
 
+/* === FOOTER === */
 footer {
   background: #2c3e50;
   color: white;
   padding: 1em;
   text-align: center;
-position: fixed;
+  position: fixed;
   bottom: 0;
   width: 100%;
 }
@@ -218,6 +229,9 @@ footer a {
   text-decoration: none;
 }
 
+footer a:hover {
+  text-decoration: underline;
+}
 
 /* === DARK MODE === */
 body.dark-mode {
@@ -242,7 +256,6 @@ body.dark-mode .movie-card {
 
 body.dark-mode .admin-table th {
   background-color: #333;
-  color: #fff;
 }
 
 body.dark-mode .admin-table tr:nth-child(even) {
@@ -255,33 +268,23 @@ body.dark-mode .admin-table td {
 
 body.dark-mode input,
 body.dark-mode textarea,
-body.dark-mode select{
+body.dark-mode select {
   background-color: #2b2b2b;
   color: #e0e0e0;
   border: 1px solid #555;
 }
 
-
-body.dark-mode button {
-  background-color: #3498db;
-  color: #e0e0e0;
-  border: 1px solid #555;
-}
-
+body.dark-mode button,
 body.dark-mode .btn,
 body.dark-mode .button {
+
   color: white;
+  border-color: #555;
 }
 
 body.dark-mode a {
   color: #90caf9;
 }
-
-body.dark-mode .theme-toggle {
-  background-color: #333;
-  color: #fff;
-}
-
 
 /* === CREDENTIALS FORM === */
 .credentials-container {
@@ -356,13 +359,64 @@ body.dark-mode .credentials-form .form-input:focus {
   box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.3);
 }
 
-body.dark-mode .credentials-form .form-button:hover {
-  background-color: #1e70a2;
-}
-
+/* === ERROR MESSAGE === */
 .form-error {
   color: red;
   font-weight: bold;
   margin-bottom: 1em;
   text-align: center;
+}
+
+/* === MEDIA QUERIES === */
+@media (max-width: 600px) {
+  header, nav, .search-form, .container, .movie-info, footer {
+    padding: 1em;
+    text-align: center;
+  }
+
+  nav .button {
+    display: block;
+    margin: 0.5em auto;
+    width: 80%;
+  }
+
+  .movie-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .movie-card img,
+  .movie-card .movie-poster {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .admin-table {
+    font-size: 0.9em;
+    overflow-x: auto;
+    display: block;
+  }
+
+  .add-form input[type="text"],
+  .add-form input[type="number"],
+  .add-form textarea,
+  .add-form input[type="file"],
+  .credentials-form .form-input,
+  .credentials-form .form-button {
+    width: 100%;
+  }
+
+  .credentials-container {
+    margin: 2em 1em;
+    padding: 1.5em;
+  }
+
+  .btn {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0;
+  }
+
+  .container {
+    padding: 1em;
+  }
 }

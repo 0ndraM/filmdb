@@ -48,6 +48,11 @@
 <html lang="cs">
    <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Admin sekce pro správu filmů a uživatelů. Umožňuje schvalovat, upravovat a mazat filmy a uživatele.">
+      <meta name="keywords" content="admin, správa filmů, správa uživatelů, schvalování filmů, úprava filmů, mazání filmů">
+      <meta name="author" content="0ndra_m_">
+      <link rel="icon" type="image/svg" href="logo.svg">
       <title>Admin sekce</title>
       <script src="theme-toggle.js"></script>
       <script>
@@ -63,7 +68,9 @@
       </header>
       <nav>
          <a class="button" href="index.php">← Zpět na filmy</a>
-         <a class="button" href="logs.php"> Logy</a>
+         <?php if ($_SESSION['role'] == 'owner'): ?>
+         <a class="button" href="logs.php">📜 Logy</a>
+         <?php endif?>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">
@@ -86,14 +93,14 @@
                      <td><?= htmlspecialchars($film['autor']) ?></td>
                      <td><?= htmlspecialchars($film['vytvoreno']) ?></td>
                      <td>
-                        <a class="btn btn-view"  href="info.php?id=<?= $film['id'] ?>">👁️ Zobrazit</a>
+                        <a class="btn btn-view"  href="info.php?id=<?= $film['id'] ?>">👁️Zobrazit</a>
                         <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️ Upravit</a>
                         <?php if (!$film['schvaleno']): ?>
-                        <a class="btn btn-approve" href="schvalit.php?id=<?= $film['id'] ?>">✅ Schválit</a>
+                        <a class="btn btn-approve" href="schvalit.php?id=<?= $film['id'] ?>">✅Schválit</a>
                         <?php else: ?>
-                        <a class="btn btn-warning" href="odschvalit.php?id=<?= $film['id'] ?>">↩️ Odschválit</a>
+                        <a class="btn btn-warning" href="odschvalit.php?id=<?= $film['id'] ?>">↩️Skrýt</a>
                         <?php endif; ?>
-                        <a class="btn btn-danger" href="smazat.php?id=<?= $film['id'] ?>" onclick="return confirm('Opravdu smazat?')">🗑️ Smazat</a>
+                        <a class="btn btn-danger" href="smazat.php?id=<?= $film['id'] ?>" onclick="return confirm('Opravdu smazat?')">🗑️Smazat</a>
                      </td>
                   </tr>
                   <?php endwhile; ?>

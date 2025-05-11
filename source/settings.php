@@ -44,7 +44,12 @@
 <!DOCTYPE html>
 <html lang="cs">
    <head>
-      <meta charset="UTF-8">
+      <meta charset="UTF-8">  
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Úprava účtu uživatele. Umožňuje změnu uživatelského jména a hesla. Zobrazují se zde také filmy, které uživatel přidal.">
+      <meta name="keywords" content="úprava účtu, změna hesla, správa uživatelského účtu, filmy uživatele">
+      <meta name="author" content="0ndra_m_">
+      <link rel="icon" type="image/svg" href="logo.svg">
       <title>Úprava účtu</title>
       <script src="theme-toggle.js"></script>
       <script>

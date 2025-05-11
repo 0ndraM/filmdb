@@ -12,6 +12,11 @@
 <html lang="cs">
    <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Seznam filmů. Umožňuje procházet filmy podle názvu, roku, žánru, režiséra a hodnocení.">
+      <meta name="keywords" content="filmy, seznam filmů, databáze filmů, procházení filmů, hodnocení filmů">
+      <meta name="author" content="0ndra_m_">
+      <link rel="icon" type="image/svg" href="logo.svg">
       <title>Filmy</title>
       <script src="theme-toggle.js"></script>
       <script>

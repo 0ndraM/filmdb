@@ -37,7 +37,12 @@ if ($film) {
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Detail filmu <?= htmlspecialchars($film['nazev']) ?>. Zobrazí informace o filmu, jako je název, rok, žánr, režisér a hodnocení.">
+    <meta name="keywords" content="film, <?= htmlspecialchars($film['nazev']) ?>, detail filmu, informace o filmu, <?= htmlspecialchars($film['zanr']) ?>, <?= htmlspecialchars($film['reziser']) ?>">
+    <meta name="author" content="0ndra_m_">
+    <link rel="icon" type="image/svg" href="logo.svg">
     <title><?= htmlspecialchars($film['nazev']) ?></title>
     <script src="theme-toggle.js"></script>
       <script>

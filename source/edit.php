@@ -70,6 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="cs">
    <head>
       <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="Upravit film v databázi. Umožňuje administrátorům a autorům upravit údaje o filmech.">
+      <meta name="keywords" content="upravit film, databáze filmů, úprava filmu, správa filmů">
+      <meta name="author" content="0ndra_m_">
+      <link rel="icon" href="favicon.ico" type="image/x-icon">
       <title>Upravit film</title>
       <script src="theme-toggle.js"></script>
       <script>
@@ -96,13 +101,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label>Rok:</label>
             <input type="number" name="rok" value="<?= $film['rok'] ?>" required>
             <label>Žánr:</label>
-            <input type="text" name="zanr" value="<?= htmlspecialchars($film['zanr']) ?>" required>
+            <input type="text" name="zanr" value="<?= htmlspecialchars($film['zanr']) ?>" >
             <label>Režisér:</label>
-            <input type="text" name="reziser" value="<?= htmlspecialchars($film['reziser']) ?>" required>
+            <input type="text" name="reziser" value="<?= htmlspecialchars($film['reziser']) ?>" >
             <label>Hodnocení:</label>
-            <input type="number" step="0.1" name="hodnoceni" value="<?= $film['hodnoceni'] ?>" required>
+            <input type="number" step="0.1" name="hodnoceni" value="<?= $film['hodnoceni'] ?>" >
             <label>Popis:</label>
-            <textarea name="popis" required><?= htmlspecialchars($film['popis']) ?></textarea>
+            <textarea name="popis" ><?= htmlspecialchars($film['popis']) ?></textarea>
             <label>Nahrát nový plakát:</label>
             <input type="file" name="plakat" accept=".jpg,.jpeg">
             <input type="hidden" name="id" value="<?= $film['id'] ?>">

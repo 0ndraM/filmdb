@@ -15,6 +15,11 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Logy systému pro správu filmů. Zobrazují změny uživatelských rolí a úpravy filmů.">
+    <meta name="keywords" content="logy, správa filmů, změny uživatelských rolí, úpravy filmů">
+    <meta name="author" content="0ndra_m_">
+    <link rel="icon" type="image/svg" href="logo.svg">
     <title>Logy systému</title>
     <script src="theme-toggle.js"></script>
     <script>

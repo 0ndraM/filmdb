@@ -45,7 +45,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Registrace nového uživatele do databáze filmů. Umožňuje uživatelům vytvořit účet pro správu filmů.">
+    <meta name="keywords" content="registrace, databáze filmů, uživatelský účet, správa filmů">
+    <meta name="author" content="0ndra_m_">
+    <link rel="icon" type="image/svg" href="logo.svg">
     <title>Registrace</title>
     <script src="theme-toggle.js"></script>
       <script>
