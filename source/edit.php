@@ -107,7 +107,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <label>Hodnocení:</label>
             <input type="number" step="0.1" name="hodnoceni" value="<?= $film['hodnoceni'] ?>" >
             <label>Popis:</label>
-            <textarea name="popis" ><?= htmlspecialchars($film['popis']) ?></textarea>
+            <textarea name="popis"><?= htmlspecialchars($film['popis']) ?></textarea>
+
+            <?php
+            // Check if the film has a poster (plakat)
+            $plakatPath = "plakaty/" . $film['id'] . ".jpg";
+            if (file_exists($plakatPath)) {
+                echo '<p>Aktuální plakát:</p>';
+                echo '<img src="' . $plakatPath . '" alt="Plakát filmu" style="max-width: 200px; max-height: 300px;">';
+                echo '<br>';
+            }
+            ?>
+
             <label>Nahrát nový plakát:</label>
             <input type="file" name="plakat" accept=".jpg,.jpeg">
             <input type="hidden" name="id" value="<?= $film['id'] ?>">

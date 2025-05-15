@@ -22,7 +22,7 @@ Tento webový projekt slouží pro správu databáze filmů. Umožňuje uživate
 ### `filmy`
 | Sloupec     | Typ           | Popis                          |
 |-------------|----------------|--------------------------------|
-| id          | INT AUTO_INCREMENT | Primární klíč               |
+| id          | INT AUTO_INCREMENT | Primární klíč             |
 | nazev       | VARCHAR(255)  | Název filmu                    |
 | rok         | INT           | Rok vydání                     |
 | zanr        | VARCHAR(100)  | Žánr                           |
@@ -38,7 +38,7 @@ Logovací tabulka ukládající každou změnu filmu.
 
 | Sloupec     | Typ           | Popis                              |
 |-------------|----------------|------------------------------------|
-| id          | INT AUTO_INCREMENT | Primární klíč                 |
+| id          | INT AUTO_INCREMENT | Primární klíč                |
 | film_id     | INT           | Odkaz na `filmy.id`               |
 | ...         | ...           | Kopie ostatních polí z `filmy`    |
 | autor       | VARCHAR(50)   | Uživatel, který provedl změnu     |
@@ -48,29 +48,30 @@ Logovací tabulka ukládající každou změnu filmu.
 
 ```
 📁 projekt/
-├── db.php                # Připojení k databázi
-├── login.php             # Přihlášení
-├── logout.php            # Odhlášení
-├── register.php          # Registrace
-├── index.php             # Úvodní stránka / výpis filmů
-├── add.php               # Přidání filmu
-├── smazat.php            # Smazání filmu (admin nebo owner)
-├── edit.php              # Úprava filmu (s kontrolou práv)
-├── info.php              # Detail filmu (s kontrolou přístupnosti)
-├── admin.php             # Admin sekce pro správu a schvalování
-├── settings.php          # Změna jména a hesla
-├── plakaty/              # Složka pro nahrané plakáty
-├── styles.css            # Stylování
-├── export_log.php        # Export logů správy uživatelů
-├── export_filmy_log.php  # Export logů úpravy filmů
-├── schvalit.php          # Schválení filmu
-├── odschválit.php        # Odschvální filmu
-├── promenit_roli.php     # Úprava rolí 
-├── smazat_uzivatele.php  # Smazání uživatele
-├── theme-toggle.js       # Přepínání motivu
-├── plakáty               # Složka plakátů filmů
-├── filmy_db.sql          # SQL skripty
-└── README.md             # Tento soubor
+├── db.php # Připojení k databázi
+├── login.php # Přihlášení
+├── logout.php # Odhlášení
+├── register.php # Registrace
+├── index.php # Úvodní stránka s AJAX filtrováním
+├── filmy_api.php # AJAX endpoint pro načítání filmů
+├── add.php # Přidání filmu
+├── edit.php # Úprava filmu (s kontrolou práv)
+├── smazat.php # Smazání filmu (admin nebo owner)
+├── info.php # Detail filmu (s kontrolou přístupnosti)
+├── admin.php # Admin sekce pro správu a schvalování
+├── settings.php # Změna jména a hesla
+├── schvalit.php # Schválení filmu
+├── odschválit.php # Odschválení filmu
+├── promenit_roli.php # Úprava rolí
+├── smazat_uzivatele.php # Smazání uživatele
+├── export_log.php # Export logů správy uživatelů
+├── export_filmy_log.php # Export logů úprav filmů
+├── styles.css # Stylování
+├── theme-toggle.js # Přepínání motivu
+├── script.js # AJAX skripty pro vyhledávání
+├── plakaty/ # Složka pro nahrané plakáty (.jpg)
+├── filmy_db.sql # SQL skripty pro vytvoření DB
+└── README.md # Tento soubor
 ```
 
 ## 🔐 Role a přístupová práva
@@ -91,9 +92,9 @@ Logovací tabulka ukládající každou změnu filmu.
 ## 🧪 Testovací účty
 
 ```
-user / heslo
-admin / heslo
-owner / heslo
+user / user
+admin / admin
+owner / owner
 ```
 
 ## 📌 Poznámky
