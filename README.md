@@ -91,9 +91,9 @@ Logovací tabulka ukládající každou změnu filmu.
 ## 🧪 Testovací účty
 
 ```
-user / heslo
-admin / heslo
-owner / heslo
+user / user
+admin / admin
+owner / owner
 ```
 
 ## 📌 Poznámky
