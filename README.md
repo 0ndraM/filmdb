@@ -22,7 +22,7 @@ Tento webový projekt slouží pro správu databáze filmů. Umožňuje uživate
 ### `filmy`
 | Sloupec     | Typ           | Popis                          |
 |-------------|----------------|--------------------------------|
-| id          | INT AUTO_INCREMENT | Primární klíč               |
+| id          | INT AUTO_INCREMENT | Primární klíč             |
 | nazev       | VARCHAR(255)  | Název filmu                    |
 | rok         | INT           | Rok vydání                     |
 | zanr        | VARCHAR(100)  | Žánr                           |
@@ -38,7 +38,7 @@ Logovací tabulka ukládající každou změnu filmu.
 
 | Sloupec     | Typ           | Popis                              |
 |-------------|----------------|------------------------------------|
-| id          | INT AUTO_INCREMENT | Primární klíč                 |
+| id          | INT AUTO_INCREMENT | Primární klíč                |
 | film_id     | INT           | Odkaz na `filmy.id`               |
 | ...         | ...           | Kopie ostatních polí z `filmy`    |
 | autor       | VARCHAR(50)   | Uživatel, který provedl změnu     |
