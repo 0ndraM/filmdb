@@ -1,110 +1,63 @@
--- phpMyAdmin SQL Dump
--- version 4.9.1
--- https://www.phpmyadmin.net/
---
--- Počítač: innodb.endora.cz:3306
--- Vytvořeno: Ned 11. kvě 2025, 20:29
--- Verze serveru: 10.3.35-MariaDB
--- Verze PHP: 7.3.33
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Databáze: `filmydb`
---
-CREATE DATABASE IF NOT EXISTS `filmydb` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `filmydb`;
-
--- --------------------------------------------------------
-
---
--- Struktura tabulky `filmy`
---
-
 CREATE TABLE `filmy` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `nazev` varchar(255) NOT NULL,
-  `rok` int(11) NOT NULL,
+  `rok` int NOT NULL,
   `zanr` varchar(100) DEFAULT NULL,
   `reziser` varchar(255) DEFAULT NULL,
   `hodnoceni` decimal(3,1) DEFAULT NULL,
-  `popis` text DEFAULT NULL,
-  `schvaleno` tinyint(1) DEFAULT 0,
-  `vytvoreno` timestamp NOT NULL DEFAULT current_timestamp(),
+  `popis` text,
+  `schvaleno` tinyint(1) DEFAULT '0',
+  `vytvoreno` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `autor` varchar(50) NOT NULL DEFAULT 'neznámý'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Vypisuji data pro tabulku `filmy`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `filmy` (`id`, `nazev`, `rok`, `zanr`, `reziser`, `hodnoceni`, `popis`, `schvaleno`, `vytvoreno`, `autor`) VALUES
-(1, 'Pán prstenů: Společenstvo Prstenu', 2001, 'Fantasy', 'Peter Jackson', '8.8', 'Pán prstenů: Společenstvo Prstenu je fantasy film z roku 2001 režírovaný Peterem Jacksonem a založený na prvním dílu Pána prstenů anglického spisovatele J. R. R. Tolkiena. Děj se odehrává ve Středozemi a vypráví o Temném pánu Sauronovi, který hledá Jeden prsten (prsten moci). Ten se dostane k mladému hobitu Frodu Pytlíkovi (Elijah Wood). Frodo a osm dalších členů Společenstva Prstenu se vydávají na cestu k Hoře osudu do země Mordor, jediného místa, kde může být prsten zničen.\r\n\r\nFilm měl premiéru v USA 19. prosince 2001 a byl vřele přijatý kritikou i fanoušky – později mnoho z nich tvrdilo, že je to nejvěrnější adaptace původního příběhu z celé Jacksonovy trilogie. Film měl neuvěřitelný komerční úspěch, celosvětově vydělal přes 870 milionů dolarů a stal se tak druhým nejvýdělečnějším filmem roku 2001 (první byl Harry Potter a Kámen mudrců). V té době to byl pátý nejvýdělečnější film v historii a dnes je na 25. pozici v tomto žebříčku. Vyhrál 4 Oscary a pět cen BAFTA. V roce 2007 Společenstvo prstenu získalo 50. místo v žebříčku 100 nejlepších amerických filmů Amerického filmového institutu. Ten jej také zvolil druhým nejlepším fantasy filmem všech dob.\r\n\r\n', 1, '2025-05-07 18:49:14', 'ondra'),
-(2, 'Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', '8.7', 'Matrix (v anglickém originále The Matrix) je kultovní[3] sci-fi film z roku 1999. Je prvním z filmové série Matrix, napsané a režírované sourozenci Wachowskými. V hlavních rolích se představili Keanu Reeves, Laurence Fishburne, Carrie-Anne Mossová a Hugo Weaving. Přímé pokračování, Matrix Reloaded, mělo premiéru v květnu 2003.\r\n\r\nFilm popisuje svět v Matrixu, rozsáhlé počítačové simulaci, na který jsou připojeni lidé, žijící v něm svůj virtuální život. Tito lidé, jejichž mozek je do Matrixu napojen, si neuvědomují, že nežijí skutečný život a že je jim do mozku promítána virtuální realita. Jsou takto nevědomky využíváni stroji s umělou inteligencí, které převzaly dominanci na planetě. Tyto stroje tedy de facto chovají lidstvo pro energii z lidských těl, díky níž fungují.\r\n\r\nVe snímku lze nalézt mnoho odkazů jak na různé filozofické a náboženské myšlenky, tak na hackerskou a kyberpunkovou subkulturu. Film proslul také díky svému vynikajícímu zpracování soubojů v hongkongském stylu a inspirací v japonském anime.\r\n\r\nFilm vznikl za spolupráce studií Warner Bros. a Village Roadshow Pictures. Byl natáčen zejména v australském Sydney.', 1, '2025-05-07 18:49:17', 'ondra'),
-(3, 'Počátek', 2010, 'Sci-Fi', 'Christopher Nolan', '8.8', 'Počátek (v anglickém originále Inception) je americký film z roku 2010 produkce Warner Brothers s Leonardem DiCapriem v hlavní roli. Autorem, producentem a režisérem filmu je Christopher Nolan. Film získal celkem čtyři Oscary. Hudbu zkomponoval Hans Zimmer, trailery složil Zack Hemsey. Distribuční název byl kvůli pečlivému utajení filmu zvolen bez znalosti děje, vhodnější by byl výraz Vnuknutí.[zdroj⁠?!]\r\n\r\nTvorba začala zhruba před deseti lety, kdy Nolan napsal osmdesátistránkové filmové zpracování o zlodějích snů. Poté, co přednesl myšlenku společnosti Warner Bros. v 2001, cítil, že potřebuje mít víc zkušeností s vytvářením filmů ve velkém měřítku. Proto se rozhodl pracovat na filmech Batman začíná a Temný rytíř. Strávil půl roku dolaďováním scénáře předtím, než ho Warner Bros. koupilo v únoru 2009. Natáčení začalo v Tokiu 19. června 2009 a skončilo na konci listopadu téhož roku.', 1, '2025-05-07 18:57:31', 'ondra'),
-(4, 'Skyfall', 2012, 'thriller', 'Sam Mendes', '10.0', 'Skyfall je dvacátá třetí filmová bondovka produkovaná Eon Productions pro společnosti MGM, Columbia Pictures a Sony Pictures Entertainment.[3] Natočil ji režisér Sam Mendes. Na scénáři se podíleli John Logan, Neal Purvis a Robert Wade. Postavu Jamese Bonda ztvárnil potřetí herec Daniel Craig.\r\n\r\nFilm pojednává o Bondově vyšetřování útoku na centrálu MI6, který je součástí spiknutí ze strany bývalého britského agenta a hlavní záporné postavy Raoula Silvy, v podání Javiera Bardema. Jeho cílem je zdiskreditovat a zabít svou bývalou řídící důstojnici M, jakožto odplatu za zradu, které se na něm měla kdysi dopustit. V bondovce se po deseti letech představily dvě vracející se postavy, jež absentovaly v předchozích dvou dílech série: Q, kterého hrál Ben Whishaw a slečna Eve Moneypenny, jíž ztvárnila Naomie Harrisová. Skyfall byl posledním snímkem pro Judi Denchovou, která se v úloze M objevila celkem sedmkrát. Její postavu šéfa MI6 převzal Ralph Fiennes, jakožto Gareth Mallory. Role smyslné Bond girl Sévérine se ujala francouzská herečka Bérénice Marloheová.\r\n\r\nMendes byl k natáčení přizván v roce 2008 po premiéře Quantum of Solace. Práce na filmu však byly pozastaveny pro finanční problémy studia MGM až do prosince 2010; během tohoto období na projektu pracoval v pozici konzultanta. Původní rozpracovaný scénář z dílny Petera Morgana dopsali do finální verze Logan, Purvis a Wade. První klapka padla v listopadu 2011 a natáčení pokračovalo na lokalitách ve Velké Británii, Číně a Turecku.\r\n\r\nSvětová premiéra proběhla za přítomnosti korunního prince Charlese a jeho choti vévodkyně Camilly 23. října 2012 v londýnské Royal Albert Hall. Ve Spojeném království se premiéra uskutečnila 26. října 2012 v kinosálech s formátem velkorozměrného kinematografického systému IMAX,[4][5] ačkoli film nebyl snímán kamerami IMAX.\r\n\r\nDo konce roku 2012 dosáhly celosvětové tržby výše jedné miliardy dolarů,[2] čímž se Skyfall stal čtrnáctým filmem v historii, jenž překročil tuto hranici a také druhým nejvýdělečnějším snímkem roku.[6] Na počátku roku 2013 byl sedmým nejvýnosnějším filmem v historii kinematografie, nejvýdělečnějším snímkem vzešlým z Velké Británie i ze studií Sony Pictures a MGM, a na prvenství dosáhl také v bondovské sérii.\r\n\r\nSkyfall obdržel několik ocenění, včetně cen BAFTA pro nejlepší film a hudbu. Z pěti nominací na Oscara proměnil na 85. ročníku udílení Cen Akademie dvě – za nejlepší píseň „Skyfall“ a střih zvuku. Na jubilejním 70. ročníku udílení Zlatých glóbů obdržel cenu za nejlepší píseň.', 1, '2025-05-07 18:49:08', 'ondra'),
-(5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 1, '2025-05-07 21:03:18', 'user'),
-(6, 'Velký Gatsby', 2013, 'Romantika', 'Baz Luhrmann', '5.0', 'Velký Gatsby (v anglickém originále The Great Gatsby) je americký dramatický snímek režiséra Baze Luhrmanna, který je též jedním z autorů scénáře. Film je adaptací stejnojmenného románu od Francise Scotta Fitzgeralda. Představitelé hlavních rolí jsou Leonardo DiCaprio, Tobey Maguire, Carey Mulligan, Joel Edgerton, Elizabeth Debicki, Isla Fisher, Jason Clarke a Amitabh Bachchan.\r\n\r\nFilm sleduje životy multimilionáře Jaye Gatsbyho a jeho souseda Nicka, který se s Gatsbym setkává během bouřlivých dvacátých let. Premiéra filmu ve Spojených státech proběhla dne 10. května 2013. Snímek byl vydán ve formátu 3D a získal smíšené recenze od filmových kritiků.', 1, '2025-05-07 18:49:04', 'admin'),
-(7, 'Iron Man', 2008, 'Akční ', 'Jon Favreau', '10.0', 'Robert Downey Jr. je nejlepší. ', 0, '2025-05-10 11:33:59', 'Andrejka71');
-
--- --------------------------------------------------------
-
---
--- Struktura tabulky `filmy_log`
---
+(1, 'Pán prstenů: Společenstvo Prstenu', 2001, 'Fantasy', 'Peter Jackson', 8.8, 'Pán prstenů: Společenstvo Prstenu je fantasy film z roku 2001 režírovaný Peterem Jacksonem a založený na prvním dílu Pána prstenů anglického spisovatele J. R. R. Tolkiena. Děj se odehrává ve Středozemi a vypráví o Temném pánu Sauronovi, který hledá Jeden prsten (prsten moci). Ten se dostane k mladému hobitu Frodu Pytlíkovi (Elijah Wood). Frodo a osm dalších členů Společenstva Prstenu se vydávají na cestu k Hoře osudu do země Mordor, jediného místa, kde může být prsten zničen.\r\n\r\nFilm měl premiéru v USA 19. prosince 2001 a byl vřele přijatý kritikou i fanoušky – později mnoho z nich tvrdilo, že je to nejvěrnější adaptace původního příběhu z celé Jacksonovy trilogie. Film měl neuvěřitelný komerční úspěch, celosvětově vydělal přes 870 milionů dolarů a stal se tak druhým nejvýdělečnějším filmem roku 2001 (první byl Harry Potter a Kámen mudrců). V té době to byl pátý nejvýdělečnější film v historii a dnes je na 25. pozici v tomto žebříčku. Vyhrál 4 Oscary a pět cen BAFTA. V roce 2007 Společenstvo prstenu získalo 50. místo v žebříčku 100 nejlepších amerických filmů Amerického filmového institutu. Ten jej také zvolil druhým nejlepším fantasy filmem všech dob.\r\n\r\n', 1, '2025-05-07 16:49:14', 'ondra'),
+(2, 'Matrix', 1999, 'Sci-Fi', 'Wachowski Brothers', 8.7, 'Matrix (v anglickém originále The Matrix) je kultovní[3] sci-fi film z roku 1999. Je prvním z filmové série Matrix, napsané a režírované sourozenci Wachowskými. V hlavních rolích se představili Keanu Reeves, Laurence Fishburne, Carrie-Anne Mossová a Hugo Weaving. Přímé pokračování, Matrix Reloaded, mělo premiéru v květnu 2003.\r\n\r\nFilm popisuje svět v Matrixu, rozsáhlé počítačové simulaci, na který jsou připojeni lidé, žijící v něm svůj virtuální život. Tito lidé, jejichž mozek je do Matrixu napojen, si neuvědomují, že nežijí skutečný život a že je jim do mozku promítána virtuální realita. Jsou takto nevědomky využíváni stroji s umělou inteligencí, které převzaly dominanci na planetě. Tyto stroje tedy de facto chovají lidstvo pro energii z lidských těl, díky níž fungují.\r\n\r\nVe snímku lze nalézt mnoho odkazů jak na různé filozofické a náboženské myšlenky, tak na hackerskou a kyberpunkovou subkulturu. Film proslul také díky svému vynikajícímu zpracování soubojů v hongkongském stylu a inspirací v japonském anime.\r\n\r\nFilm vznikl za spolupráce studií Warner Bros. a Village Roadshow Pictures. Byl natáčen zejména v australském Sydney.', 1, '2025-05-07 16:49:17', 'ondra'),
+(3, 'Počátek', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 'Počátek (v anglickém originále Inception) je americký film z roku 2010 produkce Warner Brothers s Leonardem DiCapriem v hlavní roli. Autorem, producentem a režisérem filmu je Christopher Nolan. Film získal celkem čtyři Oscary. Hudbu zkomponoval Hans Zimmer, trailery složil Zack Hemsey. Distribuční název byl kvůli pečlivému utajení filmu zvolen bez znalosti děje, vhodnější by byl výraz Vnuknutí.[zdroj⁠?!]\r\n\r\nTvorba začala zhruba před deseti lety, kdy Nolan napsal osmdesátistránkové filmové zpracování o zlodějích snů. Poté, co přednesl myšlenku společnosti Warner Bros. v 2001, cítil, že potřebuje mít víc zkušeností s vytvářením filmů ve velkém měřítku. Proto se rozhodl pracovat na filmech Batman začíná a Temný rytíř. Strávil půl roku dolaďováním scénáře předtím, než ho Warner Bros. koupilo v únoru 2009. Natáčení začalo v Tokiu 19. června 2009 a skončilo na konci listopadu téhož roku.', 1, '2025-05-07 16:57:31', 'ondra'),
+(4, 'Skyfall', 2012, 'thriller', 'Sam Mendes', 10.0, 'Skyfall je dvacátá třetí filmová bondovka produkovaná Eon Productions pro společnosti MGM, Columbia Pictures a Sony Pictures Entertainment.[3] Natočil ji režisér Sam Mendes. Na scénáři se podíleli John Logan, Neal Purvis a Robert Wade. Postavu Jamese Bonda ztvárnil potřetí herec Daniel Craig.\r\n\r\nFilm pojednává o Bondově vyšetřování útoku na centrálu MI6, který je součástí spiknutí ze strany bývalého britského agenta a hlavní záporné postavy Raoula Silvy, v podání Javiera Bardema. Jeho cílem je zdiskreditovat a zabít svou bývalou řídící důstojnici M, jakožto odplatu za zradu, které se na něm měla kdysi dopustit. V bondovce se po deseti letech představily dvě vracející se postavy, jež absentovaly v předchozích dvou dílech série: Q, kterého hrál Ben Whishaw a slečna Eve Moneypenny, jíž ztvárnila Naomie Harrisová. Skyfall byl posledním snímkem pro Judi Denchovou, která se v úloze M objevila celkem sedmkrát. Její postavu šéfa MI6 převzal Ralph Fiennes, jakožto Gareth Mallory. Role smyslné Bond girl Sévérine se ujala francouzská herečka Bérénice Marloheová.\r\n\r\nMendes byl k natáčení přizván v roce 2008 po premiéře Quantum of Solace. Práce na filmu však byly pozastaveny pro finanční problémy studia MGM až do prosince 2010; během tohoto období na projektu pracoval v pozici konzultanta. Původní rozpracovaný scénář z dílny Petera Morgana dopsali do finální verze Logan, Purvis a Wade. První klapka padla v listopadu 2011 a natáčení pokračovalo na lokalitách ve Velké Británii, Číně a Turecku.\r\n\r\nSvětová premiéra proběhla za přítomnosti korunního prince Charlese a jeho choti vévodkyně Camilly 23. října 2012 v londýnské Royal Albert Hall. Ve Spojeném království se premiéra uskutečnila 26. října 2012 v kinosálech s formátem velkorozměrného kinematografického systému IMAX,[4][5] ačkoli film nebyl snímán kamerami IMAX.\r\n\r\nDo konce roku 2012 dosáhly celosvětové tržby výše jedné miliardy dolarů,[2] čímž se Skyfall stal čtrnáctým filmem v historii, jenž překročil tuto hranici a také druhým nejvýdělečnějším snímkem roku.[6] Na počátku roku 2013 byl sedmým nejvýnosnějším filmem v historii kinematografie, nejvýdělečnějším snímkem vzešlým z Velké Británie i ze studií Sony Pictures a MGM, a na prvenství dosáhl také v bondovské sérii.\r\n\r\nSkyfall obdržel několik ocenění, včetně cen BAFTA pro nejlepší film a hudbu. Z pěti nominací na Oscara proměnil na 85. ročníku udílení Cen Akademie dvě – za nejlepší píseň „Skyfall“ a střih zvuku. Na jubilejním 70. ročníku udílení Zlatých glóbů obdržel cenu za nejlepší píseň.', 1, '2025-05-07 16:49:08', 'ondra'),
+(5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 1, '2025-05-07 19:03:18', 'user'),
+(6, 'Velký Gatsby', 2013, 'Romantika', 'Baz Luhrmann', 5.0, 'Velký Gatsby (v anglickém originále The Great Gatsby) je americký dramatický snímek režiséra Baze Luhrmanna, který je též jedním z autorů scénáře. Film je adaptací stejnojmenného románu od Francise Scotta Fitzgeralda. Představitelé hlavních rolí jsou Leonardo DiCaprio, Tobey Maguire, Carey Mulligan, Joel Edgerton, Elizabeth Debicki, Isla Fisher, Jason Clarke a Amitabh Bachchan.\r\n\r\nFilm sleduje životy multimilionáře Jaye Gatsbyho a jeho souseda Nicka, který se s Gatsbym setkává během bouřlivých dvacátých let. Premiéra filmu ve Spojených státech proběhla dne 10. května 2013. Snímek byl vydán ve formátu 3D a získal smíšené recenze od filmových kritiků.', 1, '2025-05-07 16:49:04', 'admin'),
+(7, 'Iron Man', 2008, 'Akční ', 'Jon Favreau', 10.0, 'Iron Man je americký akční film z roku 2008, který natočil režisér Jon Favreau podle komiksů o Iron Manovi. V hlavní roli Tonyho Starka, bohatého a geniálního vynálezce, který si sestrojí obrněný a vyzbrojený oblek a stane se tak superhrdinou, se představil Robert Downey Jr., jenž si zahrál i v navazujících filmech Iron Man 2 (2010) a Iron Man 3 (2013). Jedná se o první celovečerní snímek z filmové série Marvel Cinematic Universe.', 1, '2025-05-15 13:01:55', 'Andrejka71'),
+(8, 'Captain America Nový svět', 2025, 'Akční', 'Julius Onah', 10.0, 'Captain America: Nový svět (v anglickém originále Captain America: Brave New World) je připravovaný americký sci-fi akční film natočený podle komiksu Captain America od Marvel Comics. Režie se ujal nigerijsko-americký režisér Julius Onah a scénář napsali Malcolm Spellman a Dalan Musson. V hlavní roli se objeví Anthony Mackie. Jedná se o 34. film franšízy Marvel Cinematic Universe, součást 5. fáze, a sequel filmu Captain America: Občanská válka a seriálu Falcon a Winter Soldier.', 1, '2025-05-12 13:43:53', 'Andrejka71'),
+(9, 'Vlk z Wall Street', 2013, 'thriller', 'Martin Scorsese', 5.0, 'Vlk z Wall Street je v první řadě kriminální thriller, ale i americká černá komedie z roku 2013 režírovaná Martinem Scorsesem, založená na stejnojmenných pamětech Jordana Belforta. Film je o jeho pohledu na kariéru makléře v New Yorku a na to, jak se jeho firma Stratton Oakmont zapojila do nekontrolovatelné korupce a podvodů na Wall Street, což nakonec vedlo k jeho pádu. Leonardo DiCaprio, který byl také producentem filmu, ztvárňuje Jordana v hlavní roli, jeho obchodním partnerem a přítelem je Jonah Hill jako Donnie Azoff, Margot Robbie ztvárnila roli jeho manželky Naomi Lapaglia a Kyle Chandler je zde jako agent FBI Patrick Denham, který se snaží Belforta zničit.\r\n\r\nPremiéra byla dne 17. prosince 2013 v New Yorku a ve Spojených státech byl film vypuštěn 25. prosince 2013 prostřednictvím Paramount Pictures. Byl to také první film zveřejněný za pomocí digitální distribuce.\r\n\r\nFilm vzbudil rozruch ohledně jeho morálně nejednoznačného zobrazení událostí, explicitního sexuálního obsahu, extrémních vulgárních výrazů, zobrazení užívání tvrdých drog a využívání zvířat během natáčení. Získal také zápis v Guinnessově knize rekordů za největší počet nadávek ve filmu.', 1, '2025-05-14 17:59:03', 'ondra');
 
 CREATE TABLE `filmy_log` (
-  `id` int(11) NOT NULL,
-  `film_id` int(11) NOT NULL,
+  `id` int NOT NULL,
+  `film_id` int NOT NULL,
   `nazev` varchar(255) DEFAULT NULL,
-  `rok` int(11) DEFAULT NULL,
+  `rok` int DEFAULT NULL,
   `zanr` varchar(100) DEFAULT NULL,
   `reziser` varchar(255) DEFAULT NULL,
   `hodnoceni` decimal(3,1) DEFAULT NULL,
-  `popis` text DEFAULT NULL,
+  `popis` text,
   `autor` varchar(50) DEFAULT NULL,
-  `zmeneno` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Vypisuji data pro tabulku `filmy_log`
---
+  `zmeneno` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 INSERT INTO `filmy_log` (`id`, `film_id`, `nazev`, `rok`, `zanr`, `reziser`, `hodnoceni`, `popis`, `autor`, `zmeneno`) VALUES
-(1, 3, 'Počátek', 2010, 'Sci-Fi', 'Christopher Nolan', '8.8', 'Počátek (v anglickém originále Inception) je americký film z roku 2010 produkce Warner Brothers s Leonardem DiCapriem v hlavní roli. Autorem, producentem a režisérem filmu je Christopher Nolan. Film získal celkem čtyři Oscary. Hudbu zkomponoval Hans Zimmer, trailery složil Zack Hemsey. Distribuční název byl kvůli pečlivému utajení filmu zvolen bez znalosti děje, vhodnější by byl výraz Vnuknutí.[zdroj⁠?!]\r\n\r\nTvorba začala zhruba před deseti lety, kdy Nolan napsal osmdesátistránkové filmové zpracování o zlodějích snů. Poté, co přednesl myšlenku společnosti Warner Bros. v 2001, cítil, že potřebuje mít víc zkušeností s vytvářením filmů ve velkém měřítku. Proto se rozhodl pracovat na filmech Batman začíná a Temný rytíř. Strávil půl roku dolaďováním scénáře předtím, než ho Warner Bros. koupilo v únoru 2009. Natáčení začalo v Tokiu 19. června 2009 a skončilo na konci listopadu téhož roku.', 'ondra', '2025-05-07 18:57:31'),
-(2, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '2.5', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 18:57:46'),
-(3, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '2.5', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 19:48:33'),
-(4, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 19:53:49'),
-(5, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 19:58:04'),
-(6, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 19:58:22'),
-(7, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'admin', '2025-05-07 20:08:15'),
-(8, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', '4.0', 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'ondra', '2025-05-07 21:03:18');
-
--- --------------------------------------------------------
-
---
--- Struktura tabulky `logy`
---
+(1, 3, 'Počátek', 2010, 'Sci-Fi', 'Christopher Nolan', 8.8, 'Počátek (v anglickém originále Inception) je americký film z roku 2010 produkce Warner Brothers s Leonardem DiCapriem v hlavní roli. Autorem, producentem a režisérem filmu je Christopher Nolan. Film získal celkem čtyři Oscary. Hudbu zkomponoval Hans Zimmer, trailery složil Zack Hemsey. Distribuční název byl kvůli pečlivému utajení filmu zvolen bez znalosti děje, vhodnější by byl výraz Vnuknutí.[zdroj⁠?!]\r\n\r\nTvorba začala zhruba před deseti lety, kdy Nolan napsal osmdesátistránkové filmové zpracování o zlodějích snů. Poté, co přednesl myšlenku společnosti Warner Bros. v 2001, cítil, že potřebuje mít víc zkušeností s vytvářením filmů ve velkém měřítku. Proto se rozhodl pracovat na filmech Batman začíná a Temný rytíř. Strávil půl roku dolaďováním scénáře předtím, než ho Warner Bros. koupilo v únoru 2009. Natáčení začalo v Tokiu 19. června 2009 a skončilo na konci listopadu téhož roku.', 'ondra', '2025-05-07 16:57:31'),
+(2, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 2.5, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 16:57:46'),
+(3, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 2.5, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 17:48:33'),
+(4, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 17:53:49'),
+(5, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 17:58:04'),
+(6, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'user', '2025-05-07 17:58:22'),
+(7, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'admin', '2025-05-07 18:08:15'),
+(8, 5, 'Gentlemani', 2019, 'akční', 'Guy Ritchie', 4.0, 'Gentlemani, v anglickém originále The Gentlemen, je akční komedie z roku 2019 režiséra Guye Ritchieho, který film také produkoval, je autorem scénáře a předlohy spolu s Ivanem Atkinsonem a Marnem Daviesem. Hlavní role ve filmu ztvárnili Matthew McConaughey, Charlie Hunnam, Henry Golding, Michelle Dockeryová, Jeremy Strong, Eddie Marsan, Colin Farrell a Hugh Grant.\r\n\r\nFilm vyvolal povětšinou nadšené reakce u filmových recenzentů, kteří chválili zejména režiséra, herce a scénář, mnoho z nich také kvitovalo, že Ritchie je zpátky ve formě. Nicméně někteří kritici vnímali negativně rasistický podtón a hrubý jazyk. Film byl též komerčně úspěšný, na pokladnách kin vydělal ke květnu 2020 po celém světě celkem 115 milionů amerických dolarů.\r\n\r\nFilm byl poprvé uveden dne 3. prosince 2019 v londýnském kině Curzon Mayfair. Premiéra filmu ve Spojeném království proběhla 1. ledna 2020 a ve Spojených státech amerických 24. ledna 2020. V Česku měl film premiéru 30. ledna 2020.', 'ondra', '2025-05-07 19:03:18'),
+(9, 7, 'Iron Man', 2008, 'Akční ', 'Jon Favreau', 10.0, '\r\nProdukce\r\nVydání\r\nPřijetí\r\n\r\nTržby\r\nFilmová kritika\r\nOcenění\r\nNavazující filmy\r\nOdkazy\r\n\r\nReference\r\nExterní odkazy\r\nIron Man (film, 2008)\r\n\r\nČlánek\r\nDiskuse\r\nČíst\r\nEditovat\r\nEditovat zdroj\r\nZobrazit historii\r\n\r\nNástroje\r\nVzhled skrýt\r\nPísmo\r\n\r\nMalé\r\n\r\nStandardní\r\n\r\nVelké\r\nŠířka\r\n\r\nBěžné\r\n\r\nŠiroké\r\nIron Man\r\nLogo filmu\r\nLogo filmu\r\nZákladní informace\r\nPůvodní název	Iron Man\r\nZemě původu	USA\r\nJazyk	angličtina\r\nDélka	126 min\r\nŽánry	akční\r\ndobrodružný\r\nsci-fi\r\nPředloha	komiks Iron Man\r\nScénář	Mark Fergus\r\nHawk Ostby\r\nArt Marcum\r\nMatt Holloway\r\nRežie	Jon Favreau\r\nObsazení a filmový štáb\r\nHlavní role	viz obsazení\r\nProdukce	Avi Arad\r\nKevin Feige\r\nHudba	Ramin Djawadi\r\nKamera	Matthew Libatique\r\nStřih	Dan Lebental\r\nVýroba a distribuce\r\nPremiéra	2. května 2008\r\nČeská premiéra	1. května 2008\r\nProdukční společnosti	Marvel Studios\r\nFairview Entertainment\r\nDistribuce	Paramount Pictures\r\nČeská distribuce	Bontonfilm\r\nRozpočet	140 milionů $\r\nTržby	585,2 milionů $\r\nMarvel Cinematic Universe\r\nNeuvěřitelný Hulk\r\n(2008)\r\nIron Man na ČSFD, Kinoboxu, FDb, IMDb\r\nNěkterá data mohou pocházet z datové položky.\r\nIron Man je americký akční film z roku 2008, který natočil režisér Jon Favreau podle komiksů o Iron Manovi. V hlavní roli Tonyho Starka, bohatého a geniálního vynálezce, který si sestrojí obrněný a vyzbrojený oblek a stane se tak superhrdinou, se představil Robert Downey Jr., jenž si zahrál i v navazujících filmech Iron Man 2 (2010) a Iron Man 3 (2013). Jedná se o první celovečerní snímek z filmové série Marvel Cinematic Universe.', 'ondra', '2025-05-11 19:24:58'),
+(10, 8, 'Captain America Nový svět', 2025, 'Akční', 'Julius Ohan', 10.0, 'Místo setkání s nově zvoleným prezidentem USA Thaddeusem Rossem se Sam Wilson ocitne uprostřed mezinárodního incidentu. Musí odhalit příčinu nekalého celosvětového spiknutí dříve, než skutečný strůjce konfliktu způsobí, že celý svět uvidí rudě.', 'Andrejka71', '2025-05-12 13:42:41'),
+(11, 8, 'Captain America Nový svět', 2025, 'Akční', 'Julius Onah', 10.0, 'Místo setkání s nově zvoleným prezidentem USA Thaddeusem Rossem se Sam Wilson ocitne uprostřed mezinárodního incidentu. Musí odhalit příčinu nekalého celosvětového spiknutí dříve, než skutečný strůjce konfliktu způsobí, že celý svět uvidí rudě.', 'Andrejka71', '2025-05-12 13:43:37'),
+(12, 8, 'Captain America Nový svět', 2025, 'Akční', 'Julius Onah', 10.0, 'Captain America: Nový svět (v anglickém originále Captain America: Brave New World) je připravovaný americký sci-fi akční film natočený podle komiksu Captain America od Marvel Comics. Režie se ujal nigerijsko-americký režisér Julius Onah a scénář napsali Malcolm Spellman a Dalan Musson. V hlavní roli se objeví Anthony Mackie. Jedná se o 34. film franšízy Marvel Cinematic Universe, součást 5. fáze, a sequel filmu Captain America: Občanská válka a seriálu Falcon a Winter Soldier.', 'ondra', '2025-05-12 13:43:53'),
+(13, 9, 'Vlk z Wall Street', 2013, 'thriller', 'Martin Scorsese', 5.0, '', 'ondra', '2025-05-14 17:58:03'),
+(14, 9, 'Vlk z Wall Street', 2013, 'thriller', 'Martin Scorsese', 5.0, 'Vlk z Wall Street je v první řadě kriminální thriller, ale i americká černá komedie z roku 2013 režírovaná Martinem Scorsesem, založená na stejnojmenných pamětech Jordana Belforta. Film je o jeho pohledu na kariéru makléře v New Yorku a na to, jak se jeho firma Stratton Oakmont zapojila do nekontrolovatelné korupce a podvodů na Wall Street, což nakonec vedlo k jeho pádu. Leonardo DiCaprio, který byl také producentem filmu, ztvárňuje Jordana v hlavní roli, jeho obchodním partnerem a přítelem je Jonah Hill jako Donnie Azoff, Margot Robbie ztvárnila roli jeho manželky Naomi Lapaglia a Kyle Chandler je zde jako agent FBI Patrick Denham, který se snaží Belforta zničit.\r\n\r\nPremiéra byla dne 17. prosince 2013 v New Yorku a ve Spojených státech byl film vypuštěn 25. prosince 2013 prostřednictvím Paramount Pictures. Byl to také první film zveřejněný za pomocí digitální distribuce.\r\n\r\nFilm vzbudil rozruch ohledně jeho morálně nejednoznačného zobrazení událostí, explicitního sexuálního obsahu, extrémních vulgárních výrazů, zobrazení užívání tvrdých drog a využívání zvířat během natáčení. Získal také zápis v Guinnessově knize rekordů za největší počet nadávek ve filmu.', 'ondra', '2025-05-14 17:59:03'),
+(15, 7, 'Iron Man', 2008, 'Akční ', 'Jon Favreau', 10.0, 'Iron Man je americký akční film z roku 2008, který natočil režisér Jon Favreau podle komiksů o Iron Manovi. V hlavní roli Tonyho Starka, bohatého a geniálního vynálezce, který si sestrojí obrněný a vyzbrojený oblek a stane se tak superhrdinou, se představil Robert Downey Jr., jenž si zahrál i v navazujících filmech Iron Man 2 (2010) a Iron Man 3 (2013). Jedná se o první celovečerní snímek z filmové série Marvel Cinematic Universe.', 'owner', '2025-05-15 13:01:55');
 
 CREATE TABLE `logy` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `autor` varchar(50) NOT NULL,
   `akce` text NOT NULL,
-  `cas` datetime DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Vypisuji data pro tabulku `logy`
---
+  `cas` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `logy` (`id`, `autor`, `akce`, `cas`) VALUES
 (1, 'ondra', 'Změnil roli uživateli \'admin\' z \'admin\' na \'user\'', '2025-05-06 16:28:03'),
@@ -112,100 +65,65 @@ INSERT INTO `logy` (`id`, `autor`, `akce`, `cas`) VALUES
 (3, 'ondra', 'Změnil roli uživateli \'Andrejka71\' z \'user\' na \'admin\'', '2025-05-10 13:37:06'),
 (4, 'ondra', 'Změnil roli uživateli \'admin\' z \'admin\' na \'user\'', '2025-05-10 13:37:19'),
 (5, 'ondra', 'Změnil roli uživateli \'Andrejka71\' z \'admin\' na \'user\'', '2025-05-10 13:37:23'),
-(6, 'ondra', 'Změnil roli uživateli \'admin\' z \'user\' na \'admin\'', '2025-05-10 13:37:28');
+(6, 'ondra', 'Změnil roli uživateli \'admin\' z \'user\' na \'admin\'', '2025-05-10 13:37:28'),
+(7, 'owner', 'Změnil roli uživateli \'ondra\' z \'user\' na \'admin\'', '2025-05-15 14:51:03'),
+(8, 'owner', 'Změnil roli uživateli \'ondra\' z \'admin\' na \'owner\'', '2025-05-15 14:51:08');
 
--- --------------------------------------------------------
+CREATE TABLE `tabulka` (
+  `cislo` int NOT NULL DEFAULT '0',
+  `jmeno` varchar(30) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL DEFAULT '',
+  `prijmeni` varchar(30) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Struktura tabulky `uzivatele`
---
+INSERT INTO `tabulka` (`cislo`, `jmeno`, `prijmeni`) VALUES
+(0, 'Jan', 'Novák');
 
 CREATE TABLE `uzivatele` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('owner','admin','user') DEFAULT 'user'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Vypisuji data pro tabulku `uzivatele`
---
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `uzivatele` (`id`, `username`, `password`, `role`) VALUES
 (1, 'admin', '$2y$10$M5TZX0TDr2beVv3p52wp8uQv21MOqWSWNW8pc9ujWCflKklqRW9ge', 'admin'),
 (2, 'user', '$2y$10$KXrMDM4zIBPnwok.cIgbQeNH6vNRPzKf30SBHX5TAPZ2q4rS0Htl2', 'user'),
-(3, 'ondra', '$2y$10$1i9venNsfLd5SuOo78MUzewtGdmXLUYtv4Q6EMdKbMXbBclBQFk4S', 'owner'),
-(7, 'Andrejka71', '$2y$10$SPFDYBxcn/oQmSCWJF/zt.fm6RQqvjy.mLR5PBlcC6kEl9X78pXmW', 'user');
+(9, 'owner', '$2y$10$ydmWaZfg9vb15FQtzvJZNunuz.0WtGHvmLYK.o0twRJ2flkJVvI0a', 'owner'),
+(10, 'Andrejka71', '$2y$10$dgTQkzNXDhxyzk9UCUsRHOOIkfVRYtS7EbzAKZyda2aOoZLTb1MYK', 'user'),
+(11, 'ondra', '$2y$10$s9piGTlsGbzibisqb9T2B.CH5EC8vIOnFRcv1ITwbbW4o2tlEq0uK', 'owner');
 
---
--- Klíče pro exportované tabulky
---
 
---
--- Klíče pro tabulku `filmy`
---
 ALTER TABLE `filmy`
   ADD PRIMARY KEY (`id`);
 
---
--- Klíče pro tabulku `filmy_log`
---
 ALTER TABLE `filmy_log`
   ADD PRIMARY KEY (`id`),
   ADD KEY `film_id` (`film_id`);
 
---
--- Klíče pro tabulku `logy`
---
 ALTER TABLE `logy`
   ADD PRIMARY KEY (`id`);
 
---
--- Klíče pro tabulku `uzivatele`
---
+ALTER TABLE `tabulka`
+  ADD PRIMARY KEY (`cislo`);
+
 ALTER TABLE `uzivatele`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `username` (`username`);
 
---
--- AUTO_INCREMENT pro tabulky
---
 
---
--- AUTO_INCREMENT pro tabulku `filmy`
---
 ALTER TABLE `filmy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
---
--- AUTO_INCREMENT pro tabulku `filmy_log`
---
 ALTER TABLE `filmy_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
---
--- AUTO_INCREMENT pro tabulku `logy`
---
 ALTER TABLE `logy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
---
--- AUTO_INCREMENT pro tabulku `uzivatele`
---
 ALTER TABLE `uzivatele`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
---
--- Omezení pro exportované tabulky
---
 
---
--- Omezení pro tabulku `filmy_log`
---
 ALTER TABLE `filmy_log`
   ADD CONSTRAINT `filmy_log_ibfk_1` FOREIGN KEY (`film_id`) REFERENCES `filmy` (`id`);
 COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
