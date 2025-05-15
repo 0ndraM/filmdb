@@ -6,7 +6,6 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner']
     header('Location: login.php');
     exit();
  }
- 
 
 $id = $_GET['id'] ?? null;
 

@@ -7,7 +7,6 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner']
     exit();
  }
  
-
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
     $stmt = $conn->prepare("UPDATE filmy SET schvaleno = 1 WHERE id = ?");
