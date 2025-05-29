@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          <h1>Přihlášení</h1>
       </header>
       <nav>
-         <a class="button" href="index.php">← Zpět na filmy</a>
+         <a class="button" href="index.php">⬅️ Zpět na filmy</a>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
 <div class="credentials-container">

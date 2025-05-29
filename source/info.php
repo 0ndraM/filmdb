@@ -57,12 +57,14 @@ if ($film) {
         <h1><?= htmlspecialchars($film['nazev']) ?></h1>
     </header>
     <nav>
-        <a class="button" href="index.php">← Zpět na seznam filmů</a>
+        <a class="button" href="index.php">⬅️ Zpět na seznam filmů</a>
         <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
     </nav>
-    <div class="movie-card" style="max-width: 800px; margin: 0 auto; ">
-        <img src="plakaty/<?= urlencode($film['id']) ?>.jpg" alt="Plakát" class="movie-poster">
-        <div class="movie-info">
+    <div class="movie-card detail-card">
+        <div class="poster-wrapper">
+            <img src="plakaty/<?= urlencode($film['id']) ?>.jpg" alt="Plakát" class="movie-poster detail-poster">
+        </div>
+        <div class="movie-info detail-info">
             <p><strong>Rok:</strong> <?= $film['rok'] ?></p>
             <p><strong>Žánr:</strong> <?= htmlspecialchars($film['zanr']) ?></p>
             <p><strong>Režisér:</strong> <?= htmlspecialchars($film['reziser']) ?></p>

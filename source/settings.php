@@ -64,7 +64,7 @@
          <h1>Úprava účtu</h1>
       </header>
       <nav>
-         <a class="button" href="index.php">← Zpět na filmy</a>
+         <a class="button" href="index.php">⬅️ Zpět na filmy</a>
          <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">

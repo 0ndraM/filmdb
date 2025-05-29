@@ -67,7 +67,7 @@
          <h1>Admin sekce</h1>
       </header>
       <nav>
-         <a class="button" href="index.php">← Zpět na filmy</a>
+         <a class="button" href="index.php">⬅️ Zpět na filmy</a>
          <?php if ($_SESSION['role'] == 'owner'): ?>
          <a class="button" href="logs.php">📜 Logy</a>
          <?php endif?>

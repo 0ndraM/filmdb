@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          <h1>Upravit film</h1>
       </header>
       <nav> 
-         <a class="button" href="admin.php">← Zpět do admin sekce</a>
+         <a class="button" href="admin.php">⬅️ Zpět do admin sekce</a>
          <a class="button"  onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">

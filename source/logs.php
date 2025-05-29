@@ -34,7 +34,7 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
         <h1>📜 Logy systému</h1>
     </header>
     <nav>
-        <a class="button" href="admin.php">← Zpět na admin sekci</a>
+        <a class="button" href="admin.php">⬅️ Zpět na admin sekci</a>
         <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
     </nav>
     <div class="container">

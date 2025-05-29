@@ -51,9 +51,9 @@ nav .button:hover {
 /* === MOVIE GRID === */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 1em;
-  padding: 1em;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.5em;
+  padding: 1.5em;
 }
 
 .movie-card {
@@ -81,15 +81,43 @@ nav .button:hover {
 }
 
 /* === DETAIL PAGE === */
-.movie-card img {
-  max-width: 300px;
-  border-radius: 10px;
+
+/* === MOVIE DETAIL CUSTOM === */
+.detail-card {
+  max-width: 900px;
+  margin: 2rem auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem;
 }
 
-.movie-info {
-  padding: 1em;
+.poster-wrapper {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
+.detail-poster {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.detail-info {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  text-align: justify;
+}
+
+body.dark-mode .detail-card {
+  background-color: #181818;
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.05);
+}
+
+body.dark-mode .detail-info {
+  color: #e0e0e0;
+}
 /* === GENERAL BUTTONS === */
 .button,
 .btn {
