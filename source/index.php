@@ -61,35 +61,7 @@ session_start();
    <div class="movie-grid" id="movie-grid">
       <!-- Výsledky filmů se načtou sem -->
    </div>
-
-   <script>
-      document.addEventListener("DOMContentLoaded", () => {
-         const form = document.getElementById("filter-form");
-         const grid = document.getElementById("movie-grid");
-
-         const loadMovies = () => {
-            const search = document.getElementById("search").value;
-            const orderBy = document.getElementById("order_by").value;
-
-            const params = new URLSearchParams({ search, order_by: orderBy });
-
-            fetch(`filmy_api.php?${params.toString()}`)
-               .then(response => response.text())
-               .then(html => {
-                  grid.innerHTML = html;
-               });
-         };
-
-         form.addEventListener("submit", e => {
-            e.preventDefault();
-            loadMovies();
-         });
-
-         // Načti výchozí seznam filmů při načtení
-         loadMovies();
-      });
-   </script>
-
+   
    <script src="script.js"></script>
 </body>
 <footer>
