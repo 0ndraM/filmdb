@@ -48,10 +48,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
 
     // Nahrání nového plakátu (volitelné)
-    if (!empty($_FILES['plakat']['name']) && mime_content_type($_FILES['plakat']['tmp_name']) === 'image/jpeg') {
-        $target_dir = "plakaty/";
-        $target_file = $target_dir . $id . ".jpg";
-        move_uploaded_file($_FILES['plakat']['tmp_name'], $target_file);
+    if (!empty($_FILES['plakat']['name'])) {
+        $plakatTmp = $_FILES['plakat']['tmp_name'];
+        $plakatName = $_FILES['plakat']['name'];
+        $extension = strtolower(pathinfo($plakatName, PATHINFO_EXTENSION));
+
+        if (in_array($extension, ['jpg', 'jpeg'])) {
+            $target_dir = "plakaty/";
+            $target_file = $target_dir . $id . ".jpg";
+
+            // Kontrola, zda adresář existuje
+            if (!is_dir($target_dir)) {
+                mkdir($target_dir, 0755, true);
+            }
+
+            // Pokus o přesun
+            if (move_uploaded_file($plakatTmp, $target_file)) {
+                // OK
+            } else {
+                echo "Nepodařilo se uložit plakát.";
+                exit();
+            }
+        } else {
+            echo "Nepodporovaný formát obrázku. Použijte .jpg nebo .jpeg.";
+            exit();
+        }
     }
 
     // Uložení do logu (zachování aktuálního autora z tabulky, ale uložení "kdo to změnil")
@@ -74,7 +95,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       <meta name="description" content="Upravit film v databázi. Umožňuje administrátorům a autorům upravit údaje o filmech.">
       <meta name="keywords" content="upravit film, databáze filmů, úprava filmu, správa filmů">
       <meta name="author" content="0ndra_m_">
-      <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/svg" href="logo.svg">
       <title>Upravit film</title>
       <script src="theme-toggle.js"></script>
       <script>
