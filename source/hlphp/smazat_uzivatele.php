@@ -3,19 +3,17 @@ session_start();
 require 'db.php';
 
 if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit();
  }
 
-if (isset($_GET['id'])) {
-    $id = intval($_GET['id']);
+$id = $_GET['id'] ?? null;
 
-    // Smazat film
-    $stmt = $conn->prepare("DELETE FROM filmy WHERE id = ?");
+if ($id) {
+    $stmt = $conn->prepare("DELETE FROM uzivatele WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
 }
 
-header('Location: admin.php');
+header("Location: ..úadmin.php");
 exit();
-?>

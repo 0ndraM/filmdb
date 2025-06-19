@@ -1,6 +1,6 @@
 <?php
    session_start();
-   require 'db.php';
+   require 'hlphp/db.php';
    
    if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
       header('Location: settings.php');
@@ -96,11 +96,11 @@
                         <a class="btn btn-view"  href="info.php?id=<?= $film['id'] ?>">👁️Zobrazit</a>
                         <a class="btn" href="edit.php?id=<?= $film['id'] ?>">✏️Upravit</a>
                         <?php if (!$film['schvaleno']): ?>
-                        <a class="btn btn-approve" href="schvalit.php?id=<?= $film['id'] ?>">✅Schválit</a>
+                        <a class="btn btn-approve" href="hlphp/schvalit.php?id=<?= $film['id'] ?>">✅Schválit</a>
                         <?php else: ?>
-                        <a class="btn btn-warning" href="odschvalit.php?id=<?= $film['id'] ?>">↩️Skrýt</a>
+                        <a class="btn btn-warning" href="hlphp/odschvalit.php?id=<?= $film['id'] ?>">↩️Skrýt</a>
                         <?php endif; ?>
-                        <a class="btn btn-danger" href="smazat.php?id=<?= $film['id'] ?>" onclick="return confirm('Opravdu smazat?')">🗑️Smazat</a>
+                        <a class="btn btn-danger" href="hlphp/smazat.php?id=<?= $film['id'] ?>" onclick="return confirm('Opravdu smazat?')">🗑️Smazat</a>
                      </td>
                   </tr>
                   <?php endwhile; ?>
@@ -131,20 +131,20 @@
                         <?php if ($jeJinyUzivatel): ?>
                         <?php if ($jeOwner): ?>
                         <?php if ($uzivatel['role'] === 'user'): ?>
-                        <a class="btn" href="promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=admin">⬆️ Udělat adminem</a>
+                        <a class="btn" href="hlphp/promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=admin">⬆️ Udělat adminem</a>
                         <?php elseif ($uzivatel['role'] === 'admin'): ?>
-                        <a class="btn" href="promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=user">⬇️ Odebrat admina</a>
-                        <a class="btn" href="promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=owner">👑 Udělat ownerem</a>
+                        <a class="btn" href="hlphp/promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=user">⬇️ Odebrat admina</a>
+                        <a class="btn" href="hlphp/promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=owner">👑 Udělat ownerem</a>
                         <?php elseif ($uzivatel['role'] === 'owner'): ?>
                         <span>👑 Owner</span>
                         <?php endif; ?>
                         <?php elseif ($jeAdmin): ?>
                         <?php if ($uzivatel['role'] === 'admin'): ?>
-                        <a class="btn" href="promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=user">⬇️ Odebrat admina</a>
+                        <a class="btn" href="hlphp/promenit_roli.php?id=<?= $uzivatel['id'] ?>&role=user">⬇️ Odebrat admina</a>
                         <?php endif; ?>
                         <?php endif; ?>
                         <?php if ($uzivatel['role'] !== 'owner'): ?>
-                        <a class="btn btn-danger" href="smazat_uzivatele.php?id=<?= $uzivatel['id'] ?>" onclick="return confirm('Smazat uživatele?')">🗑️ Smazat</a>
+                        <a class="btn btn-danger" href="hlhph/smazat_uzivatele.php?id=<?= $uzivatel['id'] ?>" onclick="return confirm('Smazat uživatele?')">🗑️ Smazat</a>
                         <?php endif; ?>
                         <?php else: ?>
                         <em>(vy)</em>

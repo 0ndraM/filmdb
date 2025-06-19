@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require 'hlphp/db.php';
 
 if (!isset($_SESSION['username'])) {
     header('Location: login.php');

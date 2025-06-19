@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require 'hlphp/db.php';
 
 $id = intval($_GET['id']);
 $film = null;

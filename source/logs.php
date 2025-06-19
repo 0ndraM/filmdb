@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'db.php';
+require 'hlphp/db.php';
 
 if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
     header('Location: login.php');
@@ -65,7 +65,7 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
             </div>
         <?php endif; ?>
 
-        <form method="post" action="export_log.php" style="margin-top: 20px;">
+        <form method="post" action="hlphp/export_log.php" style="margin-top: 20px;">
             <button type="submit" class="button">⬇️ Exportovat log rolí do CSV</button>
         </form>
 
@@ -103,7 +103,7 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
             </div>
         <?php endif; ?>
 
-        <form method="post" action="export_filmy_log.php" style="margin-top: 20px;">
+        <form method="post" action="hlphp/export_filmy_log.php" style="margin-top: 20px;">
             <button type="submit" class="button">⬇️ Exportovat log úpravy filmů do CSV</button>
         </form>
     </div>
