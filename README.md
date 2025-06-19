@@ -94,7 +94,6 @@ Logovací tabulka ukládající každou změnu oprávnění.
 ├── styles.css               # Stylování
 ├── theme-toggle.js          # Přepínání motivu
 └── README.md                # Tento soubor
-
 ```
 
 ## 🔐 Role a přístupová práva
