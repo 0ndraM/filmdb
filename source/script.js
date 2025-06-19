@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const params = new URLSearchParams({ search, order_by: orderBy });
 
-    fetch(`filmy_api.php?${params.toString()}`)
+    fetch(`hlphp/filmy_api.php?${params.toString()}`)
       .then(response => response.text())
       .then(html => {
         grid.innerHTML = html;
