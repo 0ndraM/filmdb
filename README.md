@@ -66,8 +66,7 @@ Logovací tabulka ukládající každou změnu oprávnění.
 ## 🗂️ Struktura souborů
 
 ```
-📁 projekt/
- source/
+📁source/
 ├── 📁 hlphp/
 │   ├── db.php               # Připojení k databázi
 │   ├── export_filmy_log.php # AJAX endpoint pro načítání filmů
