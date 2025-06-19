@@ -69,14 +69,6 @@ INSERT INTO `logy` (`id`, `autor`, `akce`, `cas`) VALUES
 (7, 'owner', 'Změnil roli uživateli \'ondra\' z \'user\' na \'admin\'', '2025-05-15 14:51:03'),
 (8, 'owner', 'Změnil roli uživateli \'ondra\' z \'admin\' na \'owner\'', '2025-05-15 14:51:08');
 
-CREATE TABLE `tabulka` (
-  `cislo` int NOT NULL DEFAULT '0',
-  `jmeno` varchar(30) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL DEFAULT '',
-  `prijmeni` varchar(30) CHARACTER SET latin2 COLLATE latin2_czech_cs NOT NULL DEFAULT ''
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
-INSERT INTO `tabulka` (`cislo`, `jmeno`, `prijmeni`) VALUES
-(0, 'Jan', 'Novák');
 
 CREATE TABLE `uzivatele` (
   `id` int NOT NULL,

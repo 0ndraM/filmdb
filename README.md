@@ -44,34 +44,58 @@ Logovací tabulka ukládající každou změnu filmu.
 | autor       | VARCHAR(50)   | Uživatel, který provedl změnu     |
 | zmeneno     | TIMESTAMP     | Čas změny                         |
 
+### `uzivatele`
+| Sloupec   | Typ                           | Popis                              |
+|-----------|-------------------------------|------------------------------------|
+| id        | INT                           | Primární klíč                      |
+| username  | VARCHAR(50)                   | Uživatelské jméno                  |
+| password  | VARCHAR(255)                  | Hashované heslo                    |
+| role      | ENUM('owner','admin','user')  | Role uživatele (výchozí: `user`)   |
+
+### `logy`
+Logovací tabulka ukládající každou změnu oprávnění.
+
+
+| Sloupec | Typ         | Popis                              |
+|---------|-------------|------------------------------------|
+| id      | INT         | Primární klíč                      |
+| autor   | VARCHAR(50) | Uživatelské jméno autora akce     |
+| akce    | TEXT        | Popis provedené akce               |
+| cas     | DATETIME    | Čas záznamu (výchozí: NOW)         |
+
 ## 🗂️ Struktura souborů
 
 ```
 📁 projekt/
-├── db.php # Připojení k databázi
-├── login.php # Přihlášení
-├── logout.php # Odhlášení
-├── register.php # Registrace
-├── index.php # Úvodní stránka s AJAX filtrováním
-├── filmy_api.php # AJAX endpoint pro načítání filmů
-├── add.php # Přidání filmu
-├── edit.php # Úprava filmu (s kontrolou práv)
-├── smazat.php # Smazání filmu (admin nebo owner)
-├── info.php # Detail filmu (s kontrolou přístupnosti)
-├── admin.php # Admin sekce pro správu a schvalování
-├── settings.php # Změna jména a hesla
-├── schvalit.php # Schválení filmu
-├── odschválit.php # Odschválení filmu
-├── promenit_roli.php # Úprava rolí
-├── smazat_uzivatele.php # Smazání uživatele
-├── export_log.php # Export logů správy uživatelů
-├── export_filmy_log.php # Export logů úprav filmů
-├── styles.css # Stylování
-├── theme-toggle.js # Přepínání motivu
-├── script.js # AJAX skripty pro vyhledávání
-├── plakaty/ # Složka pro nahrané plakáty (.jpg)
-├── filmy_db.sql # SQL skripty pro vytvoření DB
-└── README.md # Tento soubor
+ source/
+├── 📁 hlphp/
+│   ├── db.php               # Připojení k databázi
+│   ├── export_filmy_log.php # AJAX endpoint pro načítání filmů
+│   ├── export_log.php       # Export logů správy uživatelů
+│   ├── filmy_api.php
+│   ├── logout.php # Odhlášení
+│   ├── odschvalit.php       # Odschválení filmu
+│   ├── promenit_roli.php    # Úprava rolí
+│   ├── schvalit.php         # Schválení filmu
+│   ├── smazat.php           # Smazání filmu (admin nebo owner)
+│   └── smazat_uzivatele.php # Smazání uživatele
+├── 📁 plakaty/               # Složka pro nahrané plakáty (.jpg)
+├── add.php                  # Přidání filmu
+├── admin.php                # Admin sekce pro správu a schvalování
+├── edit.php                 # Úprava filmu (s kontrolou práv)
+├── filmy_db.sql             # SQL skript pro vytvoření databáze
+├── index.php                # Úvodní stránka s AJAX filtrováním
+├── info.php                 # Detail filmu 
+├── login.php                # Přihlášení
+├── logo.svg                 # Favicon
+├── logs.php                 # Logy (pouze owner)
+├── register.php             # Registrace
+├── script.js                # AJAX skripty pro vyhledávání
+├── settings.php             # Změna jména a hesla
+├── styles.css               # Stylování
+├── theme-toggle.js          # Přepínání motivu
+└── README.md                # Tento soubor
+
 ```
 
 ## 🔐 Role a přístupová práva
