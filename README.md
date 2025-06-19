@@ -72,8 +72,8 @@ Logovací tabulka ukládající každou změnu oprávnění.
 │   ├── db.php               # Připojení k databázi
 │   ├── export_filmy_log.php # AJAX endpoint pro načítání filmů
 │   ├── export_log.php       # Export logů správy uživatelů
-│   ├── filmy_api.php
-│   ├── logout.php # Odhlášení
+│   ├── filmy_api.php        # Api pro ajax
+│   ├── logout.php           # Odhlášení
 │   ├── odschvalit.php       # Odschválení filmu
 │   ├── promenit_roli.php    # Úprava rolí
 │   ├── schvalit.php         # Schválení filmu
