@@ -54,6 +54,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: index.php');
     exit();
 }
+
+// Načtení dostupných žánrů pro dropdown
+$zanry = [];
+$result = $conn->query("SELECT DISTINCT zanr FROM filmy ORDER BY zanr ASC");
+while ($row = $result->fetch_assoc()) {
+    if (!empty($row['zanr'])) {
+        $zanry[] = $row['zanr'];
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -93,7 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <input type="number" name="rok" placeholder="Rok" required>
 
         <label>Žánr:</label>
-        <input type="text" name="zanr" placeholder="Žánr" >
+        <input list="zanry" type="text" name="zanr" placeholder="Vyber nebo napiš žánr" required>
+        <datalist id="zanry">
+            <?php foreach ($zanry as $zanrOption): ?>
+                <option value="<?= htmlspecialchars($zanrOption) ?>">
+            <?php endforeach; ?>
+        </datalist>
 
         <label>Režisér:</label>
         <input type="text" name="reziser" placeholder="Režisér" >
