@@ -8,6 +8,8 @@ if (!isset($_SESSION['role'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $autor = $_SESSION['username'] ?? 'neznámý';
+
     $nazev = $_POST['nazev'];
     $rok = $_POST['rok'];
     $zanr = $_POST['zanr'];
@@ -16,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $popis = $_POST['popis'];
 
     // Nejprve vlož film do DB bez plakátu, aby získal ID
-    $stmt = $conn->prepare("INSERT INTO filmy (nazev, rok, zanr, reziser, hodnoceni, popis, schvaleno) VALUES (?, ?, ?, ?, ?, ?, 0)");
-    $stmt->bind_param("sissds", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis);
+    $stmt = $conn->prepare("INSERT INTO filmy (nazev, rok, zanr, reziser, hodnoceni, popis, schvaleno, autor) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
+    $stmt->bind_param("sissdss", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $autor);
     $stmt->execute();
 
     // Získání ID právě vloženého filmu

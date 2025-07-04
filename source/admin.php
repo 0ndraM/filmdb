@@ -39,7 +39,7 @@
    }
    
    // Filmy
-   $filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, rok DESC");
+   $filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, nazev ASC");
    
    // Uživatelé
    $uzivatele = $conn->query("SELECT * FROM uzivatele ORDER BY role DESC, username ASC");
