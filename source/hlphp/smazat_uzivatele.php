@@ -15,5 +15,5 @@ if ($id) {
     $stmt->execute();
 }
 
-header("Location: ..úadmin.php");
+header("Location: ../admin.php");
 exit();
