@@ -144,7 +144,7 @@
                         <?php endif; ?>
                         <?php endif; ?>
                         <?php if ($uzivatel['role'] !== 'owner'): ?>
-                        <a class="btn btn-danger" href="hlhph/smazat_uzivatele.php?id=<?= $uzivatel['id'] ?>" onclick="return confirm('Smazat uživatele?')">🗑️ Smazat</a>
+                        <a class="btn btn-danger" href="hlphp/smazat_uzivatele.php?id=<?= $uzivatel['id'] ?>" onclick="return confirm('Smazat uživatele?')">🗑️ Smazat</a>
                         <?php endif; ?>
                         <?php else: ?>
                         <em>(vy)</em>
