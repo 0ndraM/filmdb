@@ -64,7 +64,13 @@ $logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 50"
                                     <?php
                                     if (preg_match('/IP: ([0-9\.]+)/', $log['akce'], $matches)) {
                                         $ip = $matches[1];
-                                        echo " <a class='btn btn-danger' href='hlphp/blokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Zablokovat IP $ip?')\">Blokovat IP</a>";
+                                        $file = __DIR__ . '/blocked_ips.txt';
+                                        $blocked = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
+                                        if (in_array($ip, $blocked)) {
+                                            echo " <a class='btn btn-success' href='hlphp/odblokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Odblokovat IP $ip?')\">Odblokovat IP</a>";
+                                        } else {
+                                            echo " <a class='btn btn-danger' href='hlphp/blokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Zablokovat IP $ip?')\">Blokovat IP</a>";
+                                        }
                                     }
                                     ?>
                                 </td>
