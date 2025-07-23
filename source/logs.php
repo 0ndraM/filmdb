@@ -10,6 +10,7 @@ if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner']
 // Dotazy
 $logy_role = $conn->query("SELECT * FROM logy ORDER BY cas DESC LIMIT 50");
 $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 50");
+$logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 50");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -39,6 +40,40 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
     </nav>
     <div class="container">
 
+
+    <h2>🔐 Log přihlášení</h2>
+        <?php if (!$logy_login): ?>
+            <p style='color:red;'>Chyba při načítání logu přihlášení: <?= $conn->error ?></p>
+        <?php else: ?>
+            <div class="table-wrapper">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Autor</th>
+                            <th>Akce</th>
+                            <th>Čas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php while ($log = $logy_login->fetch_assoc()): ?>
+                            <tr>
+                                <td><?= htmlspecialchars($log['autor']) ?></td>
+                                <td><?= htmlspecialchars($log['akce']) ?></td>
+                                <td>
+                                    <?= htmlspecialchars($log['cas']) ?>
+                                    <?php
+                                    if (preg_match('/IP: ([0-9\.]+)/', $log['akce'], $matches)) {
+                                        $ip = $matches[1];
+                                        echo " <a class='btn btn-danger' href='hlphp/blokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Zablokovat IP $ip?')\">Blokovat IP</a>";
+                                    }
+                                    ?>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
         <h2>👥 Log změn uživatelských rolí</h2>
         <?php if (!$logy_role): ?>
             <p style='color:red;'>Chyba při načítání logu rolí: <?= $conn->error ?></p>
@@ -106,6 +141,9 @@ $logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 
         <form method="post" action="hlphp/export_filmy_log.php" style="margin-top: 20px;">
             <button type="submit" class="button">⬇️ Exportovat log úpravy filmů do CSV</button>
         </form>
+
+        
+
     </div>
 </body>
 <footer>

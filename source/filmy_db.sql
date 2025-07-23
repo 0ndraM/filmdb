@@ -85,6 +85,14 @@ INSERT INTO `uzivatele` (`id`, `username`, `password`, `role`) VALUES
 (11, 'ondra', '$2y$10$s9piGTlsGbzibisqb9T2B.CH5EC8vIOnFRcv1ITwbbW4o2tlEq0uK', 'owner');
 
 
+CREATE TABLE `acces_logy` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `autor` VARCHAR(50) NOT NULL,
+  `akce` TEXT NOT NULL,
+  `cas` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+);
+
 ALTER TABLE `filmy`
   ADD PRIMARY KEY (`id`);
 

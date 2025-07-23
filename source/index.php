@@ -1,5 +1,7 @@
 <?php
 session_start();
+require_once 'hlphp/db.php';
+blokuj_ip();
 ?>
 <!DOCTYPE html>
 <html lang="cs">

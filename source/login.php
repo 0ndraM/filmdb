@@ -2,6 +2,15 @@
 session_start();
 require 'hlphp/db.php';
 
+function logLoginAttempt($username, $status) {
+    global $conn;
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $stmt = $conn->prepare("INSERT INTO acces_logy (autor, akce) VALUES (?, ?)");
+    $akce = "Přihlášení uživatele '$username' - $status (IP: $ip)";
+    $stmt->bind_param("ss", $username, $akce);
+    $stmt->execute();
+}
+
 $chyba = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,13 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $uzivatel['password'])) {
             $_SESSION['username'] = $uzivatel['username'];
             $_SESSION['role'] = $uzivatel['role'];
+            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+            logLoginAttempt($username, 'úspěšné');
             header("Location: index.php");
             exit();
         } else {
             $chyba = "Špatné heslo.";
+            logLoginAttempt($username, 'neúspěšné - špatné heslo');
         }
     } else {
         $chyba = "Uživatel nenalezen.";
+        logLoginAttempt($username, 'neúspěšné - uživatel nenalezen');
     }
 }
 ?>
