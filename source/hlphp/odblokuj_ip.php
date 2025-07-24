@@ -22,8 +22,11 @@ $file = __DIR__ . '/../blocked_ips.txt';
 
 if (file_exists($file)) {
     $ips = file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    $ips = array_filter($ips, fn($i) => trim($i) !== $ip);
-    file_put_contents($file, implode(PHP_EOL, $ips) . PHP_EOL);
+    $ips = array_map('trim', $ips);
+    $filtered = array_filter($ips, function($i) use ($ip) {
+        return $i !== $ip;
+    });
+    file_put_contents($file, implode(PHP_EOL, $filtered) . PHP_EOL);
 }
 
 header('Location: ../logs.php');
