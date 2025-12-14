@@ -1,0 +1,13 @@
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.AssemblyReference.cache
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.Maindform.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.Properties.Resources.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.GenerateResource.cache
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.CoreCompileInputs.cache
+C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\filmdb.exe.config
+C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\filmdb.exe
+C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\filmdb.pdb
+C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\Newtonsoft.Json.dll
+C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\Newtonsoft.Json.xml
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.Up2Date
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.exe
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.pdb
