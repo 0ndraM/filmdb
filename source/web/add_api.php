@@ -1,12 +1,31 @@
 <?php
 // Nastavení hlaviček pro API odpověď
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Ponecháno pro kompatibilitu, ale zvažte omezení
+header('Access-Control-Allow-Origin: *'); // Zvažte omezení na konkrétní doménu klienta
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
-// Přeskočíme session_start(), jelikož autorizace probíhá přes POST data.
+// Přeskočení preflight požadavků
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// Vyžadujeme JWT knihovnu
+require 'vendor/autoload.php';
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+use Firebase\JWT\ExpiredException;
+
+// Zahrneme připojení k databázi
 require 'hlphp/db.php';
+
+// --- Konfigurace JWT (Musí odpovídat nastavení v login_api.php!) ---
+// DŮLEŽITÉ: Uložte tento klíč BEZPEČNĚ!
+$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
+// -------------------------------------------------------------------
+
+// --- POMOCNÉ FUNKCE ---
 
 // Pomocná funkce pro úspěšnou JSON odpověď
 function successResponse() {
@@ -21,13 +40,52 @@ function errorResponse($message, $http_code = 400) {
     exit();
 }
 
-// Zkontrolujeme, zda je metoda POST
+// 1. KONTROLA METODY
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     errorResponse("Metoda není povolena. Očekává se POST.", 405);
 }
 
-// 1. Extrahování dat
-$autor = $_POST['autor'] ?? null; // TOTO JE KLÍČOVÁ ZMĚNA: Bereme autora z POST dat
+
+// 2. AUTORIZACE: Získání a ověření JWT tokenu
+
+$token = null;
+$headers = getallheaders();
+
+// Získání tokenu z hlavičky Authorization: Bearer [token]
+if (isset($headers['Authorization'])) {
+    $auth_header = $headers['Authorization'];
+    if (preg_match('/Bearer\s(\S+)/', $auth_header, $matches)) {
+        $token = $matches[1];
+    }
+}
+
+if (!$token) {
+    errorResponse("Neautorizovaný přístup. Chybí autorizační token.", 401);
+}
+
+try {
+    // Dekódování a ověření tokenu (kontroluje platnost, podpis a čas vypršení)
+    $decoded = JWT::decode($token, new Key($secret_key, 'HS256'));
+    
+    // Získání uživatelského jména z payloadu (payload->data->username)
+    $autor = $decoded->data->username ?? null;
+    
+    if (empty($autor)) {
+         errorResponse("Token neobsahuje platné uživatelské jméno.", 401);
+    }
+    
+} catch (ExpiredException $e) {
+    // Chyta vypršení platnosti tokenu
+    errorResponse("Autorizační token vypršel.", 401);
+} catch (Exception $e) {
+    // Chyta ostatních chyb (špatný podpis, neplatná struktura atd.)
+    errorResponse("Neplatný autorizační token.", 401);
+}
+
+// --- Autorizace úspěšná. Proměnná $autor je nastavena z tokenu. ---
+
+
+// 3. Extrahování dat z POST (multipart/form-data)
 $nazev = $_POST['nazev'] ?? null;
 $rok = $_POST['rok'] ?? null;
 $zanr = $_POST['zanr'] ?? null;
@@ -35,27 +93,22 @@ $reziser = $_POST['reziser'] ?? null;
 $hodnoceni = $_POST['hodnoceni'] ?? null;
 $popis = $_POST['popis'] ?? null;
 
-// 2. Základní validace dat (autor je nyní povinný)
-if (empty($autor) || empty($nazev) || empty($rok) || empty($zanr) || empty($popis)) {
-    errorResponse("Chybí povinná pole (autor, název, rok, žánr, popis).");
+// Důležité: $_POST['autor'] NEPOUŽÍVÁME, bereme ho z $autor získaného z tokenu.
+
+
+// 4. Základní validace dat
+if (empty($nazev) || empty($rok) || empty($zanr) || empty($popis)) {
+    errorResponse("Chybí povinná pole (název, rok, žánr, popis).");
 }
-// Kontrola typu a rozmezí pro rok
 if (!is_numeric($rok) || $rok < 1888 || $rok > (date("Y") + 1)) {
      errorResponse("Neplatná hodnota roku.");
 }
 
-// --- ZDE BY MĚLA BÝT BEZPEČNOSTNÍ KONTROLA AUTORA, např. Token ---
-// Bezpečnostní upozornění: Váš C# kód neověřuje uživatele! Kdokoli může zaslat POST požadavek 
-// s jakýmkoliv jménem autora. Doporučuji používat JWT token pro API autentizaci.
-// ---
-
-// 3. Vložení filmu do DB (bez plakátu)
+// 5. Vložení filmu do DB
 try {
-    // Převedení hodnocení na float (pro 'd' v bind_param), pokud existuje, jinak null
-    // Používáme ternary operátor pro bezpečné zpracování, i když C# posílá string
     $hodnoceni_float = is_numeric($hodnoceni) ? floatval($hodnoceni) : null;
     
-    // Používáme připravený dotaz s určenými datovými typy: sissdss
+    // Používáme připravený dotaz: sissdss (s=string, i=int, d=double/float)
     $stmt = $conn->prepare("INSERT INTO filmy (nazev, rok, zanr, reziser, hodnoceni, popis, schvaleno, autor) VALUES (?, ?, ?, ?, ?, ?, 0, ?)");
     
     // Vázání parametrů
@@ -76,7 +129,7 @@ try {
 }
 
 
-// 4. Zpracování plakátu
+// 6. Zpracování plakátu
 if (isset($_FILES['plakat']) && $_FILES['plakat']['error'] === UPLOAD_ERR_OK) {
     $plakatTmp = $_FILES['plakat']['tmp_name'];
     $plakatName = $_FILES['plakat']['name'];
@@ -102,7 +155,7 @@ if (isset($_FILES['plakat']) && $_FILES['plakat']['error'] === UPLOAD_ERR_OK) {
     }
 }
 
-// 5. ÚSPĚŠNÁ ODPOVĚĎ
+// 7. ÚSPĚŠNÁ ODPOVĚĎ
 successResponse();
 
 ?>
