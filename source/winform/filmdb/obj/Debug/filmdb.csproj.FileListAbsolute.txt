@@ -11,3 +11,5 @@ C:\Users\muhlh\filmdb\source\winform\filmdb\bin\Debug\Newtonsoft.Json.xml
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.Up2Date
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.exe
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.pdb
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.FilmDetailForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.PosterFullScreenForm.resources

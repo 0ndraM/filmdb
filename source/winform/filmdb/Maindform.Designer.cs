@@ -43,38 +43,112 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.txtPopis = new System.Windows.Forms.TextBox();
             this.lblTime = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.zobrazeníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDarkMode = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picturePoster)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
-
-            this.dataGridViewFilms.Location = new System.Drawing.Point(12, 41);
-            this.dataGridViewFilms.Size = new System.Drawing.Size(500, 300);
+            // 
+            // dataGridViewFilms
+            // 
+            this.dataGridViewFilms.Location = new System.Drawing.Point(12, 64);
+            this.dataGridViewFilms.Name = "dataGridViewFilms";
+            this.dataGridViewFilms.Size = new System.Drawing.Size(563, 300);
+            this.dataGridViewFilms.TabIndex = 0;
+            this.dataGridViewFilms.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFilms_CellDoubleClick);
             this.dataGridViewFilms.SelectionChanged += new System.EventHandler(this.dataGridViewFilms_SelectionChanged);
-
-            this.picturePoster.Location = new System.Drawing.Point(530, 41);
+            // 
+            // picturePoster
+            // 
+            this.picturePoster.Location = new System.Drawing.Point(595, 64);
+            this.picturePoster.Name = "picturePoster";
             this.picturePoster.Size = new System.Drawing.Size(200, 300);
             this.picturePoster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-
-            this.txtSearch.Location = new System.Drawing.Point(12, 12);
-            this.comboOrderBy.Location = new System.Drawing.Point(200, 12);
-            this.btnSearch.Location = new System.Drawing.Point(360, 10);
+            this.picturePoster.TabIndex = 1;
+            this.picturePoster.TabStop = false;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(12, 35);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(100, 20);
+            this.txtSearch.TabIndex = 2;
+            // 
+            // comboOrderBy
+            // 
+            this.comboOrderBy.Location = new System.Drawing.Point(200, 35);
+            this.comboOrderBy.Name = "comboOrderBy";
+            this.comboOrderBy.Size = new System.Drawing.Size(121, 21);
+            this.comboOrderBy.TabIndex = 3;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(360, 33);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 4;
             this.btnSearch.Text = "Hledat";
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-
-            this.lblTitle.Location = new System.Drawing.Point(12, 350);
-            this.lblTitle.Size = new System.Drawing.Size(500, 20);
-
-            this.txtPopis.Location = new System.Drawing.Point(12, 375);
-            this.txtPopis.Size = new System.Drawing.Size(718, 60);
-            this.txtPopis.Multiline = true;
-            this.txtPopis.ReadOnly = true;
-
-            this.lblTime.Location = new System.Drawing.Point(650, 450);
-
+            // 
+            // timerClock
+            // 
             this.timerClock.Interval = 1000;
             this.timerClock.Tick += new System.EventHandler(this.timerClock_Tick);
-
-            this.ClientSize = new System.Drawing.Size(742, 480);
+            // 
+            // lblTitle
+            // 
+            this.lblTitle.Location = new System.Drawing.Point(12, 373);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(500, 20);
+            this.lblTitle.TabIndex = 5;
+            // 
+            // txtPopis
+            // 
+            this.txtPopis.Location = new System.Drawing.Point(12, 396);
+            this.txtPopis.Multiline = true;
+            this.txtPopis.Name = "txtPopis";
+            this.txtPopis.ReadOnly = true;
+            this.txtPopis.Size = new System.Drawing.Size(783, 60);
+            this.txtPopis.TabIndex = 6;
+            // 
+            // lblTime
+            // 
+            this.lblTime.Location = new System.Drawing.Point(695, 471);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(100, 23);
+            this.lblTime.TabIndex = 7;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.zobrazeníToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(828, 24);
+            this.menuStrip1.TabIndex = 8;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // zobrazeníToolStripMenuItem
+            // 
+            this.zobrazeníToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuDarkMode});
+            this.zobrazeníToolStripMenuItem.Name = "zobrazeníToolStripMenuItem";
+            this.zobrazeníToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.zobrazeníToolStripMenuItem.Text = "Zobrazení";
+            // 
+            // menuDarkMode
+            // 
+            this.menuDarkMode.CheckOnClick = true;
+            this.menuDarkMode.Name = "menuDarkMode";
+            this.menuDarkMode.Size = new System.Drawing.Size(180, 22);
+            this.menuDarkMode.Text = "Tmavý režim ";
+            this.menuDarkMode.Click += new System.EventHandler(this.menuDarkMode_Click);
+            // 
+            // Maindform
+            // 
+            this.ClientSize = new System.Drawing.Size(828, 506);
             this.Controls.Add(this.dataGridViewFilms);
             this.Controls.Add(this.picturePoster);
             this.Controls.Add(this.txtSearch);
@@ -83,11 +157,22 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.txtPopis);
             this.Controls.Add(this.lblTime);
-            this.Load += new System.EventHandler(this.MainForm_Load);
+            this.Controls.Add(this.menuStrip1);
+            this.Name = "Maindform";
             this.Text = "FilmDB Desktop";
+            this.Load += new System.EventHandler(this.MainForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilms)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picturePoster)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
+
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem zobrazeníToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menuDarkMode;
     }
 }
 
