@@ -20,33 +20,65 @@ namespace filmdb
             InitializeComponent();
         }
 
+        public class LoginResponse
+        {
+            // Tyto názvy polí musí odpovídat názvům vráceným z PHP API.
+            public bool success { get; set; }
+            public string username { get; set; }
+            public string token { get; set; }
+            public string message { get; set; }
+        }
+        // Tuto třídu můžete umístit kamkoli do projektu (např. do složky Helpers)
+        public static class AppContext
+        {
+            // Zde bude uložen platný JWT token pro všechna následující API volání.
+            public static string AuthToken { get; private set; }
+
+            // Metoda pro nastavení tokenu po úspěšném přihlášení
+            public static void SetToken(string token)
+            {
+                AuthToken = token;
+            }
+        }
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             using (var client = new HttpClient())
             {
                 var data = new Dictionary<string, string>
-            {
-                { "username", txtUsername.Text },
-                { "password", txtPassword.Text }
-            };
+        {
+            { "username", txtUsername.Text },
+            { "password", txtPassword.Text }
+        };
 
+                // Krok 1: Odeslání přihlašovacích údajů
                 var response = await client.PostAsync(
                     "https://0ndra.maweb.eu/FilmDB/login_api.php",
                     new FormUrlEncodedContent(data)
                 );
 
                 var json = await response.Content.ReadAsStringAsync();
-                dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
 
-                if (result.success == true)
+                // Krok 2: Deserializace na silně typovou třídu
+                var result = Newtonsoft.Json.JsonConvert.DeserializeObject<LoginResponse>(json);
+
+                // Krok 3: Kontrola úspěchu a uložení tokenu
+                if (result.success && !string.IsNullOrEmpty(result.token))
                 {
+                    // Uložení JWT tokenu pro budoucí požadavky
+                    AppContext.SetToken(result.token);
+
+                    // Nastavení přihlášeného uživatele (pokud je potřeba)
                     LoggedUser = result.username;
+
+                    MessageBox.Show($"Přihlášení úspěšné. Vítejte, {result.username}!");
                     DialogResult = DialogResult.OK;
                     Close();
                 }
                 else
                 {
-                    MessageBox.Show("Neplatné přihlašovací údaje");
+                    // Zobrazíme chybovou zprávu z API, pokud existuje (např. "Špatné heslo.")
+                    string message = result.message ?? "Neplatné přihlašovací údaje nebo chyba serveru.";
+                    MessageBox.Show(message);
                 }
             }
         }
