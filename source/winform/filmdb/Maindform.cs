@@ -19,13 +19,19 @@ namespace filmdb
         // Pole pro sledování přihlášeného uživatele (null, pokud nikdo není přihlášen)
         private string loggedInUsername = null;
 
-        // Reference na novou položku "Přidat film" (bude vytvořena dynamicky)
+        // Reference na položku "Přidat film"
         private ToolStripMenuItem actualAddFilmToolStripMenuItem;
+
+        // Reference na položku "Nastavení"
+        private ToolStripMenuItem settingsToolStripMenuItem;
+
+        // NOVÉ: Reference na položku "Administrace"
+        private ToolStripMenuItem administrationToolStripMenuItem;
 
         public Maindform()
         {
             InitializeComponent();
-            InitializeLoginLogic(); // Nová metoda pro nastavení logiky menu
+            InitializeLoginLogic();
         }
 
         // Metoda, která nastaví menu a počáteční stav
@@ -35,11 +41,26 @@ namespace filmdb
             actualAddFilmToolStripMenuItem = new ToolStripMenuItem("Přidat film");
             actualAddFilmToolStripMenuItem.Click += new EventHandler(this.AddFilmToolStripMenuItem_Click);
 
-            // 2. Vložení nové položky do menuStrip (předpokládáme vložení na index 2)
-            // TATO ŘÁDKA PŘIDÁVÁ NOVOU POLOŽKU DO MENU V KÓDU
+            // 2. Vytvoření nové položky "Nastavení"
+            settingsToolStripMenuItem = new ToolStripMenuItem("Nastavení");
+            settingsToolStripMenuItem.Click += new EventHandler(this.SettingsToolStripMenuItem_Click);
+
+            // 3. NOVÉ: Vytvoření položky "Administrace"
+            administrationToolStripMenuItem = new ToolStripMenuItem("Administrace");
+            administrationToolStripMenuItem.Click += new EventHandler(this.AdministrationToolStripMenuItem_Click); // Nový handler
+
+            // 4. Vložení položek do menuStrip (předpokládáme vložení za položku "Odhlásit se")
+
+            // Index 2: Přidat film
             menuStrip1.Items.Insert(2, actualAddFilmToolStripMenuItem);
 
-            // 3. Nastavení počátečního stavu UI
+            // Index 3: Nastavení
+            menuStrip1.Items.Insert(3, settingsToolStripMenuItem);
+
+            // Index 4: NOVÉ: Administrace
+            menuStrip1.Items.Insert(4, administrationToolStripMenuItem);
+
+            // 5. Nastavení počátečního stavu UI
             UpdateLoginState();
         }
 
@@ -122,20 +143,22 @@ namespace filmdb
         }
 
         // Změněný handler pro původní přidatFilmToolStripMenuItem (nyní slouží jako LOGIN/LOGOUT)
-        // Změněný handler pro původní přidatFilmToolStripMenuItem (nyní slouží jako LOGIN/LOGOUT)
         private void přidatFilmToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // LOGOUT logika
             if (!string.IsNullOrEmpty(loggedInUsername))
             {
-                // Vyčistíme token a uživatele
-                // TOTO JE ŘÁDEK, KTERÝ MUSÍME ZMĚNIT:
-                // Původní: LoginForm.AppContext.SetToken(null);
-                LoginForm.AppContext.SetToken(null, null); // Nyní posíláme NULL pro token i pro roli
+                // 1. Vyčistíme globální stav
+                LoginForm.AppContext.SetToken(null, null, null);
 
-                loggedInUsername = null;
+                // 2. Vyčistíme lokální stav
+                loggedInUsername = null; // TOTO MUSÍ ZŮSTAT!
+
                 MessageBox.Show("Byl jste úspěšně odhlášen.");
-                UpdateLoginState();
+
+                // 3. Aktualizujeme UI
+                UpdateLoginState(); // TOTO TAKÉ MUSÍ ZŮSTAT!
+
                 return;
             }
 
@@ -162,25 +185,79 @@ namespace filmdb
             }
         }
 
+
+        // NOVÝ: Handler pro položku "Nastavení"
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(loggedInUsername))
+            {
+                var settingsForm = new SettingsForm();
+                settingsForm.ShowDialog();
+
+                // **KRITICKÁ ZMĚNA:** Po zavření SettingsForm ověříme globální stav:
+
+                // Pokud AppContext neobsahuje token (což se stane po změně jména/odhlášení)
+                if (string.IsNullOrEmpty(LoginForm.AppContext.AuthToken))
+                {
+                    // Vynutíme vyčištění lokálního stavu v MainFormu
+                    loggedInUsername = null;
+
+                    // Vynutíme vizuální aktualizaci menu
+                    UpdateLoginState();
+                }
+            }
+        }
+
+
+        // NOVÝ: Handler pro položku "Administrace"
+        private void AdministrationToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(loggedInUsername))
+            {
+                MessageBox.Show($"Otevřít administrační panel pro {loggedInUsername} (Role: {LoginForm.AppContext.UserRole})", "Administrace");
+                // Zde bys spustil: AdminForm adminForm = new AdminForm();
+                // adminForm.ShowDialog();
+            }
+        }
+
         // Nová metoda pro aktualizaci stavu UI
         private void UpdateLoginState()
         {
+            // Zjistíme, jestli je uživatel přihlášený
+            bool isLoggedIn = !string.IsNullOrEmpty(loggedInUsername);
+
+            // Zjistíme role
+            string currentRole = LoginForm.AppContext.UserRole;
+            bool isUserRole = string.Equals(currentRole, "user", StringComparison.OrdinalIgnoreCase);
+            bool isAdminOrOwner = string.Equals(currentRole, "admin", StringComparison.OrdinalIgnoreCase) ||
+                                  string.Equals(currentRole, "owner", StringComparison.OrdinalIgnoreCase);
+
             // 1. Změna textu pro přihlášení/odhlášení
-            if (!string.IsNullOrEmpty(loggedInUsername))
+            if (isLoggedIn)
             {
-                // Původní položka je nyní Odhlásit se
                 přidatFilmToolStripMenuItem.Text = "Odhlásit se (" + loggedInUsername + ")";
             }
             else
             {
-                // Původní položka je nyní Přihlásit se
                 přidatFilmToolStripMenuItem.Text = "Přihlásit se";
             }
 
             // 2. Zobrazení/Skrytí položky "Přidat film"
             if (actualAddFilmToolStripMenuItem != null)
             {
-                actualAddFilmToolStripMenuItem.Visible = !string.IsNullOrEmpty(loggedInUsername);
+                actualAddFilmToolStripMenuItem.Visible = isLoggedIn;
+            }
+
+            // 3. Zobrazení/Skrytí položky "Nastavení" POUZE pro roli 'user'
+            if (settingsToolStripMenuItem != null)
+            {
+                settingsToolStripMenuItem.Visible = isLoggedIn && isUserRole;
+            }
+
+            // 4. NOVÉ: Zobrazení/Skrytí položky "Administrace" POUZE pro role 'admin' nebo 'owner'
+            if (administrationToolStripMenuItem != null)
+            {
+                administrationToolStripMenuItem.Visible = isLoggedIn && isAdminOrOwner;
             }
         }
     }

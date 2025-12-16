@@ -20,16 +20,18 @@ namespace filmdb
         {
             InitializeComponent();
         }
-
         public static class AppContext
         {
             public static string AuthToken { get; private set; }
-            public static string UserRole { get; private set; } // NOVÉ: Role
+            public static string UserRole { get; private set; }
+            // NOVÉ: Uložíme jméno pro globální přístup
+            public static string LoggedInUsername { get; private set; }
 
-            public static void SetToken(string token, string role) // Změna: Nyní přijímá i roli
+            public static void SetToken(string token, string role, string username = null) // Přidán username
             {
                 AuthToken = token;
                 UserRole = role;
+                LoggedInUsername = username; // Ukládáme jméno
             }
         }
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -57,7 +59,7 @@ namespace filmdb
                 if (result.success && !string.IsNullOrEmpty(result.token))
                 {
                     // Uložení JWT tokenu pro budoucí požadavky
-                    AppContext.SetToken(result.token, result.role); // Předáváme i result.role!
+                    AppContext.SetToken(result.token, result.role, result.username);// Předáváme i result.role!
 
                     // Nastavení přihlášeného uživatele (pokud je potřeba)
                     LoggedUser = result.username;
