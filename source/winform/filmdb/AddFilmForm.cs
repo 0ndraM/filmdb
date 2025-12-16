@@ -20,10 +20,59 @@ namespace filmdb
         private readonly string _autor;
         private string selectedPosterPath;
 
+        public class GenreResponse
+        {
+            public bool success { get; set; }
+            public List<string> genres { get; set; }
+            public string message { get; set; }
+        }
+        private async void LoadGenresAsync()
+        {
+            using (var client = new HttpClient())
+            {
+                try
+                {
+                    var response = await client.GetAsync("https://0ndra.maweb.eu/FilmDB/api_get_genres.php");
+                    response.EnsureSuccessStatusCode(); // Vyhodí výjimku, pokud status není 2xx
+
+                    var json = await response.Content.ReadAsStringAsync();
+                    var result = Newtonsoft.Json.JsonConvert.DeserializeObject<GenreResponse>(json);
+
+                    if (result.success && result.genres != null)
+                    {
+                        // Předpokládáme, že máš TextBox nazvaný 'txtZanr'
+                        // Nastavení AutoCompleteCustomSource pro automatické doplňování žánrů
+
+                        var customSource = new AutoCompleteStringCollection();
+                        customSource.AddRange(result.genres.ToArray());
+
+                        txtZanr.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+                        txtZanr.AutoCompleteSource = AutoCompleteSource.CustomSource;
+                        txtZanr.AutoCompleteCustomSource = customSource;
+
+                        // Můžeš také použít ComboBox, pokud bys chtěl pouze výběr
+                        // cmbZanr.DataSource = result.genres; 
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Chyba načítání žánrů: {result.message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    MessageBox.Show($"Chyba připojení k API pro žánry: {ex.Message}", "Chyba sítě", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Nastala chyba: {ex.Message}", "Chyba", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
         public AddFilmForm(string autor)
         {
             InitializeComponent();
             _autor = autor;
+            LoadGenresAsync();
         }
 
         private void btnPoster_Click(object sender, EventArgs e)

@@ -14,4 +14,13 @@ namespace filmdb.Models
         public string Autor { get; set; }
         public string Poster { get; set; }
     }
+
+    public class LoginResponse
+    {
+        public bool success { get; set; }
+        public string username { get; set; }
+        public string role { get; set; } // NOVÉ: Pole pro uložení role
+        public string token { get; set; }
+        public string message { get; set; }
+    }
 }

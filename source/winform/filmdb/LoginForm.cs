@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using filmdb.Models;
 using System.Windows.Forms;
 
 namespace filmdb
@@ -20,24 +21,15 @@ namespace filmdb
             InitializeComponent();
         }
 
-        public class LoginResponse
-        {
-            // Tyto názvy polí musí odpovídat názvům vráceným z PHP API.
-            public bool success { get; set; }
-            public string username { get; set; }
-            public string token { get; set; }
-            public string message { get; set; }
-        }
-        // Tuto třídu můžete umístit kamkoli do projektu (např. do složky Helpers)
         public static class AppContext
         {
-            // Zde bude uložen platný JWT token pro všechna následující API volání.
             public static string AuthToken { get; private set; }
+            public static string UserRole { get; private set; } // NOVÉ: Role
 
-            // Metoda pro nastavení tokenu po úspěšném přihlášení
-            public static void SetToken(string token)
+            public static void SetToken(string token, string role) // Změna: Nyní přijímá i roli
             {
                 AuthToken = token;
+                UserRole = role;
             }
         }
         private async void btnLogin_Click(object sender, EventArgs e)
@@ -65,7 +57,7 @@ namespace filmdb
                 if (result.success && !string.IsNullOrEmpty(result.token))
                 {
                     // Uložení JWT tokenu pro budoucí požadavky
-                    AppContext.SetToken(result.token);
+                    AppContext.SetToken(result.token, result.role); // Předáváme i result.role!
 
                     // Nastavení přihlášeného uživatele (pokud je potřeba)
                     LoggedUser = result.username;
