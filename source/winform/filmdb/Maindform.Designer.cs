@@ -46,6 +46,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.zobrazeníToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuDarkMode = new System.Windows.Forms.ToolStripMenuItem();
+            this.přidatFilmToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFilms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picturePoster)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -123,7 +124,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.zobrazeníToolStripMenuItem});
+            this.zobrazeníToolStripMenuItem,
+            this.přidatFilmToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(828, 24);
@@ -142,9 +144,16 @@
             // 
             this.menuDarkMode.CheckOnClick = true;
             this.menuDarkMode.Name = "menuDarkMode";
-            this.menuDarkMode.Size = new System.Drawing.Size(180, 22);
+            this.menuDarkMode.Size = new System.Drawing.Size(144, 22);
             this.menuDarkMode.Text = "Tmavý režim ";
             this.menuDarkMode.Click += new System.EventHandler(this.menuDarkMode_Click);
+            // 
+            // přidatFilmToolStripMenuItem
+            // 
+            this.přidatFilmToolStripMenuItem.Name = "přidatFilmToolStripMenuItem";
+            this.přidatFilmToolStripMenuItem.Size = new System.Drawing.Size(74, 20);
+            this.přidatFilmToolStripMenuItem.Text = "Přidat film";
+            this.přidatFilmToolStripMenuItem.Click += new System.EventHandler(this.přidatFilmToolStripMenuItem_Click);
             // 
             // Maindform
             // 
@@ -173,6 +182,7 @@
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem zobrazeníToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menuDarkMode;
+        private System.Windows.Forms.ToolStripMenuItem přidatFilmToolStripMenuItem;
     }
 }
 

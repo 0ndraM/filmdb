@@ -13,3 +13,5 @@ C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.exe
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.pdb
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.FilmDetailForm.resources
 C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.PosterFullScreenForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.AddFilmForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.LoginForm.resources

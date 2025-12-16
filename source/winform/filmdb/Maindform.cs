@@ -114,5 +114,15 @@ namespace filmdb
             FilmDetailForm detail = new FilmDetailForm(selectedFilm);
             detail.ShowDialog();
         }
+
+        private void přidatFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var login = new LoginForm();
+            if (login.ShowDialog() == DialogResult.OK)
+            {
+                var addFilm = new AddFilmForm(login.LoggedUser);
+                addFilm.ShowDialog();
+            }
+        }
     }
 }
