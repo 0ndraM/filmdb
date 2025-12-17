@@ -78,7 +78,15 @@ Logovací tabulka ukládající každou změnu oprávnění.
 │   ├── schvalit.php         # Schválení filmu
 │   ├── smazat.php           # Smazání filmu (admin nebo owner)
 │   └── smazat_uzivatele.php # Smazání uživatele
-├── 📁 plakaty/               # Složka pro nahrané plakáty (.jpg)
+├── 📁 plakaty/              # Složka pro nahrané plakáty (.jpg)
+├── 📁 vendor/               # Composer balíčky (Firebase/JWT)
+├── add_api.php              # Endpoint pro přidání filmu (Multipart Form Data)
+├── api_login.php            # Endpoint pro získání JWT tokenu
+├── api_settings.php         # Endpoint pro změnu hesla a jména (transakční)
+├── api_get_genres.php       # Endpoint pro získání žánrů
+├── approve_api.php          # Endpoint pro administrátorské schvalování
+├── edit_api.php             # Endpoint pro úpravu filmů (Multipart Form Data)
+├── filmy_api.php            # Hlavní API pro načítání filmů s filtry
 ├── add.php                  # Přidání filmu
 ├── admin.php                # Admin sekce pro správu a schvalování
 ├── edit.php                 # Úprava filmu (s kontrolou práv)
@@ -104,12 +112,6 @@ Logovací tabulka ukládající každou změnu oprávnění.
 | admin  | Může upravovat vše, schvalovat             |
 | owner  | Má stejná práva jako admin + případná rozšíření |
 
-## 🛠️ Požadavky
-
-- PHP 7.4+
-- MySQL/MariaDB
-- Webserver (např. Apache)
-- Povolený `file_uploads` v `php.ini`
 
 ## 🧪 Testovací účty
 
@@ -125,7 +127,48 @@ owner / owner
 - Nepovolený přístup je automaticky přesměrován na přihlášení.
 - Neschválené filmy jsou viditelné pouze autorovi a administrátorům.
 
+
+
+# 🖥️ WinForm Aplikace (C# Client)
+Desktopový klient umožňuje efektivní správu databáze přímo z prostředí Windows.
+
+## Technické parametry:
+- Architektura: .NET Framework / .NET s využitím HttpClient pro REST komunikaci.
+
+- Autentizace: JWT (JSON Web Token) uložený v AppContext. Token je přikládán ke každému požadavku v hlavičce Authorization: Bearer.
+
+- Dynamic UI: Položky menu a akce se vykreslují na základě oprávnění uživatele (Role-Based Access Control).
+
+## Přehled formulářů
+ - **Mainform**: Hlavní dashboard s dynamickým Gridem, který podporuje řazení, po dvojkliku na název filmu zobrazí detail.
+ 
+- **FilmDetailForm**: Deatail filmu, po kliknutí na plakát se zvětší, formulář se zavře po  stisku klávesy Esc.
+
+- **SettingsForm**: Modální okno pro změnu jména/hesla s automatickým odhlášením při změně identity.
+
+- **AdminForm**: Rozhraní pro schvalování a "odschvalování" filmů s filtrem "Zobrazit vše".
+
+- **LoginForm**:	Zajišťuje vstup do systému. Po úspěšném přihlášení ukládá token do AppContext.
+
+- **AddFilmForm**: Formulář pro přidání filmu.Slouží k zápisu dat.
+
+- **EditFilmForm**: Inteligentní editor, který na straně klienta kontroluje, zda má uživatel právo editovat daný záznam.
+
+**Theme Management**
+Aplikace obsahuje `ThemeManager`, který rekurzivně prochází všechny ovládací prvky (`Button`, `TextBo`x, `DataGridView`, `MenuStrip`) a aplikuje tmavé barvy definované ve třídě `DarkMenuColorTable`.
+
+## 🚀Instalace a požadavky
+
+1. **Server**: PHP 8.0+, MySQL.
+
+2. **Composer**: Spustit composer require firebase/php-jwt pro funkčnost API.
+
+3. **Database**: Importovat přiložený soubor filmy_db.sql.
+
+4. **Client**: Visual Studio pro kompilaci WinForm aplikace, vyžaduje knihovnu Newtonsoft.Json.
+
 ---
 
 > 📣 Autor: [0ndra_m_](https://github.com/0ndraM)  
+ 
 
