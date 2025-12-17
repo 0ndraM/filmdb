@@ -1,46 +1,138 @@
 <?php
-   session_start();
-   require 'hlphp/db.php';
-   
-   if (!isset($_SESSION['role'])) {
-       header('Location: index.php');
-       exit();
-   }
-   
-   // Získání aktuálních údajů o uživatelském účtu
-   $username = $_SESSION['username'];
-   $user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
-   
-   if ($user_result->num_rows > 0) {
-       $user = $user_result->fetch_assoc();
-   } else {
-       die("Uživatel nenalezen.");
-   }
-   
-   // Změna jména a hesla
-   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-       // Změna jména
-       if (isset($_POST['new_username'])) {
-           $new_username = $_POST['new_username'];
-           $conn->query("UPDATE uzivatele SET username = '$new_username' WHERE username = '$username'");
-           $_SESSION['username'] = $new_username; // Aktualizace session proměnné
-           $username = $new_username;
-       }
-   
-       // Změna hesla
-       if (isset($_POST['new_password'])) {
-           $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-           $conn->query("UPDATE uzivatele SET password = '$new_password' WHERE username = '$username'");
-       }
-       
-       // Přesměrování na stránku pro zobrazení změn
-       header('Location: settings.php');
-       exit();
-   }
-   
-   // Seznam filmů, které uživatel přidal (i neschválené)
-   $films_result = $conn->query("SELECT * FROM filmy WHERE autor = '$username' ORDER BY vytvoreno DESC");
-   ?>
+session_start();
+require 'hlphp/db.php'; // Předpokládá existenci $conn (MySQLi objekt)
+
+// --- FUNKCE PRO LOGOVÁNÍ A ZPRÁVY ---
+$chyba = '';
+$uspech = '';
+
+function setError($msg) {
+    global $chyba;
+    $chyba = $msg;
+}
+
+function setSuccess($msg) {
+    global $uspech;
+}
+// --- KONEC FUNKCÍ PRO LOGOVÁNÍ A ZPRÁVY ---
+
+if (!isset($_SESSION['role'])) {
+    header('Location: index.php');
+    exit();
+}
+
+$username = $_SESSION['username'];
+$user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
+
+if ($user_result->num_rows > 0) {
+    $user = $user_result->fetch_assoc();
+} else {
+    die("Uživatel nenalezen.");
+}
+
+// ---------------------------------------------------------------------
+// --- ZPRACOVÁNÍ POST POŽADAVKŮ ---
+// ---------------------------------------------------------------------
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $puvodni_username = $_SESSION['username'];
+    $provedena_zmena = false;
+    
+    // Zpracování změny jména
+    if (isset($_POST['new_username']) && !empty($_POST['new_username'])) {
+        $new_username = trim($_POST['new_username']);
+        
+        if ($new_username != $puvodni_username) {
+            
+            // 1. Kontrola, zda nové jméno již neexistuje
+            $check_stmt = $conn->prepare("SELECT id FROM uzivatele WHERE username = ?");
+            $check_stmt->bind_param("s", $new_username);
+            $check_stmt->execute();
+            if ($check_stmt->get_result()->num_rows > 0) {
+                setError("Uživatelské jméno '$new_username' je již obsazeno.");
+            } else {
+                // 2. Provedení transakce pro atomickou změnu Jména + Autora filmů
+                $conn->begin_transaction();
+                try {
+                    // A. Aktualizace Jména v tabulce 'uzivatele'
+                    $stmt_user = $conn->prepare("UPDATE uzivatele SET username = ? WHERE username = ?");
+                    $stmt_user->bind_param("ss", $new_username, $puvodni_username);
+                    $stmt_user->execute();
+                    
+                    // B. Aktualizace pole 'autor' v tabulce 'filmy'
+                    $stmt_films = $conn->prepare("UPDATE filmy SET autor = ? WHERE autor = ?");
+                    $stmt_films->bind_param("ss", $new_username, $puvodni_username);
+                    $stmt_films->execute();
+                    
+                    $conn->commit();
+                    
+                    // Aktualizace stavu Session a lokálních proměnných
+                    $_SESSION['username'] = $new_username;
+                    $username = $new_username;
+                    $uspech = "Uživatelské jméno bylo úspěšně změněno na '$new_username'.";
+                    $provedena_zmena = true;
+                    
+                } catch (mysqli_sql_exception $e) {
+                    $conn->rollback();
+                    setError("Chyba při změně jména a filmů: " . $e->getMessage());
+                }
+            }
+        }
+    }
+
+    // Zpracování změny hesla
+    if (isset($_POST['new_password']) && !empty($_POST['new_password'])) {
+        $new_password = $_POST['new_password'];
+        $confirm_password = $_POST['confirm_password']; // Nové pole pro potvrzení
+
+        if ($new_password !== $confirm_password) {
+            setError("Heslo a potvrzení se neshodují!");
+        } elseif (strlen($new_password) < 8) { // Jednoduchá kontrola délky
+             setError("Heslo musí mít alespoň 8 znaků.");
+        } else {
+            $hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("UPDATE uzivatele SET password = ? WHERE username = ?");
+            $stmt->bind_param("ss", $hashed_password, $username);
+            
+            if ($stmt->execute()) {
+                $uspech = empty($uspech) ? "Heslo bylo úspěšně změněno." : $uspech . " Heslo bylo úspěšně změněno.";
+                $provedena_zmena = true;
+            } else {
+                setError("Chyba při aktualizaci hesla.");
+            }
+        }
+    }
+    
+    // Po dokončení změn se přesměrujeme (pokud neproběhla chyba), aby se aktualizoval formulář
+    if (empty($chyba) && $provedena_zmena) {
+        // Přidání úspěšné zprávy do URL, aby přežila přesměrování
+        header("Location: settings.php?msg=" . urlencode($uspech));
+        exit();
+    }
+}
+
+// Zpracování zprávy po přesměrování (GET parametr)
+if (isset($_GET['msg'])) {
+    $uspech = htmlspecialchars($_GET['msg']);
+}
+
+// Získání aktuálních údajů o uživatelském účtu (pro případ, že se jméno změnilo)
+// Zde bychom museli znovu načíst uživatele, aby se aktualizoval stav na stránce po redirectu
+// Ale protože se spoléháme na $_SESSION['username'], stačí nechat původní kód nahoře
+// a pracovat s $username, který je případně aktualizován
+// Nicméně, pro aktuální data, získáme aktuální uživatelský řádek znovu:
+$user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
+if ($user_result->num_rows > 0) {
+    $user = $user_result->fetch_assoc();
+}
+
+
+// Seznam filmů, které uživatel přidal (i neschválené)
+$films_result = $conn->prepare("SELECT * FROM filmy WHERE autor = ? ORDER BY vytvoreno DESC");
+$films_result->bind_param("s", $username);
+$films_result->execute();
+$films_list = $films_result->get_result();
+?>
 <!DOCTYPE html>
 <html lang="cs">
    <head>
@@ -68,14 +160,27 @@
          <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
       </nav>
       <div class="container">
+         <?php if ($chyba): ?>
+            <div class="form-error"><?= htmlspecialchars($chyba) ?></div>
+         <?php endif; ?>
+         <?php if ($uspech): ?>
+            <div class="form-success"><?= htmlspecialchars($uspech) ?></div>
+         <?php endif; ?>
+
          <h2>🖊️ Změnit jméno a heslo</h2>
          <form method="POST" action="settings.php" class="credentials-form">
             <label class="form-label">Nové uživatelské jméno:</label>
             <input type="text" name="new_username" class="form-input" value="<?= htmlspecialchars($user['username']) ?>" required>
-            <label class="form-label">Nové heslo:</label>
+            
+            <label class="form-label">Nové heslo (nevyplňovat pro zachování stávajícího):</label>
             <input type="password" name="new_password" class="form-input">
+            
+            <label class="form-label">Potvrzení nového hesla:</label>
+            <input type="password" name="confirm_password" class="form-input">
+            
             <button type="submit" class="form-button">Uložit změny</button>
          </form>
+
          <h2>🎬 Filmy, které jste přidali</h2>
          <div class="table-wrapper">
             <table class="admin-table">
@@ -88,7 +193,7 @@
                   </tr>
                </thead>
                <tbody>
-                  <?php while ($film = $films_result->fetch_assoc()): ?>
+                  <?php while ($film = $films_list->fetch_assoc()): ?>
                   <tr>
                      <td><?= htmlspecialchars($film['nazev']) ?></td>
                      <td><?= htmlspecialchars($film['rok']) ?></td>

@@ -1,23 +1,57 @@
 <?php
 // Nastavení hlaviček pro API odpověď
 header('Content-Type: application/json');
-header('Access-Control-Allow-Origin: *'); // Může být omezena na konkrétní domény
-header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
+// Při požadavku OPTIONS (preflight) odejdeme
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(200);
+    exit();
+}
+
+// Vyžadujeme autoload pro JWT knihovnu
+require 'vendor/autoload.php';
+use Firebase\JWT\JWT;
+
+// Zahrneme připojení k databázi
+session_start();
+require 'hlphp/db.php';
+
+// --- Konfigurace JWT ---
+$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
+$issuer = "http://vasa-domena.cz"; 
+$audience = "http://vasa-domena.cz";
+$expiration_time = time() + (3600 * 24); // Platnost 1 den 
+// -----------------------
+
+// Pomocná funkce pro logování pokusů
+function logLoginAttempt($username, $status) {
+    global $conn;
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $stmt = $conn->prepare("INSERT INTO acces_logy (autor, akce) VALUES (?, ?)");
+    $akce = "Přihlášení uživatele '$username' - $status (IP: $ip)";
+    $stmt->bind_param("ss", $username, $akce);
+    $stmt->execute();
+}
+
 // Odpověď pro úspěšný login
-function successResponse($username) {
+function successResponse($username, $role, $token) { // Přidáno $role
     echo json_encode([
         "success" => true,
-        "username" => $username
+        "username" => $username,
+        "role" => $role, // NOVÉ: Vrácení role v JSON odpovědi
+        "token" => $token
     ]);
     exit();
 }
 
 // Odpověď pro neúspěšný login
-function errorResponse($message) {
-    // Nastavení stavového kódu HTTP na 401 Unauthorized
-    http_response_code(401);
+function errorResponse($message, $username = "Neznámý") {
+    logLoginAttempt($username, 'neúspěšné - ' . $message);
+    
+    http_response_code(401); 
     echo json_encode([
         "success" => false,
         "message" => $message
@@ -25,34 +59,28 @@ function errorResponse($message) {
     exit();
 }
 
-// Zbytek tvého původního kódu
-session_start();
-require 'hlphp/db.php';
-
-function logLoginAttempt($username, $status) {
-    global $conn;
-    $ip = $_SERVER['REMOTE_ADDR'];
-    // Použij 'Neznámý' nebo podobně, pokud username selže před načtením z DB
-    $log_username = $username ? $username : 'Neznámý'; 
-    $stmt = $conn->prepare("INSERT INTO acces_logy (autor, akce) VALUES (?, ?)");
-    $akce = "Přihlášení uživatele '$log_username' - $status (IP: $ip)";
-    $stmt->bind_param("ss", $log_username, $akce);
-    // Potlačení chyby v případě, že logování selže, aby nebránilo odpovědi API
-    $stmt->execute(); 
-}
-
-// Zkontrolujeme, zda je metoda POST a zda byla data odeslána
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Pro API je lepší očekávat JSON, ale protože tvůj původní kód používal $_POST, necháme pro kompatibilitu.
-    // Pro čisté API by se mělo používat: $data = json_decode(file_get_contents("php://input"), true);
+    $username = '';
+    $password = '';
     
-    // Použijeme tvůj původní přístup přes $_POST
-    $username = $_POST['username'] ?? '';
-    $password = $_POST['password'] ?? '';
+    // Zkusíme data z $_POST (klasický formulář/FormUrlEncodedContent)
+    if (isset($_POST['username']) && isset($_POST['password'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+    }
     
-    // Rychlá kontrola, zda data dorazila
+    // Pokud se v $_POST nic nenašlo, zkusíme JSON body
     if (empty($username) || empty($password)) {
-        logLoginAttempt($username, 'neúspěšné - chybí data');
+        $json_data = file_get_contents("php://input");
+        $data = json_decode($json_data, true);
+        
+        if (isset($data['username']) && isset($data['password'])) {
+            $username = $data['username'];
+            $password = $data['password'];
+        }
+    }
+
+    if (empty($username) || empty($password)) {
         errorResponse("Chybí uživatelské jméno nebo heslo.");
     }
 
@@ -65,33 +93,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($vysledek->num_rows === 1) {
         $uzivatel = $vysledek->fetch_assoc();
 
-        // Ověření hesla pomocí password_verify
+        // Ověření hesla
         if (password_verify($password, $uzivatel['password'])) {
-            // Při API loginu nemusíš nutně nastavovat SESSION, pokud používáš tokeny (např. JWT).
-            // Nicméně, pokud je API voláno ze stejné domény pro udržení PHP session, můžeš to nechat.
-            // Prozatím to ponecháme pro konzistenci s tvým kódem:
-            $_SESSION['username'] = $uzivatel['username'];
-            $_SESSION['role'] = $uzivatel['role'];
-            $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+            
+            // --- GENERUJEME JWT TOKEN ---
+            $payload = [
+                'iss' => $issuer,
+                'aud' => $audience,
+                'iat' => time(),
+                'exp' => $expiration_time,
+                'data' => [
+                    'username' => $uzivatel['username'],
+                    'role' => $uzivatel['role'] // NOVÉ: Přidání role do payloadu
+                ]
+            ];
+            
+            $jwt = JWT::encode($payload, $secret_key, 'HS256');
             
             logLoginAttempt($uzivatel['username'], 'úspěšné');
-            
-            // ÚSPĚŠNÁ ODPOVĚĎ
-            successResponse($uzivatel['username']);
+
+            // ÚSPĚŠNÁ ODPOVĚĎ s tokenem a rolí
+            successResponse($uzivatel['username'], $uzivatel['role'], $jwt); // Předáváme $uzivatel['role']
 
         } else {
-            logLoginAttempt($username, 'neúspěšné - špatné heslo');
-            // NEÚSPĚŠNÁ ODPOVĚĎ
-            errorResponse("Špatné heslo.");
+            // NEÚSPĚCH: Špatné heslo
+            errorResponse("Špatné uživatelské jméno nebo heslo.", $username);
         }
     } else {
-        logLoginAttempt($username, 'neúspěšné - uživatel nenalezen');
-        // NEÚSPĚŠNÁ ODPOVĚĎ
-        errorResponse("Uživatel nenalezen.");
+        // NEÚSPĚCH: Uživatel nenalezen
+        errorResponse("Špatné uživatelské jméno nebo heslo.", $username);
     }
 } else {
     // Pokud metoda není POST
-    http_response_code(405); // Metoda není povolena
+    http_response_code(405);
     echo json_encode([
         "success" => false, 
         "message" => "Metoda není povolena. Očekává se POST."
