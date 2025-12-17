@@ -28,6 +28,9 @@ namespace filmdb
         // NOVÉ: Reference na položku "Administrace"
         private ToolStripMenuItem administrationToolStripMenuItem;
 
+        // Reference na položku "Upravit vybraný film"
+        private ToolStripMenuItem editFilmToolStripMenuItem;
+
         public Maindform()
         {
             InitializeComponent();
@@ -49,7 +52,11 @@ namespace filmdb
             administrationToolStripMenuItem = new ToolStripMenuItem("Administrace");
             administrationToolStripMenuItem.Click += new EventHandler(this.AdministrationToolStripMenuItem_Click); // Nový handler
 
-            // 4. Vložení položek do menuStrip (předpokládáme vložení za položku "Odhlásit se")
+            // 4. Vytvoření nové položky "Upravit vybraný film"
+            editFilmToolStripMenuItem = new ToolStripMenuItem("Upravit vybraný film");
+            editFilmToolStripMenuItem.Click += new EventHandler(this.EditFilmToolStripMenuItem_Click);
+          
+            // 5. Vložení položek do menuStrip (předpokládáme vložení za položku "Odhlásit se")
 
             // Index 2: Přidat film
             menuStrip1.Items.Insert(2, actualAddFilmToolStripMenuItem);
@@ -60,6 +67,8 @@ namespace filmdb
             // Index 4: NOVÉ: Administrace
             menuStrip1.Items.Insert(4, administrationToolStripMenuItem);
 
+            // Index 5: Upravit vybraný film
+            menuStrip1.Items.Insert(3, editFilmToolStripMenuItem);
             // 5. Nastavení počátečního stavu UI
             UpdateLoginState();
         }
@@ -82,8 +91,15 @@ namespace filmdb
 
         private async System.Threading.Tasks.Task LoadFilms()
         {
+            // 1. Získání dat z API
             films = await ApiService.GetFilmsAsync(comboOrderBy.Text, txtSearch.Text);
-            dataGridViewFilms.DataSource = films;
+
+            // 2. Převod Listu na BindingList (podporuje řazení a notifikace v UI)
+            var bindingList = new BindingList<Film>(films);
+
+            // 3. Přiřazení zdroje dat
+            dataGridViewFilms.DataSource = bindingList;
+
             FormatGrid();
         }
 
@@ -96,9 +112,31 @@ namespace filmdb
             if (dataGridViewFilms.Columns["popis"] != null)
                 dataGridViewFilms.Columns["popis"].Visible = false;
 
+            if (dataGridViewFilms.Columns["schvaleno"] != null)
+                dataGridViewFilms.Columns["schvaleno"].Visible = false;
+
+            if (dataGridViewFilms.Columns["poster"] != null)
+                dataGridViewFilms.Columns["poster"].Visible = false;
+
+            if (dataGridViewFilms.Columns["hodnoceni"] != null)
+            {
+                dataGridViewFilms.Columns["hodnoceni"].HeaderText = "Hodnocení";
+                // "N1" zajistí formát jako 8.5, 7.0 atd.
+                dataGridViewFilms.Columns["hodnoceni"].DefaultCellStyle.Format = "N1";
+            }
             // Nastavení hlaviček (zkráceno pro přehlednost)
             if (dataGridViewFilms.Columns["reziser"] != null)
                 dataGridViewFilms.Columns["reziser"].HeaderText = "Režisér";
+            if (dataGridViewFilms.Columns["autor"] != null)
+            {
+                dataGridViewFilms.Columns["autor"].Visible = true;
+                dataGridViewFilms.Columns["autor"].HeaderText = "Přidal uživatel";
+            }
+
+            foreach (DataGridViewColumn column in dataGridViewFilms.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
         }
 
         private async void btnSearch_Click(object sender, EventArgs e)
@@ -210,15 +248,22 @@ namespace filmdb
 
 
         // NOVÝ: Handler pro položku "Administrace"
-        private void AdministrationToolStripMenuItem_Click(object sender, EventArgs e)
+       private void AdministrationToolStripMenuItem_Click(object sender, EventArgs e)
+{
+    if (!string.IsNullOrEmpty(loggedInUsername))
+    {
+        string currentRole = LoginForm.AppContext.UserRole;
+        if (currentRole == "admin" || currentRole == "owner")
         {
-            if (!string.IsNullOrEmpty(loggedInUsername))
-            {
-                MessageBox.Show($"Otevřít administrační panel pro {loggedInUsername} (Role: {LoginForm.AppContext.UserRole})", "Administrace");
-                // Zde bys spustil: AdminForm adminForm = new AdminForm();
-                // adminForm.ShowDialog();
-            }
+            // Otevření admin sekce
+            var adminForm = new AdminForm();
+            adminForm.ShowDialog();
+            
+            // Po zavření admin sekce obnovíme hlavní seznam filmů
+            _ = LoadFilms(); 
         }
+    }
+}
 
         // Nová metoda pro aktualizaci stavu UI
         private void UpdateLoginState()
@@ -251,13 +296,36 @@ namespace filmdb
             // 3. Zobrazení/Skrytí položky "Nastavení" POUZE pro roli 'user'
             if (settingsToolStripMenuItem != null)
             {
-                settingsToolStripMenuItem.Visible = isLoggedIn && isUserRole;
+                settingsToolStripMenuItem.Visible = isLoggedIn;
             }
 
             // 4. NOVÉ: Zobrazení/Skrytí položky "Administrace" POUZE pro role 'admin' nebo 'owner'
             if (administrationToolStripMenuItem != null)
             {
                 administrationToolStripMenuItem.Visible = isLoggedIn && isAdminOrOwner;
+            }
+        }
+        private void EditFilmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewFilms.CurrentRow?.DataBoundItem is Film selectedFilm)
+            {
+                // Kontrola práv: Upravit může jen autor nebo admin/owner
+                bool isAuthor = string.Equals(selectedFilm.Autor, loggedInUsername, StringComparison.OrdinalIgnoreCase);
+                bool isAdmin = string.Equals(LoginForm.AppContext.UserRole, "admin", StringComparison.OrdinalIgnoreCase) ||
+                               string.Equals(LoginForm.AppContext.UserRole, "owner", StringComparison.OrdinalIgnoreCase);
+
+                if (isAuthor || isAdmin)
+                {
+                    var editForm = new EditFilmForm(selectedFilm);
+                    if (editForm.ShowDialog() == DialogResult.OK)
+                    {
+                        _ = LoadFilms(); // Refresh seznamu
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Můžete upravovat pouze své vlastní filmy.");
+                }
             }
         }
     }

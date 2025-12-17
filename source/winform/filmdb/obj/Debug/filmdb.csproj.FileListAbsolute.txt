@@ -33,3 +33,6 @@ C:\Users\ondrejmuhlhandel\source\repos\0ndraM\filmdb\source\winform\filmdb\bin\D
 C:\Users\ondrejmuhlhandel\source\repos\0ndraM\filmdb\source\winform\filmdb\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ondrejmuhlhandel\source\repos\0ndraM\filmdb\source\winform\filmdb\obj\Debug\filmdb.csproj.Up2Date
 C:\Users\ondrejmuhlhandel\source\repos\0ndraM\filmdb\source\winform\filmdb\obj\Debug\filmdb.SettingsForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.SettingsForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.EditFilmForm.resources
+C:\Users\muhlh\filmdb\source\winform\filmdb\obj\Debug\filmdb.AdminForm.resources

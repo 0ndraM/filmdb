@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using filmdb.Models; // Kde je definována SimpleApiResponse
-using filmdb.Services;  
+using filmdb.Services;
+using filmdb;
 
 namespace filmdb
 {
@@ -20,6 +21,7 @@ namespace filmdb
         public SettingsForm()
         {
             InitializeComponent();
+            ThemeManager.Apply(this);
 
             // Získání aktuálního stavu z AppContextu
             _authToken = LoginForm.AppContext.AuthToken;

@@ -17,7 +17,16 @@ namespace filmdb
         {
             DarkMode = darkMode;
         }
+        // V ThemeManager.cs přidej tuto metodu pro snadnější volání:
+        public static void ApplyToForm(Form form)
+        {
+            // Aplikuje barvy na samotný formulář a všechny jeho prvky
+            Apply(form);
 
+            // Zabezpečí, aby se barvy aplikovaly i na titulkový pruh (u některých verzí Windows)
+            // a nastaví startovní pozici, pokud je potřeba
+            form.BackColor = DarkMode ? Color.FromArgb(30, 30, 30) : SystemColors.Control;
+        }
         public static void Apply(Form form)
         {
             Color formBack = DarkMode ? Color.FromArgb(30, 30, 30) : SystemColors.Control;
@@ -79,6 +88,22 @@ namespace filmdb
                 dgv.ColumnHeadersDefaultCellStyle.BackColor = menuBack;
                 dgv.ColumnHeadersDefaultCellStyle.ForeColor = textFore;
                 dgv.EnableHeadersVisualStyles = false;
+            }
+            else if (c is GroupBox gb)
+            {
+                gb.ForeColor = textFore; // Text GroupBoxu
+                                         // GroupBoxy mají v tmavém režimu problém s barvou čáry, 
+                                         // ale nastavení ForeColor pomůže čitelnosti.
+            }
+            else if (c is Panel p)
+            {
+                // Panely by měly mít stejnou barvu jako pozadí formuláře
+                p.BackColor = formBack;
+            }
+            else if (c is CheckBox cb)
+            {
+                cb.ForeColor = textFore;
+                cb.BackColor = Color.Transparent;
             }
 
             foreach (Control child in c.Controls)
