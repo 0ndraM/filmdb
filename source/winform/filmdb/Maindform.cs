@@ -77,7 +77,9 @@ namespace filmdb
 
         private void menuDarkMode_Click(object sender, EventArgs e)
         {
+            // Nastaví globální stav (true/false) podle zaškrtnutí v menu
             ThemeManager.Set(menuDarkMode.Checked);
+            // Aplikuje motiv na hlavní okno
             ThemeManager.Apply(this);
         }
 
