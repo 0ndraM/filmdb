@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -20,7 +15,15 @@ namespace filmdb
             this.fore = fore;
         }
 
-        public override Color MenuItemSelected => Color.FromArgb(60, 60, 60);
+        // DYNAMICKÝ HOVER: Barva se změní podle toho, zda je zapnutý DarkMode
+        public override Color MenuItemSelected => ThemeManager.DarkMode
+            ? Color.FromArgb(60, 60, 60)       // Tmavě šedá pro Dark režim
+            : Color.FromArgb(200, 200, 200);    // Světle šedá pro Light režim
+
+        // Odstranění gradientů pro čistý vzhled
+        public override Color MenuItemSelectedGradientBegin => MenuItemSelected;
+        public override Color MenuItemSelectedGradientEnd => MenuItemSelected;
+
         public override Color MenuItemBorder => back;
         public override Color MenuBorder => back;
         public override Color ToolStripDropDownBackground => back;

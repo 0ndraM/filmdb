@@ -54,8 +54,15 @@
             // 
             // dataGridViewFilms
             // 
+            this.dataGridViewFilms.AllowUserToAddRows = false;
+            this.dataGridViewFilms.AllowUserToDeleteRows = false;
+            this.dataGridViewFilms.AllowUserToOrderColumns = true;
+            this.dataGridViewFilms.AllowUserToResizeColumns = false;
+            this.dataGridViewFilms.AllowUserToResizeRows = false;
+            this.dataGridViewFilms.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewFilms.Location = new System.Drawing.Point(12, 64);
             this.dataGridViewFilms.Name = "dataGridViewFilms";
+            this.dataGridViewFilms.ReadOnly = true;
             this.dataGridViewFilms.Size = new System.Drawing.Size(563, 300);
             this.dataGridViewFilms.TabIndex = 0;
             this.dataGridViewFilms.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFilms_CellDoubleClick);
@@ -144,7 +151,7 @@
             // 
             this.menuDarkMode.CheckOnClick = true;
             this.menuDarkMode.Name = "menuDarkMode";
-            this.menuDarkMode.Size = new System.Drawing.Size(144, 22);
+            this.menuDarkMode.Size = new System.Drawing.Size(180, 22);
             this.menuDarkMode.Text = "Tmavý režim ";
             this.menuDarkMode.Click += new System.EventHandler(this.menuDarkMode_Click);
             // 
