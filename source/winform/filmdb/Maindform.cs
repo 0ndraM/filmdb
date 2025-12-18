@@ -118,6 +118,14 @@ namespace filmdb
             if (dataGridViewFilms.Columns["id"] != null)
                 dataGridViewFilms.Columns["id"].Visible = false;
 
+            if (dataGridViewFilms.Columns["rok"] != null)
+            {
+                dataGridViewFilms.Columns["rok"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
+            if (dataGridViewFilms.Columns["hodnoceni"] != null)
+            {
+                dataGridViewFilms.Columns["hodnoceni"].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            }
             if (dataGridViewFilms.Columns["popis"] != null)
                 dataGridViewFilms.Columns["popis"].Visible = false;
 

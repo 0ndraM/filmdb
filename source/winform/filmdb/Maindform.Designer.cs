@@ -34,6 +34,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Maindform));
             this.dataGridViewFilms = new System.Windows.Forms.DataGridView();
             this.picturePoster = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
@@ -56,13 +57,16 @@
             // 
             this.dataGridViewFilms.AllowUserToAddRows = false;
             this.dataGridViewFilms.AllowUserToDeleteRows = false;
-            this.dataGridViewFilms.AllowUserToOrderColumns = true;
             this.dataGridViewFilms.AllowUserToResizeColumns = false;
             this.dataGridViewFilms.AllowUserToResizeRows = false;
+            this.dataGridViewFilms.ColumnHeadersHeight = 30;
             this.dataGridViewFilms.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewFilms.Location = new System.Drawing.Point(12, 64);
             this.dataGridViewFilms.Name = "dataGridViewFilms";
             this.dataGridViewFilms.ReadOnly = true;
+            this.dataGridViewFilms.RowHeadersVisible = false;
+            this.dataGridViewFilms.RowHeadersWidth = 82;
+            this.dataGridViewFilms.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridViewFilms.Size = new System.Drawing.Size(563, 300);
             this.dataGridViewFilms.TabIndex = 0;
             this.dataGridViewFilms.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewFilms_CellDoubleClick);
@@ -130,6 +134,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.zobrazeníToolStripMenuItem,
             this.přidatFilmToolStripMenuItem});
@@ -151,7 +156,7 @@
             // 
             this.menuDarkMode.CheckOnClick = true;
             this.menuDarkMode.Name = "menuDarkMode";
-            this.menuDarkMode.Size = new System.Drawing.Size(180, 22);
+            this.menuDarkMode.Size = new System.Drawing.Size(143, 22);
             this.menuDarkMode.Text = "Tmavý režim ";
             this.menuDarkMode.Click += new System.EventHandler(this.menuDarkMode_Click);
             // 
@@ -174,6 +179,7 @@
             this.Controls.Add(this.txtPopis);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Maindform";
             this.Text = "FilmDB Desktop";
             this.Load += new System.EventHandler(this.MainForm_Load);
