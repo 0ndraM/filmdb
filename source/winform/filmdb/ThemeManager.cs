@@ -11,7 +11,7 @@ namespace filmdb
 {
      public static class ThemeManager
     {
-        public static bool DarkMode { get; private set; } = true;
+        public static bool DarkMode { get; private set; } = false;
 
         public static void Set(bool darkMode)
         {
@@ -41,26 +41,46 @@ namespace filmdb
                 ApplyToControl(c, formBack, textFore, textboxBack, menuBack, buttonBack);
         }
 
+        private static void ApplyToMenuItemsRecursively(ToolStripItem item, Color textFore)
+        {
+            item.ForeColor = textFore;
+
+            if (item is ToolStripMenuItem menuItem)
+            {
+                foreach (ToolStripItem dropDownItem in menuItem.DropDownItems)
+                {
+                    ApplyToMenuItemsRecursively(dropDownItem, textFore);
+                }
+            }
+        }
+
         private static void ApplyToControl(
-            Control c,
-            Color formBack,
-            Color textFore,
-            Color textboxBack,
-            Color menuBack,
-            Color buttonBack)
+    Control c,
+    Color formBack,
+    Color textFore,
+    Color textboxBack,
+    Color menuBack,
+    Color buttonBack)
         {
             if (c is MenuStrip menu)
             {
                 menu.BackColor = menuBack;
                 menu.ForeColor = textFore;
-                menu.Renderer = new ToolStripProfessionalRenderer(
-                    new DarkMenuColorTable(menuBack, textFore)
-                );
+
+                // DŮLEŽITÉ: Pokaždé vytvoříme novou instanci Rendereru, 
+                // aby se projevily změny barev v DarkMenuColorTable
+                menu.Renderer = new ToolStripProfessionalRenderer(new DarkMenuColorTable(menuBack, textFore));
+
+                foreach (ToolStripMenuItem item in menu.Items)
+                {
+                    ApplyToMenuItemsRecursively(item, textFore);
+                }
             }
             else if (c is ToolStrip tool)
             {
                 tool.BackColor = menuBack;
                 tool.ForeColor = textFore;
+
             }
             else if (c is Button btn)
             {

@@ -34,6 +34,13 @@ namespace filmdb
         public Maindform()
         {
             InitializeComponent();
+
+            // Synchronizace: Nastaví ThemeManager podle toho, co je v Designeru v MenuStripu
+            ThemeManager.Set(menuDarkMode.Checked);
+
+            // Aplikuje motiv na hlavní okno, aby bylo jasno, v jakém stavu začínáme
+            ThemeManager.Apply(this);
+
             InitializeLoginLogic();
         }
 
@@ -251,21 +258,22 @@ namespace filmdb
 
         // NOVÝ: Handler pro položku "Administrace"
        private void AdministrationToolStripMenuItem_Click(object sender, EventArgs e)
-{
-    if (!string.IsNullOrEmpty(loggedInUsername))
-    {
-        string currentRole = LoginForm.AppContext.UserRole;
-        if (currentRole == "admin" || currentRole == "owner")
         {
-            // Otevření admin sekce
-            var adminForm = new AdminForm();
-            adminForm.ShowDialog();
-            
-            // Po zavření admin sekce obnovíme hlavní seznam filmů
-            _ = LoadFilms(); 
+            if (!string.IsNullOrEmpty(loggedInUsername))
+            {
+                string currentRole = LoginForm.AppContext.UserRole;
+                if (currentRole == "admin" || currentRole == "owner")
+                {
+                    // Otevření admin sekce
+                    var adminForm = new AdminForm();
+                    adminForm.ShowDialog();
+
+                    // Po zavření admin sekce obnovíme hlavní seznam filmů
+                    _ = LoadFilms();
+                }
+            }
         }
-    }
-}
+
 
         // Nová metoda pro aktualizaci stavu UI
         private void UpdateLoginState()
@@ -305,6 +313,12 @@ namespace filmdb
             if (administrationToolStripMenuItem != null)
             {
                 administrationToolStripMenuItem.Visible = isLoggedIn && isAdminOrOwner;
+            }
+
+            // 5. Zobrazení/Skrytí položky "Upravit vybraný film" POUZE pro přihlášené uživatele    
+            if (editFilmToolStripMenuItem != null)
+            {
+                editFilmToolStripMenuItem.Visible = isLoggedIn;
             }
         }
         private void EditFilmToolStripMenuItem_Click(object sender, EventArgs e)
