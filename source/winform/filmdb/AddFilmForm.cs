@@ -71,6 +71,7 @@ namespace filmdb
         public AddFilmForm(string autor)
         {
             InitializeComponent();
+            ThemeManager.Apply(this);
             _autor = autor;
             LoadGenresAsync();
         }

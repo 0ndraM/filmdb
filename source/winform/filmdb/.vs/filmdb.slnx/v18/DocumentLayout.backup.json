@@ -1,61 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\",
+  "WorkspaceRootPath": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\maindform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:maindform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|c:\\users\\ondrejmuhlhandel\\source\\repos\\0ndram\\filmdb\\source\\winform\\filmdb\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\models\\film.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:models\\film.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|c:\\users\\ondrejmuhlhandel\\source\\repos\\0ndram\\filmdb\\source\\winform\\filmdb\\settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|c:\\users\\ondrejmuhlhandel\\source\\repos\\0ndram\\filmdb\\source\\winform\\filmdb\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\addfilmform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:addfilmform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\posterfullscreenform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:posterfullscreenform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\darkmenucolortable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:darkmenucolortable.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\maindform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:maindform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\filmdetailform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:filmdetailform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\maindform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:maindform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:settingsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|c:\\users\\muhlh\\filmdb\\source\\winform\\filmdb\\editfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:editfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:addfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\editfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:editfilmform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:adminform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{60F12949-54A4-4F59-9F72-D4F0036E4B44}|filmdb.csproj|solutionrelative:filmdetailform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -66,28 +58,90 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 10,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
+              "Title": "AddFilmForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs",
+              "RelativeDocumentMoniker": "AddFilmForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs",
+              "RelativeToolTip": "AddFilmForm.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAAAcwEkAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T15:11:39.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AdminForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AdminForm.cs",
+              "RelativeDocumentMoniker": "AdminForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AdminForm.cs",
+              "RelativeToolTip": "AdminForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T14:39:03.152Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "AdminForm.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AdminForm.cs",
+              "RelativeDocumentMoniker": "AdminForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AdminForm.cs [N\u00E1vrh]",
+              "RelativeToolTip": "AdminForm.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T14:39:00.201Z",
+              "EditorCaption": " [N\u00E1vrh]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "EditFilmForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\EditFilmForm.cs",
+              "RelativeDocumentMoniker": "EditFilmForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\EditFilmForm.cs",
+              "RelativeToolTip": "EditFilmForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T14:20:53.563Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "EditFilmForm.cs [N\u00E1vrh]",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\EditFilmForm.cs",
+              "RelativeDocumentMoniker": "EditFilmForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\EditFilmForm.cs [N\u00E1vrh]",
+              "RelativeToolTip": "EditFilmForm.cs [N\u00E1vrh]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-17T14:20:32.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "SettingsForm.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
               "RelativeDocumentMoniker": "SettingsForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
               "RelativeToolTip": "SettingsForm.cs",
-              "ViewState": "AgIAAAUAAAAAj5mZmRkmwCIAAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T23:17:48.935Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "SettingsForm.cs [N\u00E1vrh]",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs",
               "RelativeDocumentMoniker": "SettingsForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs [N\u00E1vrh]",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.cs [N\u00E1vrh]",
               "RelativeToolTip": "SettingsForm.cs [N\u00E1vrh]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T23:17:46.431Z",
@@ -95,37 +149,24 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "Maindform.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Maindform.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\Maindform.cs",
               "RelativeDocumentMoniker": "Maindform.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Maindform.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\Maindform.cs",
               "RelativeToolTip": "Maindform.cs",
-              "ViewState": "AgIAAIIAAACAFgAAAIAkwKIAAAANAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAowEgAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-14T17:36:00.391Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Film.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Models\\Film.cs",
-              "RelativeDocumentMoniker": "Models\\Film.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Models\\Film.cs",
-              "RelativeToolTip": "Models\\Film.cs",
-              "ViewState": "AgIAAAgAAABAZ2ZmZqYnwCAAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T22:41:53.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "AddFilmForm.cs [N\u00E1vrh]",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs",
               "RelativeDocumentMoniker": "AddFilmForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs [N\u00E1vrh]",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\AddFilmForm.cs [N\u00E1vrh]",
               "RelativeToolTip": "AddFilmForm.cs [N\u00E1vrh]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T20:44:10.198Z",
@@ -133,114 +174,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "AddFilmForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\AddFilmForm.Designer.cs",
-              "RelativeDocumentMoniker": "AddFilmForm.Designer.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\AddFilmForm.Designer.cs",
-              "RelativeToolTip": "AddFilmForm.Designer.cs",
-              "ViewState": "AgIAABkAAABg//////81wB8AAABBAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T20:43:34.113Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "LoginForm.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\LoginForm.cs",
-              "RelativeDocumentMoniker": "LoginForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\LoginForm.cs",
-              "RelativeToolTip": "LoginForm.cs",
-              "ViewState": "AgIAACQAAAAAAQAAAEA0wEEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T20:43:06.779Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "SettingsForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.Designer.cs",
               "RelativeDocumentMoniker": "SettingsForm.Designer.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\SettingsForm.Designer.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\SettingsForm.Designer.cs",
               "RelativeToolTip": "SettingsForm.Designer.cs",
-              "ViewState": "AgIAALcAAAAAAAAAAADwv+AAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-16T23:17:54.437Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DarkMenuColorTable.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\DarkMenuColorTable.cs",
-              "RelativeDocumentMoniker": "DarkMenuColorTable.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\DarkMenuColorTable.cs",
-              "RelativeToolTip": "DarkMenuColorTable.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAUAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "FilmDetailForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
+              "RelativeDocumentMoniker": "FilmDetailForm.cs",
+              "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
+              "RelativeToolTip": "FilmDetailForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:26:24.27Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "PosterFullScreenForm.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\PosterFullScreenForm.cs",
-              "RelativeDocumentMoniker": "PosterFullScreenForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\PosterFullScreenForm.cs",
-              "RelativeToolTip": "PosterFullScreenForm.cs",
-              "ViewState": "AgIAAAIAAAAAAAAAAADwvygAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-16T12:05:07.791Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "FilmDetailForm.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.Designer.cs",
-              "RelativeDocumentMoniker": "FilmDetailForm.Designer.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.Designer.cs",
-              "RelativeToolTip": "FilmDetailForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T11:15:49.01Z"
+              "WhenOpened": "2025-12-15T11:14:35.919Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 11,
-              "Title": "FilmDetailForm.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
-              "RelativeDocumentMoniker": "FilmDetailForm.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
-              "RelativeToolTip": "FilmDetailForm.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T11:14:35.919Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
               "Title": "FilmDetailForm.cs [N\u00E1vrh]",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
+              "DocumentMoniker": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs",
               "RelativeDocumentMoniker": "FilmDetailForm.cs",
               "ToolTip": "C:\\Users\\muhlh\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs [N\u00E1vrh]",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\..\\..\\..\\muhlh\\filmdb\\source\\winform\\filmdb\\FilmDetailForm.cs [N\u00E1vrh]",
+              "RelativeToolTip": "FilmDetailForm.cs [N\u00E1vrh]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-15T11:14:27.617Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Maindform.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Maindform.Designer.cs",
-              "RelativeDocumentMoniker": "Maindform.Designer.cs",
-              "ToolTip": "C:\\Users\\ondrejmuhlhandel\\source\\repos\\0ndraM\\filmdb\\source\\winform\\filmdb\\Maindform.Designer.cs",
-              "RelativeToolTip": "Maindform.Designer.cs",
-              "ViewState": "AgIAAH8AAAAAAAAAAAAawJEAAAA0AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-14T17:35:58.35Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-15T11:14:27.617Z",
+              "EditorCaption": " [N\u00E1vrh]"
             }
           ]
         }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using filmdb.Models;
 using System.Windows.Forms;
+using filmdb;
 
 namespace filmdb
 {
@@ -19,6 +20,7 @@ namespace filmdb
         public LoginForm()
         {
             InitializeComponent();
+            ThemeManager.Apply(this);
         }
         public static class AppContext
         {
@@ -34,6 +36,7 @@ namespace filmdb
                 LoggedInUsername = username; // Ukládáme jméno
             }
         }
+
         private async void btnLogin_Click(object sender, EventArgs e)
         {
             using (var client = new HttpClient())

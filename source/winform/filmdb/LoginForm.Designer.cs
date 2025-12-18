@@ -41,7 +41,7 @@
             // 
             // lblUsername
             // 
-            this.lblUsername.Location = new System.Drawing.Point(30, 60);
+            this.lblUsername.Location = new System.Drawing.Point(30, 54);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(100, 23);
             this.lblUsername.TabIndex = 1;
@@ -49,7 +49,7 @@
             // 
             // lblPassword
             // 
-            this.lblPassword.Location = new System.Drawing.Point(30, 115);
+            this.lblPassword.Location = new System.Drawing.Point(30, 109);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(100, 23);
             this.lblPassword.TabIndex = 3;
@@ -59,14 +59,14 @@
             // 
             this.txtUsername.Location = new System.Drawing.Point(30, 80);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(300, 31);
+            this.txtUsername.Size = new System.Drawing.Size(300, 20);
             this.txtUsername.TabIndex = 2;
             // 
             // txtPassword
             // 
             this.txtPassword.Location = new System.Drawing.Point(30, 135);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(300, 31);
+            this.txtPassword.Size = new System.Drawing.Size(300, 20);
             this.txtPassword.TabIndex = 4;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
