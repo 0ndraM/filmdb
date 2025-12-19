@@ -1,7 +1,8 @@
 
-# [🎬 Správa filmové databáze](https://0ndra.maweb.eu/FilmDB/index.php)  
+# 🎬 Správa filmové databáze
 
-Tento webový projekt slouží pro správu databáze filmů. Umožňuje uživatelům přidávat, upravovat a prohlížet filmy. Má oddělené přístupy pro běžné uživatele, autory, administrátory a vlastníky systému.
+Tento webový projekt slouží pro správu databáze filmů. Umožňuje uživatelům přidávat, upravovat a prohlížet filmy. Má oddělené přístupy pro běžné uživatele, autory, administrátory a vlastníky systému. Produkční web [**zde**](https://0ndra.maweb.eu/FilmDB/index.php)  
+
 
 ## 🔧 Funkce
 
@@ -171,4 +172,5 @@ Aplikace obsahuje `ThemeManager`, který rekurzivně prochází všechny ovláda
 
 > 📣 Autor: [0ndra_m_](https://github.com/0ndraM)  
  
+
 
