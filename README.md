@@ -70,7 +70,7 @@ Logovací tabulka ukládající každou změnu oprávnění.
 📁source/
 ├── 📁 hlphp/
 │   ├── db.php               # Připojení k databázi
-│   ├── export_filmy_log.php # AJAX endpoint pro načítání filmů
+│   ├── export_filmy_log.php # Export logů správy filmů
 │   ├── export_log.php       # Export logů správy uživatelů
 │   ├── filmy_api.php        # Api pro ajax
 │   ├── logout.php           # Odhlášení
@@ -87,7 +87,7 @@ Logovací tabulka ukládající každou změnu oprávnění.
 ├── api_get_genres.php       # Endpoint pro získání žánrů
 ├── approve_api.php          # Endpoint pro administrátorské schvalování
 ├── edit_api.php             # Endpoint pro úpravu filmů (Multipart Form Data)
-├── filmy_api.php            # Hlavní API pro načítání filmů s filtry
+├── filmy_api.php            # Hlavní API pro načítání filmů do winformu
 ├── add.php                  # Přidání filmu
 ├── admin.php                # Admin sekce pro správu a schvalování
 ├── edit.php                 # Úprava filmu (s kontrolou práv)
@@ -172,5 +172,6 @@ Aplikace obsahuje `ThemeManager`, který rekurzivně prochází všechny ovláda
 
 > 📣 Autor: [0ndra_m_](https://github.com/0ndraM)  
  
+
 
 
