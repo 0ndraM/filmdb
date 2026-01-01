@@ -14,8 +14,7 @@ use Firebase\JWT\ExpiredException;
 require 'hlphp/db.php'; 
 
 // --- KONFIGURACE ---
-$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
-// --- FUNKCE PRO ODPOVĚDI ---
+$secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';// --- FUNKCE PRO ODPOVĚDI ---
 function successResponse($data = []) {
     echo json_encode(array_merge(["success" => true], $data));
     exit();

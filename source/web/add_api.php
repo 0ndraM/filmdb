@@ -22,13 +22,7 @@ require 'hlphp/db.php';
 
 // --- Konfigurace JWT (Musí odpovídat nastavení v login_api.php!) ---
 // DŮLEŽITÉ: Uložte tento klíč BEZPEČNĚ!
-$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
-$secret_key = getenv('JWT_SECRET_KEY');
-if ($secret_key === false) {
-    // Log the error and stop execution if the key is not set.
-    error_log("JWT_SECRET_KEY not set.");
-    errorResponse("Chyba konfigurace serveru.", 500);
-}
+$secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';
 // -------------------------------------------------------------------
 
 // --- POMOCNÉ FUNKCE ---
