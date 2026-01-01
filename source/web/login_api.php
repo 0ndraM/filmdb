@@ -20,9 +20,9 @@ session_start();
 require 'hlphp/db.php';
 
 // --- Konfigurace JWT ---
-$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
-$issuer = "http://vasa-domena.cz"; 
-$audience = "http://vasa-domena.cz";
+$secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';
+$issuer = $_ENV['JWT_ISSUER'];
+$audience = $_ENV['JWT_AUDIENCE'];
 $expiration_time = time() + (3600 * 24); // Platnost 1 den 
 // -----------------------
 

@@ -9,8 +9,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 require 'hlphp/db.php';
 
-$secret_key = "TVUJ_VELMI_TAJNY_APLIKACNI_KLIC_123456_NAHRAZ_ME_OPRAVDOVYM_KLICEM";
-
+$secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';
 // 1. Ověření tokenu
 $headers = getallheaders();
 $token = (isset($headers['Authorization']) && preg_match('/Bearer\s(\S+)/', $headers['Authorization'], $matches)) ? $matches[1] : null;
