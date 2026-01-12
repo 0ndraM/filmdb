@@ -17,6 +17,8 @@ namespace filmdb
     {
         public string LoggedUser { get; private set; }
 
+       
+
         public LoginForm()
         {
             InitializeComponent();
@@ -78,6 +80,7 @@ namespace filmdb
                     MessageBox.Show(message);
                 }
             }
+
         }
 
         private void linkRegister_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

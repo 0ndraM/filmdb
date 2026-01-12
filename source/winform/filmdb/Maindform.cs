@@ -351,6 +351,10 @@ namespace filmdb
                     MessageBox.Show("Můžete upravovat pouze své vlastní filmy.");
                 }
             }
+            else
+            {
+                MessageBox.Show("Nejprve vyberte film, který chcete upravit.");
+            }
         }
     }
 }
