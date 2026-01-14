@@ -2,15 +2,23 @@
 session_start();
 require 'hlphp/db.php';
 
+// Ověření role - přístup mají jen admini a owner
 if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
     header('Location: login.php');
     exit();
 }
 
-// Dotazy
-$logy_role = $conn->query("SELECT * FROM logy ORDER BY cas DESC LIMIT 50");
-$logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 50");
-$logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 50");
+// 1. Načtení blokovaných IP adres JEDNOU na začátku (efektivita)
+$blocked_file = __DIR__ . '/blocked_ips.txt';
+$blocked_ips = [];
+if (file_exists($blocked_file)) {
+    $blocked_ips = file($blocked_file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+}
+
+// 2. Optimalizované dotazy
+$logy_role = $conn->query("SELECT * FROM logy ORDER BY cas DESC LIMIT 20");
+$logy_filmy = $conn->query("SELECT * FROM filmy_log ORDER BY zmeneno DESC LIMIT 20");
+$logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 20");
 ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -29,130 +37,124 @@ $logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 50"
         }
     </script>
     <link rel="stylesheet" href="styles.css">
+    <script src="theme-toggle.js"></script>
+    <style>
+        /* Rychlé styly pro lepší přehlednost logů */
+        .row-warning { background-color: rgba(255, 0, 0, 0.1); } /* Červený nádech pro chyby */
+        .ip-badge { font-family: monospace; background: #eee; padding: 2px 5px; border-radius: 4px; color: #333; }
+        .dark-mode .ip-badge { background: #333; color: #eee; }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>📜 Logy systému</h1>
-    </header>
+    <header><h1>📜 Logy systému</h1></header>
     <nav>
         <a class="button" href="admin.php">⬅️ Zpět na admin sekci</a>
         <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
     </nav>
+    
     <div class="container">
 
+        <h2>🔐 Log přihlášení (Access Log)</h2>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Akce</th>
+                        <th>Čas</th>
+                        <th>Správa IP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($log = $logy_login->fetch_assoc()): 
+                        // Detekce chyby v logu pro obarvení řádku
+                        $isError = (stripos($log['akce'], 'chyba') !== false || stripos($log['akce'], 'failed') !== false);
+                    ?>
+                    <tr class="<?= $isError ? 'row-warning' : '' ?>">
+                        <td><strong><?= htmlspecialchars($log['autor']) ?></strong></td>
+                        <td><?= htmlspecialchars($log['akce']) ?></td>
+                        <td><?= htmlspecialchars($log['cas']) ?></td>
+                        <td>
+                            <?php
+                            if (preg_match('/IP: ([0-9\.]+)/', $log['akce'], $matches)) {
+                                $ip = $matches[1];
+                                if (in_array($ip, $blocked_ips)) {
+                                    echo "<a class='btn btn-success' href='hlphp/odblokuj_ip.php?ip=" . urlencode($ip) . "'>✅ Odblokovat</a>";
+                                } else {
+                                    echo "<a class='btn btn-danger' href='hlphp/blokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Zablokovat IP $ip?')\">🚫 Blokovat</a>";
+                                }
+                            }
+                            ?>
+                        </td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
 
-    <h2>🔐 Log přihlášení</h2>
-        <?php if (!$logy_login): ?>
-            <p style='color:red;'>Chyba při načítání logu přihlášení: <?= $conn->error ?></p>
-        <?php else: ?>
-            <div class="table-wrapper">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Autor</th>
-                            <th>Akce</th>
-                            <th>Čas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($log = $logy_login->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($log['autor']) ?></td>
-                                <td><?= htmlspecialchars($log['akce']) ?></td>
-                                <td>
-                                    <?= htmlspecialchars($log['cas']) ?>
-                                    <?php
-                                    if (preg_match('/IP: ([0-9\.]+)/', $log['akce'], $matches)) {
-                                        $ip = $matches[1];
-                                        $file = __DIR__ . '/blocked_ips.txt';
-                                        $blocked = file_exists($file) ? file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) : [];
-                                        if (in_array($ip, $blocked)) {
-                                            echo " <a class='btn btn-success' href='hlphp/odblokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Odblokovat IP $ip?')\">Odblokovat IP</a>";
-                                        } else {
-                                            echo " <a class='btn btn-danger' href='hlphp/blokuj_ip.php?ip=" . urlencode($ip) . "' onclick=\"return confirm('Zablokovat IP $ip?')\">Blokovat IP</a>";
-                                        }
-                                    }
-                                    ?>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php endif; ?>
         <h2>👥 Log změn uživatelských rolí</h2>
-        <?php if (!$logy_role): ?>
-            <p style='color:red;'>Chyba při načítání logu rolí: <?= $conn->error ?></p>
-        <?php else: ?>
-            <div class="table-wrapper">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Autor</th>
-                            <th>Akce</th>
-                            <th>Čas</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($log = $logy_role->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($log['autor']) ?></td>
-                                <td><?= htmlspecialchars($log['akce']) ?></td>
-                                <td><?= htmlspecialchars($log['cas']) ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php endif; ?>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Autor</th>
+                        <th>Akce</th>
+                        <th>Čas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($log = $logy_role->fetch_assoc()): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($log['autor']) ?></td>
+                        <td><?= htmlspecialchars($log['akce']) ?></td>
+                        <td><?= htmlspecialchars($log['cas']) ?></td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
 
-        <form method="post" action="hlphp/export_log.php" style="margin-top: 20px;">
-            <button type="submit" class="button">⬇️ Exportovat log rolí do CSV</button>
+        <form method="post" action="hlphp/export_log.php">
+            <button type="submit" class="button">⬇️ Exportovat role do CSV</button>
         </form>
 
         <h2>🎬 Log změn filmů</h2>
-        <?php if (!$logy_filmy): ?>
-            <p style='color:red;'>Chyba při načítání logu filmů: <?= $conn->error ?></p>
-        <?php else: ?>
-            <div class="table-wrapper">
-                <table class="admin-table">
-                    <thead>
-                        <tr>
-                            <th>Film (aktuální název)</th>
-                            <th>Rok</th>
-                            <th>Žánr</th>
-                            <th>Režisér</th>
-                            <th>Hodnocení</th>
-                            <th>Autor změny</th>
-                            <th>Čas změny</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($film_log = $logy_filmy->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($film_log['nazev']) ?></td>
-                                <td><?= $film_log['rok'] ?></td>
-                                <td><?= htmlspecialchars($film_log['zanr']) ?></td>
-                                <td><?= htmlspecialchars($film_log['reziser']) ?></td>
-                                <td><?= $film_log['hodnoceni'] ?></td>
-                                <td><?= htmlspecialchars($film_log['autor']) ?></td>
-                                <td><?= $film_log['zmeneno'] ?></td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        <?php endif; ?>
+        <div class="table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Film</th>
+                        <th>Info</th>
+                        <th>Autor změny</th>
+                        <th>Čas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php while ($film_log = $logy_filmy->fetch_assoc()): ?>
+                    <tr>
+                        <td><strong><?= htmlspecialchars($film_log['nazev']) ?></strong></td>
+                        <td>
+                            <small>
+                                Rok: <?= $film_log['rok'] ?>, 
+                                Žánr: <?= htmlspecialchars($film_log['zanr']) ?>, 
+                                Hodnocení: <?= $film_log['hodnoceni'] ?>/10
+                            </small>
+                        </td>
+                        <td><?= htmlspecialchars($film_log['autor']) ?></td>
+                        <td><?= $film_log['zmeneno'] ?></td>
+                    </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
 
         <form method="post" action="hlphp/export_filmy_log.php" style="margin-top: 20px;">
-            <button type="submit" class="button">⬇️ Exportovat log úpravy filmů do CSV</button>
+            <button type="submit" class="button">⬇️ Exportovat filmy do CSV</button>
         </form>
 
-        
-
     </div>
+    <footer>
+        <a href="https://github.com/0ndraM">©0ndra_m_ 2020–<?= date("Y"); ?></a>
+    </footer>
 </body>
-<footer>
-    <a href="https://github.com/0ndraM">©0ndra_m_ 2020–<?= date("Y"); ?></a>
-</footer>
 </html>
