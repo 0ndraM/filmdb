@@ -31,7 +31,7 @@ function logLoginAttempt($username, $status) {
     global $conn;
     $ip = $_SERVER['REMOTE_ADDR'];
     $stmt = $conn->prepare("INSERT INTO acces_logy (autor, akce) VALUES (?, ?)");
-    $akce = "Přihlášení uživatele '$username' - $status (IP: $ip)";
+    $akce = "Přihlášení uživatele '$username' - $status (IP: $ip) - desktop aplikace";
     $stmt->bind_param("ss", $username, $akce);
     $stmt->execute();
 }
