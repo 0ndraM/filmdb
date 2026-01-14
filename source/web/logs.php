@@ -92,6 +92,10 @@ $logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 20"
             </table>
         </div>
 
+        <form method="post" action="hlphp/export_acces_logy.php" style="margin-bottom: 20px;">
+            <button type="submit" class="button">⬇️ Exportovat přístupy do CSV</button>
+        </form>
+
         <h2>👥 Log změn uživatelských rolí</h2>
         <div class="table-wrapper">
             <table class="admin-table">
