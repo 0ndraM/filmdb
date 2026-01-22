@@ -1,6 +1,6 @@
 ﻿namespace filmdb
 {
-    partial class Maindform
+    partial class Mainform
     {
         /// <summary>
         /// Vyžaduje se proměnná návrháře.
@@ -34,7 +34,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Maindform));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Mainform));
             this.dataGridViewFilms = new System.Windows.Forms.DataGridView();
             this.picturePoster = new System.Windows.Forms.PictureBox();
             this.txtSearch = new System.Windows.Forms.TextBox();
