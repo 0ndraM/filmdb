@@ -6,12 +6,12 @@ header('Access-Control-Allow-Methods: GET, POST, PUT, OPTIONS'); // Povolujeme m
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
 // Zahrnutí Composer a DB
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
 
-require 'hlphp/db.php'; 
+require '../hlphp/db.php'; 
 
 // --- KONFIGURACE ---
 $secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';// --- FUNKCE PRO ODPOVĚDI ---

@@ -16,7 +16,7 @@ namespace filmdb
     {
         private readonly string _currentUsername;
         private readonly string _authToken;
-        private const string ApiUrl = "https://0ndra.maweb.eu/FilmDB/api_settings.php";
+        private const string ApiUrl = "https://0ndra.maweb.eu/FilmDB/api/api_settings.php";
         // V SettingsForm.cs
         public SettingsForm()
         {
