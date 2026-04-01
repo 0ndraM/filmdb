@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html lang="cs">
 <head>
     <meta charset="UTF-8"> 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Registrace nového uživatele do databáze filmů. Umožňuje uživatelům vytvořit účet pro správu filmů.">
     <meta name="keywords" content="registrace, databáze filmů, uživatelský účet, správa filmů">
     <meta name="author" content="0ndra_m_">

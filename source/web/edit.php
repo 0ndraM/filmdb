@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <html lang="cs">
    <head>
       <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
       <meta name="description" content="Upravit film v databázi. Umožňuje administrátorům a autorům upravit údaje o filmech.">
       <meta name="keywords" content="upravit film, databáze filmů, úprava filmu, správa filmů">
       <meta name="author" content="0ndra_m_">

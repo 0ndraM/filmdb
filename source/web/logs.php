@@ -16,7 +16,7 @@ $logy_login = $conn->query("SELECT * FROM acces_logy ORDER BY cas DESC LIMIT 50"
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Logy systému pro správu filmů. Zobrazují změny uživatelských rolí a úpravy filmů.">
     <meta name="keywords" content="logy, správa filmů, změny uživatelských rolí, úpravy filmů">
     <meta name="author" content="0ndra_m_">
