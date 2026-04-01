@@ -16,7 +16,7 @@ namespace filmdb
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Maindform());
+            Application.Run(new Mainform());
         }
     }
 }

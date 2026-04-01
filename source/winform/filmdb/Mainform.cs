@@ -14,7 +14,7 @@ using filmdb;
 
 namespace filmdb
 {
-    public partial class Maindform : Form
+    public partial class Mainform : Form
     {
         // Pole pro sledování přihlášeného uživatele (null, pokud nikdo není přihlášen)
         private string loggedInUsername = null;
@@ -31,7 +31,7 @@ namespace filmdb
         // Reference na položku "Upravit vybraný film"
         private ToolStripMenuItem editFilmToolStripMenuItem;
 
-        public Maindform()
+        public Mainform()
         {
             InitializeComponent();
 
@@ -350,6 +350,10 @@ namespace filmdb
                 {
                     MessageBox.Show("Můžete upravovat pouze své vlastní filmy.");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Nejprve vyberte film, který chcete upravit.");
             }
         }
     }

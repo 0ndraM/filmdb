@@ -34,7 +34,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("sss", $username, $hashed, $role);
 
             if ($stmt->execute()) {
-                $zprava = "Registrace byla úspěšná. <a href='login.php'>Přihlaste se</a>.";
+                // Automatické přihlášení po úspěšné registraci
+                $_SESSION['username'] = $username;
+                $_SESSION['role'] = $role;
+                $_SESSION['ip'] = $_SERVER['REMOTE_ADDR'];
+
+                // Logování automatického přihlášení
+                $ip = $_SERVER['REMOTE_ADDR'];
+                $log_stmt = $conn->prepare("INSERT INTO acces_logy (autor, akce) VALUES (?, ?)");
+                $akce = "Registrace a automatické přihlášení uživatele '$username' (IP: $ip)";
+                $log_stmt->bind_param("ss", $username, $akce);
+                $log_stmt->execute();
+
+                header('Location: index.php');
+                exit();
             } else {
                 $chyba = "Registrace selhala. Zkuste to znovu.";
             }

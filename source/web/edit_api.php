@@ -54,7 +54,15 @@ $stmt->bind_param("sissdsi", $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, 
 
 if ($stmt->execute()) {
     echo json_encode(["success" => true, "message" => "Film upraven"]);
+  // Uložení do logu (zachování aktuálního autora z tabulky, ale uložení "kdo to změnil")
+    $upravujici = $_SESSION['username'];
+    $stmt_log = $conn->prepare("INSERT INTO filmy_log (film_id, nazev, rok, zanr, reziser, hodnoceni, popis, autor) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+    $stmt_log->bind_param("isissdss", $id, $nazev, $rok, $zanr, $reziser, $hodnoceni, $popis, $username);
+    $stmt_log->execute();
+    $stmt_log->close();
+
 } else {
     echo json_encode(["success" => false, "message" => "Chyba DB"]);
 }
+  
 ?>

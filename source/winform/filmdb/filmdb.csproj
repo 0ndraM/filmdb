@@ -82,11 +82,11 @@
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Film.cs" />
-    <Compile Include="Maindform.cs">
+    <Compile Include="Mainform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Maindform.Designer.cs">
-      <DependentUpon>Maindform.cs</DependentUpon>
+    <Compile Include="Mainform.Designer.cs">
+      <DependentUpon>Mainform.cs</DependentUpon>
     </Compile>
     <Compile Include="PosterFullScreenForm.cs">
       <SubType>Form</SubType>
@@ -119,8 +119,8 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Maindform.resx">
-      <DependentUpon>Maindform.cs</DependentUpon>
+    <EmbeddedResource Include="Mainform.resx">
+      <DependentUpon>Mainform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PosterFullScreenForm.resx">
       <DependentUpon>PosterFullScreenForm.cs</DependentUpon>

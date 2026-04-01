@@ -1,49 +1,57 @@
 <?php
-   session_start();
-   require 'hlphp/db.php';
-   
-   if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
-      header('Location: settings.php');
-      exit();
-   }
-   
-   // Získání aktuálních údajů o uživatelském účtu
-   $username = $_SESSION['username'];
-   $user_result = $conn->query("SELECT * FROM uzivatele WHERE username = '$username'");
-   
-   if ($user_result->num_rows > 0) {
-    $user = $user_result->fetch_assoc();
-   } else {
-    die("Uživatel nenalezen.");
-   }
-   
-   // Změna jména a hesla
-   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Změna jména
-    if (isset($_POST['new_username'])) {
-        $new_username = $_POST['new_username'];
-        $conn->query("UPDATE uzivatele SET username = '$new_username' WHERE username = '$username'");
-        $_SESSION['username'] = $new_username; // Aktualizace session proměnné
-        $username = $new_username;
-    }
-   
-    // Změna hesla
-    if (isset($_POST['new_password'])) {
-        $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-        $conn->query("UPDATE uzivatele SET password = '$new_password' WHERE username = '$username'");
-    }
-    
-    // Přesměrování na stránku pro zobrazení změn
-    header('Location: admin.php');
+session_start();
+require 'hlphp/db.php';
+
+// 1. Ověření role
+if (!isset($_SESSION['role']) || !in_array($_SESSION['role'], ['admin', 'owner'])) {
+    header('Location: settings.php');
     exit();
-   }
-   
-   // Filmy
-   $filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, nazev ASC");
-   
-   // Uživatelé
-   $uzivatele = $conn->query("SELECT * FROM uzivatele ORDER BY role DESC, username ASC");
-   ?>
+}
+
+$username = $_SESSION['username'];
+
+// 2. Získání údajů pomocí Prepared Statement
+$stmt = $conn->prepare("SELECT * FROM uzivatele WHERE username = ?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$user_result = $stmt->get_result();
+
+if ($user_result->num_rows > 0) {
+    $user = $user_result->fetch_assoc();
+} else {
+    die("Uživatel nenalezen.");
+}
+
+// 3. Zpracování POST požadavku
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    // Změna jména
+    if (!empty($_POST['new_username'])) {
+        $new_username = $_POST['new_username'];
+        $upd_name = $conn->prepare("UPDATE uzivatele SET username = ? WHERE username = ?");
+        $upd_name->bind_param("ss", $new_username, $username);
+        $upd_name->execute();
+        
+        $_SESSION['username'] = $new_username;
+        $username = $new_username; // Pro případný následný update hesla
+    }
+
+    // Změna hesla (pouze pokud není prázdné)
+    if (!empty($_POST['new_password'])) {
+        $new_password = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+        $upd_pass = $conn->prepare("UPDATE uzivatele SET password = ? WHERE username = ?");
+        $upd_pass->bind_param("ss", $new_password, $username);
+        $upd_pass->execute();
+    }
+
+    header('Location: admin.php?success=1');
+    exit();
+}
+
+// Načtení dat pro tabulky
+$filmy = $conn->query("SELECT * FROM filmy ORDER BY schvaleno ASC, nazev ASC");
+$uzivatele = $conn->query("SELECT * FROM uzivatele ORDER BY role DESC, username ASC");
+?>
 <!DOCTYPE html>
 <html lang="cs">
    <head>
