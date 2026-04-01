@@ -68,42 +68,41 @@ Logovací tabulka ukládající každou změnu oprávnění.
 
 ```
 📁source/
-└── 📁web/
-  ├── 📁api/
-  │   ├── add_api.php        # API: přidání filmu (multipart + JWT)
-  │   ├── api_get_genres.php # API: seznam žánrů
-  │   ├── api_settings.php   # API: změna jména/hesla (JWT)
-  │   ├── approve_api.php    # API: schvalování filmů (admin/owner)
-  │   ├── edit_api.php       # API: úprava filmu (JWT)
-  │   ├── login_api.php      # API: přihlášení + JWT token
-  │   └── winformapi.php     # API: seznam filmů pro WinForms klienta
-  ├── 📁hlphp/
-  │   ├── db.php               # Připojení k databázi
-  │   ├── export_filmy_log.php # Export logů správy filmů
-  │   ├── export_log.php       # Export logů správy uživatelů
-  │   ├── filmy_api.php        # API pro webový AJAX výpis filmů
-  │   ├── logout.php           # Odhlášení
-  │   ├── odschvalit.php       # Odschválení filmu
-  │   ├── promenit_roli.php    # Úprava rolí
-  │   ├── schvalit.php         # Schválení filmu
-  │   ├── smazat.php           # Smazání filmu (admin nebo owner)
-  │   └── smazat_uzivatele.php # Smazání uživatele
-  ├── 📁plakaty/               # Složka pro nahrané plakáty (.jpg)
-  ├── 📁vendor/                # Composer balíčky (Firebase/JWT)
-  ├── add.php                  # Přidání filmu
-  ├── admin.php                # Admin sekce pro správu a schvalování
-  ├── edit.php                 # Úprava filmu (s kontrolou práv)
-  ├── filmy_db.sql             # SQL skript pro vytvoření databáze
-  ├── index.php                # Úvodní stránka s AJAX filtrováním
-  ├── info.php                 # Detail filmu
-  ├── login.php                # Přihlášení
-  ├── logo.svg                 # Favicon
-  ├── logs.php                 # Logy (pouze owner)
-  ├── register.php             # Registrace
-  ├── script.js                # AJAX skripty pro vyhledávání
-  ├── settings.php             # Změna jména a hesla
-  ├── styles.css               # Stylování
-  └── theme-toggle.js          # Přepínání motivu
+├── 📁 hlphp/
+│   ├── db.php               # Připojení k databázi
+│   ├── export_filmy_log.php # Export logů správy filmů
+│   ├── export_log.php       # Export logů správy uživatelů
+│   ├── filmy_api.php        # Api pro ajax
+│   ├── logout.php           # Odhlášení
+│   ├── odschvalit.php       # Odschválení filmu
+│   ├── promenit_roli.php    # Úprava rolí
+│   ├── schvalit.php         # Schválení filmu
+│   ├── smazat.php           # Smazání filmu (admin nebo owner)
+│   └── smazat_uzivatele.php # Smazání uživatele
+├── 📁 plakaty/              # Složka pro nahrané plakáty (.jpg)
+├── 📁 vendor/               # Composer balíčky (Firebase/JWT)
+├── add_api.php              # Endpoint pro přidání filmu (Multipart Form Data)
+├── api_login.php            # Endpoint pro získání JWT tokenu
+├── api_settings.php         # Endpoint pro změnu hesla a jména (transakční)
+├── api_get_genres.php       # Endpoint pro získání žánrů
+├── approve_api.php          # Endpoint pro administrátorské schvalování
+├── edit_api.php             # Endpoint pro úpravu filmů (Multipart Form Data)
+├── filmy_api.php            # Hlavní API pro načítání filmů do winformu
+├── add.php                  # Přidání filmu
+├── admin.php                # Admin sekce pro správu a schvalování
+├── edit.php                 # Úprava filmu (s kontrolou práv)
+├── filmy_db.sql             # SQL skript pro vytvoření databáze
+├── index.php                # Úvodní stránka s AJAX filtrováním
+├── info.php                 # Detail filmu 
+├── login.php                # Přihlášení
+├── logo.svg                 # Favicon
+├── logs.php                 # Logy (pouze owner)
+├── register.php             # Registrace
+├── script.js                # AJAX skripty pro vyhledávání
+├── settings.php             # Změna jména a hesla
+├── styles.css               # Stylování
+├── theme-toggle.js          # Přepínání motivu
+└── README.md                # Tento soubor
 ```
 
 ## 🔐 Role a přístupová práva

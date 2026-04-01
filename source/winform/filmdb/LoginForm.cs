@@ -51,7 +51,7 @@ namespace filmdb
 
                 // Krok 1: Odeslání přihlašovacích údajů
                 var response = await client.PostAsync(
-                    "https://0ndra.maweb.eu/FilmDB/api/login_api.php",
+                    "https://0ndra.maweb.eu/FilmDB/login_api.php",
                     new FormUrlEncodedContent(data)
                 );
 

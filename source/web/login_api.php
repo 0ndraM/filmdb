@@ -12,12 +12,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Vyžadujeme autoload pro JWT knihovnu
-require '../vendor/autoload.php';
+require 'vendor/autoload.php';
 use Firebase\JWT\JWT;
 
 // Zahrneme připojení k databázi
 session_start();
-require '../hlphp/db.php';
+require 'hlphp/db.php';
 
 // --- Konfigurace JWT ---
 $secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';

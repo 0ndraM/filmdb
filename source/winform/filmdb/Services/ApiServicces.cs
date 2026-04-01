@@ -21,7 +21,7 @@ namespace filmdb.Services
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    string url = baseUrl + "api/winformapi.php?order_by=" + orderBy + "&search=" + search;
+                    string url = baseUrl + "winformapi.php?order_by=" + orderBy + "&search=" + search;
 
                     HttpResponseMessage response = await client.GetAsync(url);
 

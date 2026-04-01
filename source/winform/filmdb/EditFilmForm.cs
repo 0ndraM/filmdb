@@ -53,8 +53,8 @@ namespace filmdb
                     form.Add(new StringContent(txtHodnoceni.Text.Replace(',', '.')), "hodnoceni");
                     form.Add(new StringContent(txtPopis.Text), "popis");
 
-                    // Endpoint je po refaktoru ve složce /api
-                    var response = await client.PostAsync("https://0ndra.maweb.eu/FilmDB/api/edit_api.php", form);
+                    // POZOR: Zkontrolujte, zda se soubor jmenuje edit_api.php nebo edit_film_api.php
+                    var response = await client.PostAsync("https://0ndra.maweb.eu/FilmDB/edit_api.php", form);
 
                     if (response.IsSuccessStatusCode)
                     {

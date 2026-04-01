@@ -11,7 +11,7 @@ namespace filmdb
 {
     public partial class AdminForm : Form
     {
-        private const string ApiUrl = "https://0ndra.maweb.eu/FilmDB/api/approve_api.php";
+        private const string ApiUrl = "https://0ndra.maweb.eu/FilmDB/approve_api.php";
 
         public AdminForm()
         {

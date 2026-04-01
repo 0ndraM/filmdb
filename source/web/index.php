@@ -41,7 +41,7 @@ blokuj_ip();
             <a class="button" href="settings.php">⚙️ Nastavení</a>
          <?php endif; ?>
 
-         <a class="button" href="hlphp/logout.php">🚪 Odhlásit se</a>
+         <a class="button" href="logout.php">🚪 Odhlásit se</a>
       <?php else: ?>
          <a class="button" onclick="toggleTheme()">🌓 Přepnout motiv</a>
          <a class="button" href="login.php">🔑 Přihlásit se</a>
