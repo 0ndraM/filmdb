@@ -32,7 +32,7 @@ namespace filmdb
             {
                 try
                 {
-                    var response = await client.GetAsync("https://0ndra.maweb.eu/FilmDB/api_get_genres.php");
+                    var response = await client.GetAsync("https://0ndra.maweb.eu/FilmDB/api/api_get_genres.php");
                     response.EnsureSuccessStatusCode(); // Vyhodí výjimku, pokud status není 2xx
 
                     var json = await response.Content.ReadAsStringAsync();
@@ -128,7 +128,7 @@ namespace filmdb
 
                     // 4. Odeslání požadavku
                     var response = await client.PostAsync(
-                        "https://0ndra.maweb.eu/FilmDB/add_api.php", // Cílový URL
+                        "https://0ndra.maweb.eu/FilmDB/api/add_api.php", // Cílový URL
                         form
                     );
 

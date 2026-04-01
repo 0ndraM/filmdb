@@ -3,7 +3,7 @@
 header('Content-Type: application/json; charset=utf-8');
 
 // Zahrneme soubor s připojením k databázi
-include 'hlphp/db.php';
+include '../hlphp/db.php';
 
 // Získání a ověření parametru pro řazení
 $order_by = $_GET['order_by'] ?? 'nazev';

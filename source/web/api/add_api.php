@@ -12,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Vyžadujeme JWT knihovnu
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
 
 // Zahrneme připojení k databázi
-require 'hlphp/db.php';
+require '../hlphp/db.php';
 
 // --- Konfigurace JWT (Musí odpovídat nastavení v login_api.php!) ---
 // DŮLEŽITÉ: Uložte tento klíč BEZPEČNĚ!
@@ -136,7 +136,7 @@ if (isset($_FILES['plakat']) && $_FILES['plakat']['error'] === UPLOAD_ERR_OK) {
     $extension = strtolower(pathinfo($plakatName, PATHINFO_EXTENSION));
 
     if (in_array($extension, ['jpg', 'jpeg'])) {
-        $target_dir = "plakaty/";
+        $target_dir = "../plakaty/";
         $target_file = $target_dir . $id . ".jpg";
 
         // Kontrola a vytvoření adresáře
