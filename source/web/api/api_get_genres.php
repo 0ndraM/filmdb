@@ -3,7 +3,7 @@
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *'); 
 
-require '../hlphp/db.php'; // Předpokládáme stejné připojení k DB
+require __DIR__ . '/../hlphp/db.php'; // Předpokládáme stejné připojení k DB
 
 $zanry = [];
 

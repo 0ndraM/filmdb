@@ -12,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 // Vyžadujeme JWT knihovnu
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Firebase\JWT\ExpiredException;
 
 // Zahrneme připojení k databázi
-require '../hlphp/db.php';
+require __DIR__ . '/../hlphp/db.php';
 
 // --- Konfigurace JWT (Musí odpovídat nastavení v login_api.php!) ---
 // DŮLEŽITÉ: Uložte tento klíč BEZPEČNĚ!

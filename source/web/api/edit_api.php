@@ -4,10 +4,10 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: POST, OPTIONS');
 header('Access-Control-Allow-Headers: Content-Type, Authorization');
 
-require '../vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-require '../hlphp/db.php';
+require __DIR__ . '/../hlphp/db.php';
 
 $secret_key = $_ENV['JWT_SECRET'] ?? 'fallback_pro_jistotu';
 // 1. Ověření tokenu
